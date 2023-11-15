@@ -1,3 +1,10 @@
+
+HacknPlan linkki: 
+
+Documentation kansiosta löytyy palaverimemot ja kaikki muut kirjalliset työt.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
