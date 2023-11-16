@@ -1,7 +1,13 @@
 
 HacknPlan linkki: 
 
+Figma linkki: https://www.figma.com/files/team/1304495138055055127
+
 Documentation kansiosta löytyy palaverimemot ja kaikki muut kirjalliset työt.
+
+
+
+
 
 
 
