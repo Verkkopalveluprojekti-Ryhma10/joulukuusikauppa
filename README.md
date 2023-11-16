@@ -3,13 +3,15 @@ HacknPlan linkki:
 
 Figma linkki: https://www.figma.com/files/team/1304495138055055127
 
+Etusivuleiska proto: https://github.com/Verkkopalveluprojekti-Ryhma10/etusivuleiska
+
 Documentation kansiosta löytyy palaverimemot ja kaikki muut kirjalliset työt.
 
-
-
-
-
-
+.
+.
+.
+.
+.
 
 # Getting Started with Create React App
 
