@@ -6,6 +6,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+import ShoppingCart from '../content/Shoppingcart';
+
 
 function Navb() {
     return (
@@ -44,7 +46,8 @@ function Navb() {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
-        </Navbar.Collapse>
+          <ShoppingCart />
+        </Navbar.Collapse>     
       </Container>
     </Navbar>
     );

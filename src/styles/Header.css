@@ -6,24 +6,21 @@
   }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 200px;
+
+    height: 10em;
     width: 100%;
     border-bottom: 2px solid white;
     backdrop-filter: blur(3px);
 }
 
 .bg-body-tertiary {
-    width: 90%;
-    height: 50px;
-    border-top: 2px solid white!important;
+    width: 100%;
+    border-bottom: 2px solid white !important;
     backdrop-filter: blur(3px);
 }
 
 h1 {
-    font-size: 6em!important;
+    font-size: 6em !important;
     color:rgb(79, 93, 104);
     text-shadow: 2px 2px 4px rgb(230, 230, 235);
     font-family: 'NewFont', sans-serif;
@@ -35,20 +32,15 @@ h1 {
 }
 
 .shopping-cart {
-    background-color: white!important;
-    color: black!important;
-    text-decoration: none!important;
+    color: black !important;
+    text-decoration: none !important;
     margin: 10px;
     cursor: pointer;
     font-size: 24px;
-    position: absolute;
     right: 0%;
-    height: 40px;
-    
 }
 
 .shopping-cart span {
-    margin-right: 2px;
     font-size: 16px;
 }
 
