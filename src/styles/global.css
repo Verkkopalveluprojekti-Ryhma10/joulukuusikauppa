@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'TextFont';
+    src: url('./fonts/Simple\ Kind\ Of\ Girl.ttf') format('TrueType');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+body {
+    background-image: url('../assets/images/main.jpg');
+}
+
+.main {
+    font-family: 'TextFont', sans-serif;
+    min-height: 40em;
+    width: 100%;
+    border-bottom: 2px solid white;
+    padding: 10px;
+}
+
+.aside, .navbar {
+    color: rgb(0, 0, 0);
+    background-color: transparent!important;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.productObject {
+    text-align: center;
+}
+
+.pinePic, .decorPic {
+    height: 150px;
+    border-radius: 50%;
+    margin: 5px;
+}
+.pineBtn, .decorBtn {
+    margin: 20px;
+    margin-left: 10em;
+    border-radius: 10%;
+    height: 200px;
+    width: 200px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.pineBtn:hover,
+.decorBtn:hover {
+  background-color: #ddd;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+
+.aside {
+    margin: 20px;
+    font-size: 1.5em;
+    flex: 1;
+    padding: 10px;
+    padding-top: 1em;
+    padding-left: 3em;
+    padding-right: 3em;
+    border: 1px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    
+}

@@ -1,10 +1,14 @@
-import './App.css';
+import Header from './components/common/Header';
+import Home from './pages/Home';
+import Footer from './components/common/Footer';
 
 function App() {
   return (
-    <div>
-      <h1>Joulukuusikauppa</h1>
-    </div>
+    <>
+    <Header />
+    <Home/>
+    <Footer />
+    </>
   );
 }
 
