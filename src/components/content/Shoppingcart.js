@@ -43,7 +43,7 @@ function ShoppingCart() {
           </ul>
         ) : (
           //jos ostoskori on tyhjä, näytetään viesti
-          <p>Ostoskori on tyhjä</p>
+          <p className="ShopCartText">Ostoskori on tyhjä</p>
         )}
       </div>
     </div>

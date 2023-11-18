@@ -41,7 +41,7 @@ h1 {
 }
 
 .shopping-cart span {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .shopping-cart span:hover {
@@ -50,4 +50,8 @@ h1 {
 
 .fa-shopping-cart {
     color: white;
+}
+
+.ShopCartText {
+    font-size: 10px;
 }
