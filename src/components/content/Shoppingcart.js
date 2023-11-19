@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import "../../styles/Header.css";
+import '../../styles/ShoppingCart.css'
 
 //Ostoskorin logiigan ym hahmottelua
 
