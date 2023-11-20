@@ -30,7 +30,7 @@ function Navb() {
                 Something else here
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#action1">Koristepaketit</Nav.Link>
+            <Nav.Link href="/Koristeet">Koristepaketit</Nav.Link>
             <Nav.Link href="#action2">Latvatähdet</Nav.Link>
 
             <Nav.Link href="#">
