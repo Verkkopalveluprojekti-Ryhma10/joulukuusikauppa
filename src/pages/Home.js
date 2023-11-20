@@ -5,6 +5,8 @@ import koristeKuva from '../assets/images/koristekuva.jpg';
 import latvaKuva from '../assets/images/latvakuva.jpg';
 import muutaKuva from '../assets/images/muutakuva.jpg';
 import { faRodAsclepius } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+
 
 
 function Main() {
@@ -14,25 +16,30 @@ function Main() {
       <div className="navbar">
       </div>
       <div className='productObject'>
+        
+      <Link to="/Kuuset">
       <button className='pineBtn'>
         <img src={kuusiKuva} alt="kuusi" className='pinePic' /><br />
         Kuuset
-      </button>
+      </button></Link>
 
+      <Link to="/Koristeet">
       <button className='decorBtn'>
         <img src={koristeKuva} alt="koriste" className='decorPic' /><br />
         Koristeet
-      </button>
+      </button></Link>
 
+      <Link to="/Latvatahdet">
       <button className='decorBtn'>
         <img src={latvaKuva} alt="latva" className='decorPic' /><br />
         Latvatähdet
-      </button>
+      </button></Link>
 
+      <Link to="/Muuta">
       <button className='decorBtn'>
         <img src={muutaKuva} alt="koriste" className='decorPic' /><br />
         Muuta
-      </button>
+      </button></Link>
     </div>
 
       <aside className="aside">
