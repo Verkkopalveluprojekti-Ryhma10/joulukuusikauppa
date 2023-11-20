@@ -6,7 +6,10 @@
   }
 
 .header {
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    padding-left: 40px; 
     height: 10em;
     width: 100%;
     border-bottom: 2px solid white;
@@ -23,10 +26,12 @@ h1 {
     font-size: 6em !important;
     color:rgb(79, 93, 104);
     text-shadow: 2px 2px 4px rgb(230, 230, 235);
-    font-family: 'NewFont', sans-serif;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    padding-top: 10px;
-    padding-left: 50px;
+    font-family: 'NewFont', sans-serif;        
+}
+
+.header .days, h3 {
+    font-size: 2em !important;
+    color:rgb(79, 93, 104);
+    text-shadow: 2px 2px 4px rgb(230, 230, 235);
+    font-family: 'NewFont', sans-serif;    
 }
