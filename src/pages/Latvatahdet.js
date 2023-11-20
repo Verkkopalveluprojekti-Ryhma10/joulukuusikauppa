@@ -3,7 +3,7 @@ import React from 'react';
 const Latvatahdet = () => {
     return (
         <div>
-            <h1>Twinktwink</h1>
+            <h1>Tämä on Latvatähdet-sivu</h1>
         </div>
     );
 

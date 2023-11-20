@@ -20,21 +20,12 @@ function Navb() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
-          >   <NavDropdown title="Kuuset" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
+          > <Nav.Link href="/Kuuset">Kuuset</Nav.Link>
             <Nav.Link href="/Koristeet">Koristepaketit</Nav.Link>
-            <Nav.Link href="#action2">Latvatähdet</Nav.Link>
+            <Nav.Link href="/Latvatahdet">Latvatähdet</Nav.Link>
 
-            <Nav.Link href="#">
-              Muut
+            <Nav.Link href="/Muuta">
+              Muuta
             </Nav.Link>
           </Nav>
           <Form className="d-flex">
