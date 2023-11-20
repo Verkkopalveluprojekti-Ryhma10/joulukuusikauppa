@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Latvatähdet = () => {
+const Latvatahdet = () => {
     return (
         <div>
             <h1>Twinktwink</h1>
@@ -9,4 +9,4 @@ const Latvatähdet = () => {
 
 };
 
-export default Latvatähdet;
+export default Latvatahdet;
