@@ -2,7 +2,10 @@ import Header from './components/common/Header';
 import Home from './pages/Home';
 import Footer from './components/common/Footer';
 
+import Kuuset from './pages/Kuuset';
 import Koristeet from './pages/Koristeet';
+import Latvatahdet from './pages/Latvatahdet';
+import Muuta from './pages/Muuta';
 
 import {
   BrowserRouter as Router,
@@ -19,7 +22,10 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={ <Home />} />
+            <Route exact path="/Kuuset" element={ <Kuuset />} />
             <Route exact path="/Koristeet" element={ <Koristeet />} />
+            <Route exact path="/Latvatahdet" element={ <Latvatahdet />} />
+            <Route exact path="/Muuta" element={ <Muuta />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
