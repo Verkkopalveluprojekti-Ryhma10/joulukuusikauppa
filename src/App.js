@@ -11,7 +11,6 @@ function App() {
     <Header />
     <Home/>
     <Footer />
-    <ShoppingCart />
     </>
   );
 }
