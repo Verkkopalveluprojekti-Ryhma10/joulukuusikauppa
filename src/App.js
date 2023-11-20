@@ -7,7 +7,8 @@ import Koristeet from './pages/Koristeet';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate
 } from 'react-router-dom';
 
 
@@ -19,7 +20,6 @@ function App() {
           <Routes>
             <Route exact path="/" element={ <Home />} />
             <Route exact path="/Koristeet" element={ <Koristeet />} />
-            <Route exact path="/Tuotteet" element={ <Tuotteet />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
