@@ -3,7 +3,7 @@ import React from 'react';
 const Koristeet = () => {
     return (
         <div>
-            <h1>Plaaplaa</h1>
+            <h1>Hilppeet</h1>
         </div>
     );
 
