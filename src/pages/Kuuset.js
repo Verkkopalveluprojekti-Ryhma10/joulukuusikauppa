@@ -112,6 +112,7 @@ const TreeType = ({ type, image, label, description }) => {
         image={Mustakuusi}
         label="Mustakuusi"
         description=""/>
+        
         <TreeType
         type="Sini"
         image={Sinikuusi}
