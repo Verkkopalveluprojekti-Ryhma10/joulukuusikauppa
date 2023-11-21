@@ -105,7 +105,7 @@ const TreeType = ({ type, image, label, description }) => {
         image={Metsakuusi}
         label="Metsäkuusi" 
         description=
-        "Suomalainen viljelty metsäkuusi. Tiheäkasvuinen, teräväneulainen, keskivihreä ja Perinteinen - varma valinta!"/>
+        "Suomalainen viljelty metsäkuusi. Tiheäkasvuinen, teräväneulainen, keskivihreä ja perinteinen - varma valinta!"/>
 
         <TreeType
         type="Musta"
