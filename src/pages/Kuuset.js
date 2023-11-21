@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Metsakuusi from '../assets/images/metsakuusi.jpg';
 import Mustakuusi from '../assets/images/mustakuusi.jpg';
 import Sinikuusi from '../assets/images/sinikuusi.jpg';
+import Manty from '../assets/images/manty.jpg'
 
 const Kuuset = () => {
     const [metsaExpanded, setMetsaExpanded] = useState(false);
@@ -16,6 +17,10 @@ const Kuuset = () => {
     const [siniSelectedSize, setSiniSelectedSize] = useState('');
     const [siniQuantity, setSiniQuantity] = useState(1);
 
+    const [mantyExpanded, setMantyExpanded] = useState(false);
+    const [mantySelectedSize, setMantySelectedSize] = useState('');
+    const [mantyQuantity, setMantyQuantity] = useState(1);
+
     const handleExpand = (type) => {
         if (type === 'metsa') {
             setMetsaExpanded(!metsaExpanded);
@@ -23,6 +28,8 @@ const Kuuset = () => {
             setMustaExpanded(!mustaExpanded);
         } else if (type === 'sini') {
             setSiniExpanded(!siniExpanded);
+        } else if (type === 'manty') {
+            setMantyExpanded(!mantyExpanded);
         }
     };
 
@@ -37,6 +44,9 @@ const Kuuset = () => {
                 break;
             case 'sini':
                 setSizeFunction = setSiniSelectedSize;
+                break;
+            case 'manty':
+                setSizeFunction = setMantySelectedSize;
                 break;
             default:
                 break;
@@ -55,6 +65,9 @@ const Kuuset = () => {
                 break;
             case 'sini':
                 setQuantityFunction = setSiniQuantity;
+                break;
+            case 'manty':
+                setQuantityFunction = setMantyQuantity;
                 break;
             default:
                 break;
@@ -83,11 +96,11 @@ const Kuuset = () => {
                     - perinteinen, varma valinta<br/>
                 </p>
                         <label>
-                            Valitse kuusen pituus:
+                            Valitse kuusen korkeus:
                             <br />
                             <input
                                 type="radio"
-                                value="80"
+                                value="80-120"
                                 checked={metsaSelectedSize === '80-120'}
                                 onChange={(e) => handleSizeChange('metsa', e)}
                                 id="1"
@@ -96,7 +109,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="100"
+                                value="110-150"
                                 checked={metsaSelectedSize === '110-150'}
                                 onChange={(e) => handleSizeChange('metsa', e)}
                                 id="2"
@@ -105,7 +118,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="140"
+                                value="140-180"
                                 checked={metsaSelectedSize === '140-180'}
                                 onChange={(e) => handleSizeChange('metsa', e)}
                                 id="3"
@@ -114,7 +127,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="160"
+                                value="170-210"
                                 checked={metsaSelectedSize === '170-210'}
                                 onChange={(e) => handleSizeChange('metsa', e)}
                                 id="4"
@@ -123,7 +136,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="200"
+                                value="200-240"
                                 checked={metsaSelectedSize === '200-240'}
                                 onChange={(e) => handleSizeChange('metsa', e)}
                                 id="5"
@@ -149,11 +162,11 @@ const Kuuset = () => {
                 {mustaExpanded && (
                     <div className="options" onClick={handleSizeQuantityClick}>
                         <label>
-                            Valitse kuusen pituus:
+                            Valitse kuusen korkeus:
                             <br />
                             <input
                                 type="radio"
-                                value="80"
+                                value="80-120"
                                 checked={mustaSelectedSize === '80-120'}
                                 onChange={(e) => handleSizeChange('musta', e)}
                                 id="1"
@@ -162,7 +175,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="100"
+                                value="110-150"
                                 checked={mustaSelectedSize === '110-150'}
                                 onChange={(e) => handleSizeChange('musta', e)}
                                 id="2"
@@ -171,7 +184,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="140"
+                                value="140-180"
                                 checked={mustaSelectedSize === '140-180'}
                                 onChange={(e) => handleSizeChange('musta', e)}
                                 id="3"
@@ -180,7 +193,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="160"
+                                value="170-210"
                                 checked={mustaSelectedSize === '170-210'}
                                 onChange={(e) => handleSizeChange('musta', e)}
                                 id="4"
@@ -189,7 +202,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="200"
+                                value="200-240"
                                 checked={mustaSelectedSize === '200-240'}
                                 onChange={(e) => handleSizeChange('musta', e)}
                                 id="5"
@@ -214,11 +227,11 @@ const Kuuset = () => {
                 {siniExpanded && (
                     <div className="options" onClick={handleSizeQuantityClick}>
                         <label>
-                            Valitse kuusen pituus:
+                            Valitse kuusen korkeus:
                             <br />
                             <input
                                 type="radio"
-                                value="80"
+                                value="80-120"
                                 checked={siniSelectedSize === '80-120'}
                                 onChange={(e) => handleSizeChange('sini', e)}
                                 id="1"
@@ -227,7 +240,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="100"
+                                value="110-150"
                                 checked={siniSelectedSize === '110-150'}
                                 onChange={(e) => handleSizeChange('sini', e)}
                                 id="2"
@@ -236,7 +249,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="140"
+                                value="140-180"
                                 checked={siniSelectedSize === '140-180'}
                                 onChange={(e) => handleSizeChange('sini', e)}
                                 id="3"
@@ -245,7 +258,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="160"
+                                value="170-210"
                                 checked={siniSelectedSize === '170-210'}
                                 onChange={(e) => handleSizeChange('sini', e)}
                                 id="4"
@@ -254,7 +267,7 @@ const Kuuset = () => {
 
                             <input
                                 type="radio"
-                                value="200"
+                                value="200-240"
                                 checked={siniSelectedSize === '200-240'}
                                 onChange={(e) => handleSizeChange('sini', e)}
                                 id="5"
@@ -269,6 +282,72 @@ const Kuuset = () => {
 
                         <button>Add to Cart</button>
                     </div>
+
+                )}
+            </div>
+            <div className={`MantyDiv ${mantyExpanded ? 'expanded' : ''}`} onClick={() => handleExpand('manty')}>
+                <img src={Manty} alt="manty" className='manty' />
+                <h3>Mänty</h3>
+
+                {mantyExpanded && (
+                    <div className="options" onClick={handleSizeQuantityClick}>
+                        <label>
+                            Valitse kuusen korkeus:
+                            <br />
+                            <input
+                                type="radio"
+                                value="80-120"
+                                checked={mantySelectedSize === '80-120'}
+                                onChange={(e) => handleSizeChange('manty', e)}
+                                id="1"
+                            />
+                            <label>80 - 120 cm   -   80€</label><br />
+
+                            <input
+                                type="radio"
+                                value="110-150"
+                                checked={mantySelectedSize === '110-150'}
+                                onChange={(e) => handleSizeChange('manty', e)}
+                                id="2"
+                            />
+                            <label>110 - 150 cm   -  100€</label><br />
+
+                            <input
+                                type="radio"
+                                value="140-180"
+                                checked={mantySelectedSize === '140-180'}
+                                onChange={(e) => handleSizeChange('manty', e)}
+                                id="3"
+                            />
+                            <label>140 - 180 cm   -  140€</label><br />
+
+                            <input
+                                type="radio"
+                                value="170-210"
+                                checked={mantySelectedSize === '170-210'}
+                                onChange={(e) => handleSizeChange('manty', e)}
+                                id="4"
+                            />
+                            <label>170 - 210 cm   -  160€</label><br />
+
+                            <input
+                                type="radio"
+                                value="200-240"
+                                checked={mantySelectedSize === '200-240'}
+                                onChange={(e) => handleSizeChange('manty', e)}
+                                id="5"
+                            />
+                            <label>200 - 240 cm   -  200€</label><br />
+                        </label><br />
+
+                        <label>
+                            Määrä:
+                            <input type="number" value={mantyQuantity} onChange={(e) => handleQuantityChange('manty', e)} />
+                        </label>
+
+                        <button>Add to Cart</button>
+                    </div>
+                    
                 )}
             </div>
         </div>
