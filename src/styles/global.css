@@ -55,6 +55,43 @@ a:hover {
 
 }
 
+.kuuset-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.metsakuusi, .mustakuusi, .sinikuusi{
+    height: 250px;
+    padding: 10px;
+}
+
+.MetsaDiv, .MustaDiv, .SiniDiv {
+    border: 1px solid black;
+    height: 350px;
+    width: 250px;
+    text-align: center;
+    background-color: #F0F0F0;
+    margin-top: 5em;
+    margin-left: 4em;
+    border-radius: 10%;
+    flex: 1;
+}
+
+.MetsaDiv:hover, .MustaDiv:hover, .SiniDiv:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.MetsaDiv.expanded, .MustaDiv.expanded, .SiniDiv.expanded {
+    height: fit-content;
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+  }
+
+label {
+    padding: 5px;
+}
+
 .aside {
     margin: 20px;
     font-size: 1.5em;
