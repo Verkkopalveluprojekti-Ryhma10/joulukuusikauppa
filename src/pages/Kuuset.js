@@ -5,7 +5,7 @@ import Sinikuusi from '../assets/images/sinikuusi.jpg';
 import Manty from '../assets/images/manty.jpg'
 import Tuija from '../assets/images/tuija.jpg'
 
-const TreeType = ({ type, image, label }) => {
+const TreeType = ({ type, image, label, description }) => {
     const [expanded, setExpanded] = useState(false);
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
@@ -32,9 +32,11 @@ const TreeType = ({ type, image, label }) => {
       <div className={`TreeDiv ${expanded ? 'expanded' : ''}`} onClick={handleExpand}>
         <img src={image} alt={type} className={type.toLowerCase()} />
         <h3>{label}</h3>
+        
   
         {expanded && (
         <div className="options" onClick={handleSizeQuantityClick}>
+        <p>{description}</p>
           <label>
             Valitse kuusen korkeus:
             <br />
@@ -98,11 +100,35 @@ const TreeType = ({ type, image, label }) => {
   const Kuuset = () => {
     return (
       <div className='kuuset-container'>
-        <TreeType type="Metsa" image={Metsakuusi} label="Metsäkuusi" />
-        <TreeType type="Musta" image={Mustakuusi} label="Mustakuusi" />
-        <TreeType type="Sini" image={Sinikuusi} label="Sinikuusi" />
-        <TreeType type="Manty" image={Manty} label="Mänty" />
-        <TreeType type="Tuija" image={Tuija} label="Timanttituija" />
+        <TreeType
+        type="Metsa"
+        image={Metsakuusi}
+        label="Metsäkuusi" 
+        description=
+        "Suomalainen viljelty metsäkuusi. Tiheäkasvuinen, teräväneulainen, keskivihreä ja Perinteinen - varma valinta!"/>
+
+        <TreeType
+        type="Musta"
+        image={Mustakuusi}
+        label="Mustakuusi"
+        description=""/>
+        <TreeType
+        type="Sini"
+        image={Sinikuusi}
+        label="Sinikuusi"
+        description=""/>
+
+        <TreeType
+        type="Manty"
+        image={Manty}
+        label="Mänty"
+        description="" />
+
+        <TreeType
+        type="Tuija"
+        image={Tuija}
+        label="Timanttituija"
+        description=""/>
       </div>
     );
   };
