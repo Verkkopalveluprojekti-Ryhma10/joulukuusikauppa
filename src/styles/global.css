@@ -52,7 +52,6 @@ a:hover {
   background-color: #ddd;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
 }
 
 .kuuset-container {
@@ -60,18 +59,12 @@ a:hover {
     justify-content: space-between;
 }
 
-.metsakuusi,
-.mustakuusi,
-.sinikuusi,
-.manty{
+img {
     height: 250px;
     padding: 10px;
 }
 
-.MetsaDiv,
-.MustaDiv,
-.SiniDiv,
-.MantyDiv {
+.TreeDiv {
     border: 1px solid black;
     height: 350px;
     text-align: center;
@@ -81,17 +74,11 @@ a:hover {
     flex: 1;
 }
 
-.MetsaDiv:hover,
-.MustaDiv:hover,
-.SiniDiv:hover,
-.MantyDiv:hover {
+.TreeDiv:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.MetsaDiv.expanded,
-.MustaDiv.expanded,
-.SiniDiv.expanded,
-.MantyDiv.expanded {
+.TreeDiv.expanded{
     height: fit-content;
     width: 400px;
     text-align: center;
