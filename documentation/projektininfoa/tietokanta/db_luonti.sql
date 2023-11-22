@@ -26,14 +26,15 @@ CREATE TABLE `products` (
 -- Luodaan taulu asiakkaille
 CREATE TABLE `users` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(60) NOT NULL,
+  `lname` VARCHAR(60) NOT NULL,
+  `fname` VARCHAR(60) NOT NULL,
   `phone` VARCHAR(20) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `address` VARCHAR(60) NOT NULL,
   `post` VARCHAR(5) NOT NULL,
   `city` VARCHAR(20) NOT NULL,
-  `uname` VARCHAR(30) NOT NULL,
-  `passwd` VARCHAR(30) NOT NULL,
+  `uname` VARCHAR(30) NOT NULL UNIQUE,
+  `passwd` VARCHAR(255) NOT NULL,
   `role` VARCHAR(10) NOT NULL,
   `registeredAt` DATE DEFAULT (CURRENT_TIMESTAMP)
 );
