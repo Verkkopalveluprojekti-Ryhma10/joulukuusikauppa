@@ -3,6 +3,13 @@ const cors = require('cors')
 const mysql = require('mysql2/promise')
 const config = require('./db_config')
 
+//for pw hash npm i bcrypt
+const bcrypt = require('bcrypt')
+//for multipart/form-data npm i multer
+const multer = require('multer')
+//destination ??
+const upload = multer({ dest: "upload/" })
+
 const port = 3001
 
 const app = express()
@@ -67,6 +74,38 @@ app.get('/products', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+//Maalela yrittää tähän codes
+//pw hash stuff
+
+//first register new admin
+//should username be unique in db?
+//upload.none, .none takes in only key-value pairs as text (not files, only formdata fields)
+//with postman, choose body -> formdata -> enter keys and values 
+app.post('/register-admin', upload.none(), async (req,res) => {
+    //parameters
+    const name = req.body.name;
+    const uname = req.body.uname;
+    let pw = req.body.pw;
+    const role = req.body.role;
+
+    //password hash with salt, bigger the salt number, slower the checking gets, safer it might be
+    pw = await bcrypt.hash(pw, 10);
+
+    //values are added as parameters
+    const sqlAddUser = 'INSERT INTO users (name,uname,passwd,role) VALUES (?,?,?,?)';
+
+    try {
+        //create connection
+        const connection = await mysql.createConnection(config.db);
+        //execute slq with parameters
+        await connection.execute(sqlAddUser,[name,uname,pw,role]);
+        res.end();
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
+//
 
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)
