@@ -77,12 +77,10 @@ app.get('/products', async (req, res) => {
 
 //Maalela yrittää tähän codes
 //pw hash stuff
-
-//first register new admin
-//should username be unique in db?
+//first register new user
 //upload.none, .none takes in only key-value pairs as text (not files, only formdata fields)
 //with postman, choose body -> formdata -> enter keys and values 
-app.post('/register-admin', upload.none(), async (req,res) => {
+app.post('/register', upload.none(), async (req,res) => {
     //parameters
     const name = req.body.name;
     const uname = req.body.uname;
@@ -105,6 +103,9 @@ app.post('/register-admin', upload.none(), async (req,res) => {
         res.status(500).send(error.message);
     }
 })
+
+//is user valid
+
 //
 
 app.listen(port,() => {
