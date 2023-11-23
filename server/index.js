@@ -78,11 +78,17 @@ app.get('/products', async (req, res) => {
 //Maalela yrittää tähän codes
 //pw hash stuff
 //first register new user
-//upload.none, .none takes in only key-value pairs as text (not files, only formdata fields)
+//upload.none, .none takes in only key-value pairs as text (not files, formdata fields)
 //with postman, choose body -> formdata -> enter keys and values 
 app.post('/register', upload.none(), async (req,res) => {
-    //parameters
-    const name = req.body.name;
+    //parameters needed for registering
+    const lname = req.body.lname;
+    const fname = req.body.fname;
+    const phone = req.body.phone;
+    const email = req.body.email;
+    const address = req.body.address;
+    const post = req.body.post;
+    const city = req.body.city;
     const uname = req.body.uname;
     let pw = req.body.pw;
     const role = req.body.role;
@@ -90,21 +96,60 @@ app.post('/register', upload.none(), async (req,res) => {
     //password hash with salt, bigger the salt number, slower the checking gets, safer it might be
     pw = await bcrypt.hash(pw, 10);
 
-    //values are added as parameters
-    const sqlAddUser = 'INSERT INTO users (name,uname,passwd,role) VALUES (?,?,?,?)';
+    //values are added as parameters to sql
+    const sqlRegisterUser = 
+    'INSERT INTO users (lname, fname, phone, email, address, post, city, uname, passwd, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
     try {
         //create connection
         const connection = await mysql.createConnection(config.db);
         //execute slq with parameters
-        await connection.execute(sqlAddUser,[name,uname,pw,role]);
+        await connection.execute(sqlRegisterUser,[lname, fname, phone, email, address, post, city, uname, pw, role]);
         res.end();
     } catch (error) {
         res.status(500).send(error.message);
     }
 })
 
-//is user valid
+//with login check is user valid or not
+app.post('/login', upload.none(), async (req, res) => {
+    const uname = req.body.uname;
+    const pw = req.body.pw;
+
+    //choose passwd with uname param
+    const sql = 'SELECT passwd FROM users WHERE uname=?';
+
+    try {
+        //create connection
+        const connection = await mysql.createConnection(config.db);
+        //execute sql search for uname
+        const [rows] = await connection.execute(sql, [uname]);
+
+        //check if uname is found
+        if(rows.length === 0) {
+            // if not then 404 not found or 401 unauthorized
+            res.status(401).send("User not found");
+        } else {
+            const pwHash = rows[0].passwd;
+            //compare hashed pw with pw user has entered
+            //if match, valid is true
+            console.log(pw);
+            console.log(pwHash);
+            const valid =  await bcrypt.compare(pw, pwHash);
+
+            //if valid true, then ok, else unauthorized
+            if(valid) {
+                res.status(200).send("Login successful");
+            } else {
+                //401 unauthorized
+                res.status(401).send("Invalid username or password");
+            }
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+})
 
 //
 
