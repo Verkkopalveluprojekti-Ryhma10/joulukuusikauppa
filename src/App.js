@@ -6,6 +6,7 @@ import Kuuset from './pages/Kuuset';
 import Koristeet from './pages/Koristeet';
 import Latvatahdet from './pages/Latvatahdet';
 import Muuta from './pages/Muuta';
+import LoginForm from './components/forms/LoginForm';
 
 import {
   BrowserRouter as Router,
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/Koristeet" element={ <Koristeet />} />
             <Route exact path="/Latvatahdet" element={ <Latvatahdet />} />
             <Route exact path="/Muuta" element={ <Muuta />} />
+            <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

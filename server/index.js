@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt')
 const multer = require('multer')
 //destination ??
 const upload = multer({ dest: "upload/" })
+//for token npm i jsonwebtoken
+const jwt = require('jsonwebtoken')
 
 const port = 3001
 
@@ -130,11 +132,10 @@ app.post('/login', upload.none(), async (req, res) => {
             // if not then 404 not found or 401 unauthorized
             res.status(401).send("User not found");
         } else {
+            //if uname is found, take passwd
             const pwHash = rows[0].passwd;
             //compare hashed pw with pw user has entered
             //if match, valid is true
-            console.log(pw);
-            console.log(pwHash);
             const valid =  await bcrypt.compare(pw, pwHash);
 
             //if valid true, then ok, else unauthorized
@@ -148,7 +149,6 @@ app.post('/login', upload.none(), async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
-
 })
 
 //
