@@ -1,4 +1,5 @@
 -- Luodaan tietokanta mikäli ei ole jo olemassa
+DROP DATABASE IF EXISTS joulukuusikauppa;
 CREATE DATABASE IF NOT EXISTS joulukuusikauppa;
 
 -- Otetaan luotu tietokanta käyttöön
@@ -9,7 +10,8 @@ CREATE TABLE `product_categories` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `description` TEXT,
-  `subcategory` INT
+  `subcategory` INT,
+  `image_url` TEXT
 );
 
 -- Luodaan taulu tuotteille
@@ -18,24 +20,25 @@ CREATE TABLE `products` (
   `name` VARCHAR(30) NOT NULL,
   `description` TEXT,
   `category` INT NOT NULL,
-  `price` DECIMAL(3,2) NOT NULL,
+  `price` FLOAT NOT NULL,
   `storage` INT(5) NOT NULL,
-  `image_url` TEXT NOT NULL
+  `image_url` TEXT
 );
 
 -- Luodaan taulu asiakkaille
 CREATE TABLE `users` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(60) NOT NULL,
+  `lname` VARCHAR(60) NOT NULL,
+  `fname` VARCHAR(60) NOT NULL,
   `phone` VARCHAR(20) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) NOT NULL UNIQUE,
   `address` VARCHAR(60) NOT NULL,
   `post` VARCHAR(5) NOT NULL,
   `city` VARCHAR(20) NOT NULL,
-  `uname` VARCHAR(30) NOT NULL,
-  `passwd` VARCHAR(30) NOT NULL,
+  `uname` VARCHAR(30) NOT NULL UNIQUE,
+  `passwd` VARCHAR(255) NOT NULL,
   `role` VARCHAR(10) NOT NULL,
-  `registeredAt` DATE DEFAULT (CURRENT_TIMESTAMP)
+  `registeredAt` DATETIME DEFAULT (CURRENT_TIMESTAMP)
 );
 
 -- Luodaan taulu tilauksille
@@ -49,12 +52,12 @@ CREATE TABLE `orders` (
 );
 
 -- Luodaan taulu tilausriveille
-CREATE TABLE `orderItems` (
+CREATE TABLE `order_items` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `order` INT NOT NULL,
   `product` INT NOT NULL,
   `amount` INT NOT NULL,
-  `price` DECIMAL(5,2) NOT NULL
+  `price` FLOAT NOT NULL
 );
 
 -- Luodaan tuotteiden ja tuotekategorioiden relaatio
@@ -64,7 +67,7 @@ ALTER TABLE `products` ADD CONSTRAINT `productCategoryID` FOREIGN KEY (`category
 ALTER TABLE `orders` ADD CONSTRAINT `customerID` FOREIGN KEY (`customer`) REFERENCES `users` (`id`);
 
 -- Luodaan tilauksien ja tilausrivien relaatio
-ALTER TABLE `orderItems` ADD CONSTRAINT `orderID` FOREIGN KEY (`order`) REFERENCES `orders` (`id`);
+ALTER TABLE `order_items` ADD CONSTRAINT `orderID` FOREIGN KEY (`order`) REFERENCES `orders` (`id`);
 
 -- Luodaan tilausrivien ja tuotteiden relaatio
-ALTER TABLE `orderItems` ADD CONSTRAINT `productID` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
+ALTER TABLE `order_items` ADD CONSTRAINT `productID` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
