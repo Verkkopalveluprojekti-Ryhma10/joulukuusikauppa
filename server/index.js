@@ -150,7 +150,9 @@ app.post('/login', upload.none(), async (req, res) => {
 
             //if valid true, then ok, else unauthorized
             if(valid) {
-                res.status(200).send("Login successful");
+                //create token for user, save username and more if needed
+                const token = jwt.sign({username: uname }, process.env.JWT_KEY)
+                res.status(200).json({jwtToken: token});
             } else {
                 //401 unauthorized
                 res.status(401).send("Invalid username or password");
@@ -159,6 +161,32 @@ app.post('/login', upload.none(), async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
+})
+
+//Only authenticated user can fetch data with username 
+app.get('/user', async (req,res) => {
+
+    //check token from headers
+    //questionmark if there is no authorization, returns null
+    //use split (token is Bearer token so [1] is token)
+    const token = req.headers.authorization?.split(' ')[1];
+
+    const sql = 'SELECT lname, fname, phone, email, address, post, city FROM users WHERE uname=?'
+
+    try {
+        //this checks that token matches with user
+        const username = jwt.verify(token, process.env.JWT_KEY).uname;        
+        const connection = await mysql.createConnection(conf)
+        //now we can use username for checking data
+        //execute sql with token verified username parameter
+        const [rows] = await connection.execute(sql, [username])
+
+        res.json(rows);
+    } catch (error) {
+        //if there is no token
+        res.status(403).send('Access forbidden')
+    }
+
 })
 
 //
