@@ -6,7 +6,7 @@ const CountdownToChristmas = () => {
 
   useEffect(() => {
     // Set Christmas day date
-    const christmasDate = new Date('2023-12-24'); 
+    const christmasDate = new Date('2023-12-24 00:00:00'); 
 
     // Set interval to update every 1 second
     // https://www.geeksforgeeks.org/javascript-date-gettime-method/?ref=header_search
