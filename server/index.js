@@ -1,7 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
-const config = require('./db_config')
+//const config = require('./db_config')
+
 
 //for pw hash npm i bcrypt
 const bcrypt = require('bcrypt')
@@ -20,9 +22,17 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+const conf = {    
+        host: process.env.DB_HOST,
+        port: 3306,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE    
+}
+
 app.get('/', async (req,res) => {
     try {
-        const connection = await mysql.createConnection(config.db)
+        const connection = await mysql.createConnection(conf)
         res.status(200).json({message: 'Node server is running on port ' + port})
     } catch (err) {
         res.status(500).send(err.message)        
@@ -104,7 +114,7 @@ app.post('/register', upload.none(), async (req,res) => {
 
     try {
         //create connection
-        const connection = await mysql.createConnection(config.db);
+        const connection = await mysql.createConnection(conf);
         //execute slq with parameters
         await connection.execute(sqlRegisterUser,[lname, fname, phone, email, address, post, city, uname, pw, role]);
         res.end();
@@ -123,7 +133,7 @@ app.post('/login', upload.none(), async (req, res) => {
 
     try {
         //create connection
-        const connection = await mysql.createConnection(config.db);
+        const connection = await mysql.createConnection(conf);
         //execute sql search for uname
         const [rows] = await connection.execute(sql, [uname]);
 
