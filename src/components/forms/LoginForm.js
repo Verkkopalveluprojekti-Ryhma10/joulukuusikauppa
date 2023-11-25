@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
-import { LoginToken } from "../signals/LoginSignal"
+import { token } from "../signals/LoginSignal"
 
 //npm i axios
 //npm i @preact/signals-react
 
 export default function LoginForm() {
+
+   // console.log(token.value); this works
 
     const [uname, setUname] = useState('')
     const [pw, setPw] = useState('')
@@ -13,7 +15,7 @@ export default function LoginForm() {
     function login() {
         //send as parameters
         axios.postForm('http://localhost:3001/login', {uname, pw})
-        .then( res => LoginToken.value = res.data.jwtToken)
+        .then( res => token.value = res.data.jwtToken) //this gets tokenvalue
         .catch(error => console.log(error.message))
 
     }
