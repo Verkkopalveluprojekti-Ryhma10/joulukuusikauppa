@@ -5,7 +5,7 @@ import Footer from './components/common/Footer';
 import Kuuset from './pages/Kuuset';
 import Koristeet from './pages/Koristeet';
 import Latvatahdet from './pages/Latvatahdet';
-import Muuta from './pages/Muut';
+import Muut from './pages/Muut';
 import LoginForm from './components/forms/LoginForm';
 
 import {
