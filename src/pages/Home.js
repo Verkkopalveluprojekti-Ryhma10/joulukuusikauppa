@@ -3,18 +3,13 @@ import React from 'react';
 import kuusiKuva from '../assets/images/kuusikuva.jpg';
 import koristeKuva from '../assets/images/koristekuva.jpg';
 import latvaKuva from '../assets/images/latvakuva.jpg';
-import muutaKuva from '../assets/images/muutakuva.jpg';
-import { faRodAsclepius } from '@fortawesome/free-solid-svg-icons';
+import muutaKuva from '../assets/images/muutkuva.jpg';
 import { Link } from 'react-router-dom';
-
-
 
 function Main() {
 
   return (
     <main className="main">
-      <div className="navbar">
-      </div>
       <div className='productObject'>
         
       <Link to="/Kuuset">
