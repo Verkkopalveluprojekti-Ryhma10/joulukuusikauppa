@@ -46,10 +46,14 @@ app.get('/', async (req,res) => {
 app.get('/categories', async (req, res) => {
     try {
         const connection = await mysql.createConnection(conf);
+        const category = req.query.category;
         const subcategory = req.query.subcategory;
 
         let result;        
-        if(subcategory){
+        
+        if(category) {
+            result = await connection.execute("SELECT * FROM product_categories WHERE id=?", [category]);
+        }else if(subcategory){
             result = await connection.execute("SELECT * FROM product_categories WHERE subcategory=?", [subcategory]);
         }else{
             result = await connection.execute("SELECT * FROM product_categories");
