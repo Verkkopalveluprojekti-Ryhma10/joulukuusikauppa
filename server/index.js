@@ -181,7 +181,7 @@ app.get('/user', async (req,res) => {
         //execute sql with token verified username parameter
         const [rows] = await connection.execute(sql, [username])
 
-        res.json(rows);
+        res.json(rows[0]);
     } catch (error) {
         //if there is no token
         res.status(403).send('Access forbidden')

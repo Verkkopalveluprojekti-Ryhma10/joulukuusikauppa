@@ -16,7 +16,6 @@ import axios from "axios"
     //add token to .get using headers
     axios.get('http://localhost:3001/user', conftoken)
 
-    //doesn´t log res.data yet..... !?
     .then(res => userInfo.value = res.data)
     .catch(error => console.log(error.message))
  })

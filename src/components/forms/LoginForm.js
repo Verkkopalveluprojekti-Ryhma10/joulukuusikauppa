@@ -9,17 +9,16 @@ export default function LoginForm() {
 
     return(
         <div>
-            <Login/>
+            {/* if tokens length is bigger than 0, show UserInfo, else Login*/}
+            {token.value.length > 0 ? 
+            <UserInfo/> :
+            <Login/>}
         </div>
     )
-
 }
 
-function Login() {
-
-       console.log(token.value); 
-   console.log(userInfo.value); 
-
+function Login() { 
+    
    const [uname, setUname] = useState('')
    const [pw, setPw] = useState('')
 
@@ -28,7 +27,6 @@ function Login() {
        axios.postForm('http://localhost:3001/login', {uname, pw})
        .then( res => token.value = res.data.jwtToken) //this gets tokenvalue
        .catch(error => console.log(error.message))
-
    };
 
    return(
@@ -38,5 +36,14 @@ function Login() {
            <button onClick={login}>Kirjaudu</button>
        </div>
    )
+}
 
+function UserInfo() {
+
+    return(
+        <div>
+            {/* if userInfo has value, then show last name and first name*/}
+            {userInfo.value && <h2>{userInfo.value.lname + ' ' + userInfo.value.fname}</h2>}
+        </div>
+    )
 }
