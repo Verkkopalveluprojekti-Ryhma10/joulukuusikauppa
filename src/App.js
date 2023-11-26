@@ -5,7 +5,7 @@ import Footer from './components/common/Footer';
 import Kuuset from './pages/Kuuset';
 import Koristeet from './pages/Koristeet';
 import Latvatahdet from './pages/Latvatahdet';
-import Muuta from './pages/Muuta';
+import Muut from './pages/Muut';
 import LoginForm from './components/forms/LoginForm';
 
 import {
@@ -26,7 +26,7 @@ function App() {
             <Route exact path="/Kuuset" element={ <Kuuset />} />
             <Route exact path="/Koristeet" element={ <Koristeet />} />
             <Route exact path="/Latvatahdet" element={ <Latvatahdet />} />
-            <Route exact path="/Muuta" element={ <Muuta />} />
+            <Route exact path="/Muut" element={ <Muut />} />
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
