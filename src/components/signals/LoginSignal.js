@@ -17,7 +17,7 @@ import axios from "axios"
     axios.get('http://localhost:3001/user', conftoken)
 
     //doesn´t log res.data yet..... !?
-    .then(res => console.log(res.data))
+    .then(res => userInfo.value = res.data)
     .catch(error => console.log(error.message))
  })
 

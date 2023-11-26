@@ -175,7 +175,7 @@ app.get('/user', async (req,res) => {
 
     try {
         //this checks that token matches with user
-        const username = jwt.verify(token, process.env.JWT_KEY).uname;        
+        const username = jwt.verify(token, process.env.JWT_KEY).username;        
         const connection = await mysql.createConnection(conf)
         //now we can use username for checking data
         //execute sql with token verified username parameter
