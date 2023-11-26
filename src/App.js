@@ -7,6 +7,7 @@ import Koristeet from './pages/Koristeet';
 import Latvatahdet from './pages/Latvatahdet';
 import Muut from './pages/Muut';
 import LoginForm from './components/forms/LoginForm';
+import RegisterForm from './components/forms/RegisterForm';
 
 import {
   BrowserRouter as Router,
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/Latvatahdet" element={ <Latvatahdet />} />
             <Route exact path="/Muut" element={ <Muut />} />
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
+            <Route exact path="/rekisteri" element={ <RegisterForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>

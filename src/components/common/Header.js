@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/Header.css'
 import Navbar from "./Navbar";
 import DaysToChristmas from '../content/DaysToChristmas'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 
 function Header() {
@@ -16,6 +16,7 @@ function Header() {
         <div>
           <Navbar />
         </div>
+        
       </div>
     );
   }
