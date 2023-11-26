@@ -1,53 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import '../../styles/ShoppingCart.css'
-
-//Ostoskorin logiigan ym hahmottelua
+import '../../styles/ShoppingCart.css';
 
 function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  //tuotteen lisääminen ostoskoriin
-  const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
-  };
+// Adding a product to the cart
+const addToCart = (product) => {
+  const userId = localStorage.getItem('userId');
+  console.log('userId:', userId);
+  console.log('product.id:', product.id);
+  console.log('product.price:', product.price);
 
-  //tuotteen poistaminen ostoskorista id:n perusteella
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
-  };
+  fetch('http://localhost:3001/cart', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ productId: product.id, userId: userId, amount: 1, price: product.price }),
+})
+  .then(response => response.json())
+  .then(data => {
+    setCartItems(previousItems => {
+      //tarkistetaan, onko tuote jo ostoskorissa
+      const isProductInCart = previousItems.find(item => item.id === data.productId);
+  
+      if (isProductInCart) {
+        //jos on, päivitetään sen määrää
+        return previousItems.map(item =>
+          item.id === data.productId ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      //jos ei ole, lisätään uusi tuote
+      return [...previousItems, { ...product, quantity: 1, id: data.productId }];
+    });
+  })
+};
 
-  //ostoskorin tuotteiden määrän laskeminen
-  const totalItems = () => {
+  //tuotteen poistaminenn sen id:n perusteella
+    const removeFromCart = (productId) => {
+      setCartItems((previousItems) => previousItems.filter((item) => item.id !== productId));
+    };
+
+  //lasketaan tuotteiden kokonaismäärä
+  const totalProducts = () => {
     return cartItems.length;
   };
 
-  //useffect koukku
+  // useEffect hook
   useEffect(() => {
-    //tässä voisi olla joku fetch, jolla haetaan ostoskorin sisältö
-  });
+    fetch('http://localhost:3001/products') 
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   return (
     <div className="shopping-cart">
-      <span>Ostoskori</span>
-      <FontAwesomeIcon icon={faShoppingCart} />
-      <span>{totalItems()}</span> {/* näytetään tuotteiden kokonaismäärä */}
-      <div>
-        {cartItems.length > 0 ? (
-          //jos ostoskorissa on tuotteita, näytetään ne listana
-          <ul>
-            {cartItems.map((item, index) => (
-              <li key={index}>{item.name}</li> //jokainen tuote listataan
-            ))}
-          </ul>
-        ) : (
-          //jos ostoskori on tyhjä, näytetään viesti
-          <p className="ShopCartText">Ostoskori on tyhjä</p>
-        )}
-      </div>
+      <h2>Ostoskori <FontAwesomeIcon icon={faShoppingCart} /></h2>
+      {cartItems.length > 0 ? (
+        cartItems.map((item) => (
+          <div key={item.id}>
+            <h3>{item.name}</h3>
+            <button onClick={() => removeFromCart(item.id)}>Poista ostoskorista</button>
+          </div>
+        ))
+      ) : (
+        <p className="ShopCartText">Ostoskori on tyhjä</p>
+      )}
+      {/* Tässä voisi olla ostoskorin yhteenveto ja "Siirry kassalle" -nappi */}
     </div>
   );
-}
+  }
+  export default ShoppingCart;
 
-export default ShoppingCart;

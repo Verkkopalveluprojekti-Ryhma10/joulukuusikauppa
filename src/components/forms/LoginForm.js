@@ -1,9 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
 
-//npm i axios
-//npm i @preact/signals-react
-
 export default function LoginForm() {
 
     const [uname, setUname] = useState('')
@@ -11,12 +8,15 @@ export default function LoginForm() {
 
     function login() {
         //send as parameters
-        axios.postForm('http://localhost:3001/login', {uname, pw})
-        .then()
-        .catch()
-
+        axios.post('http://localhost:3001/login', {uname, pw})
+        .then(response => {
+            // Save the user ID to localStorage
+            localStorage.setItem('userId', response.data.userId);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
-
 
     return(
         <div>

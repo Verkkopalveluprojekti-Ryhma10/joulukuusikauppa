@@ -166,3 +166,60 @@ app.post('/login', upload.none(), async (req, res) => {
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)
 })
+
+app.post('/order_items', async (req, res) => {
+    try {
+        //koitetaan muodostaa tietokantayhteys
+        const connection = await mysql.createConnection(conf);
+        // Luetaan tuotteen id ja tilauksen id pyynnön mukana tulleesta datasta
+        const productId = req.body.productId;
+        const orderId = req.body.orderId;
+        const amount = req.body.amount;
+        const price = req.body.price;
+
+        //lisätään tuote tilaukseen tietokannassa
+        await connection.execute("INSERT INTO order_items (`order`, `product`, `amount`, `price`) VALUES (?, ?, ?, ?)", [orderId, productId, amount, price]);
+        
+        res.status(200).json({ message: 'Product added to order' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.post('/cart', async (req, res) => {
+    console.log('POST request to /cart received');
+    try {
+        // Koitetaan muodostaa tietokantayhteys
+        const connection = await mysql.createConnection(conf);
+        // Luetaan tuotteen id ja käyttäjän id pyynnön mukana tulleesta datasta
+        const productId = req.body.productId;
+        const userId = req.body.userId;
+        const amount = req.body.amount;
+        const price = req.body.price;
+
+        // Etsitään käyttäjän aktiivinen tilaus (ostoskori)
+        const [rows] = await connection.execute("SELECT id FROM orders WHERE customer = ? AND orderStatus = 'cart'", [userId]);
+        console.log('rows:', rows);
+        let orderId;
+        if (rows.length > 0) {
+            // Jos aktiivinen tilaus löytyy, käytetään sitä
+            orderId = rows[0].id;
+        } else {
+            // Jos aktiivista tilausta ei löydy, luodaan uusi
+            const [result] = await connection.execute("INSERT INTO orders (customer, payStatus, orderStatus) VALUES (?, 'pending', 'cart')", [userId]);
+            orderId = result.insertId;
+        }
+
+        // Lisätään tuote tilaukseen (ostoskoriin) tietokannassa
+        console.log('orderId:', orderId);
+        console.log('productId:', productId);
+        console.log('amount:', amount);
+        console.log('price:', price);
+        
+        const [result] = await connection.execute("INSERT INTO order_items (`order`, `product`, `amount`, `price`) VALUES (?, ?, ?, ?)", [orderId, productId, amount, price]);
+        console.log('result:', result);
+        res.status(200).json({ message: 'Product added to cart' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
