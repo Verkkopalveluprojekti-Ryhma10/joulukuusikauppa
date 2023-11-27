@@ -8,10 +8,18 @@ export default function test() {
     return (
         <div>
             <form>
-                <input value={name} onChange={handleChange}/>
-                <input value={surname} onChange={handleChange}/>
-                <input value={adress} onChange={handleChange} />
-
+                <label >
+                    Nimi:
+                    <input value={name} onChange={handleChange}/>
+                </label>
+                <label>
+                    Sukunimi:
+                    <input value={surname} onChange={handleChange}/>
+                </label>
+                <label>
+                    Osoite:
+                    <input value={adress} onChange={handleChange}/>
+                </label>
             </form>
         </div>
     )};
