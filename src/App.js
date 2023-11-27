@@ -10,7 +10,6 @@ import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate
@@ -20,8 +19,7 @@ import {
 function App() {
   return (
     <>
-      <Header />
-        <Router>
+      <Header />        
           <Routes>
             <Route exact path="/" element={ <Home />} />
             <Route exact path="/Kuuset" element={ <Kuuset />} />
@@ -32,7 +30,7 @@ function App() {
             <Route exact path="/rekisteri" element={ <RegisterForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </Router>
+        
       <Footer />
     </>
   );
