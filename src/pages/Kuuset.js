@@ -55,7 +55,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="2"
             />
-            <label>110 - 150 cm   -   100€</label><br />
+            <label>121 - 160 cm   -   120€</label><br />
 
             <input
               type="radio"
@@ -64,7 +64,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="3"
             />
-            <label>140 - 180 cm   -   140€</label><br />
+            <label>161 - 200 cm   -   160€</label><br />
           </label><br />
 
           <input
@@ -74,16 +74,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="4"
             />
-            <label>170 - 210 cm   -   160€</label><br />
-
-            <input
-              type="radio"
-              value="200-240"
-              checked={selectedSize === '200-240'}
-              onChange={(e) => handleSizeChange(e)}
-              id="5"
-            />
-            <label>200 - 240 cm   -   200€</label><br />
+            <label>201 - 240 cm   -   200€</label><br />
 
           <label>
             Määrä:
