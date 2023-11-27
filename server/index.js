@@ -13,6 +13,8 @@ const multer = require('multer')
 const upload = multer({ dest: "upload/" })
 //for token npm i jsonwebtoken
 const jwt = require('jsonwebtoken')
+//for fileserver npm i fs
+const fs = require('fs')
 
 const port = 3001
 
@@ -150,7 +152,9 @@ app.post('/login', upload.none(), async (req, res) => {
 
             //if valid true, then ok, else unauthorized
             if(valid) {
-                res.status(200).send("Login successful");
+                //create token for user, save username and more if needed
+                const token = jwt.sign({username: uname }, process.env.JWT_KEY)
+                res.status(200).json({jwtToken: token});
             } else {
                 //401 unauthorized
                 res.status(401).send("Invalid username or password");
@@ -160,6 +164,75 @@ app.post('/login', upload.none(), async (req, res) => {
         res.status(500).send(error.message);
     }
 })
+
+//Only authenticated user can fetch data with username 
+app.get('/user', async (req,res) => {
+
+    //check token from headers
+    //questionmark if there is no authorization, returns null
+    //use split (token is Bearer token so [1] is token)
+    const token = req.headers.authorization?.split(' ')[1];
+
+    const sql = 'SELECT lname, fname, phone, email, address, post, city FROM users WHERE uname=?'
+
+    try {
+        //this checks that token matches with user
+        const username = jwt.verify(token, process.env.JWT_KEY).username;        
+        const connection = await mysql.createConnection(conf)
+        //now we can use username for checking data
+        //execute sql with token verified username parameter
+        const [rows] = await connection.execute(sql, [username])
+
+        res.json(rows[0]);
+    } catch (error) {
+        //if there is no token
+        res.status(403).send('Access forbidden')
+    }
+
+})
+
+//for admin part, multirest files destinations
+
+const storage = multer.diskStorage({
+
+    destination: ( req, file, cb ) => {
+        cb(null, '../src/assets/images')
+    },
+    filename: (req, file, cb ) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+//new multer for multirest files
+const upload2 = multer({storage: storage})
+
+//add images and create new folders
+//upload.single yhden kuvan lähetykseen, määritellään parametrin(key) nimi eli tässä 'pic'
+//with postman - body - formdata - file
+app.post('/image', upload2.single('pic'), async (req, res) => {
+
+    const currentPath = req.file.path
+    const category = req.body.category
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + category + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + category
+
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        res.json({imageUrl: imageUrl})
+    } catch (error) {
+        res.json({error: error.message})
+    }
+} )
 
 //
 
