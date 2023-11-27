@@ -9,6 +9,7 @@ function Header() {
 
     return (
       <div>
+        <Link to={'/kirjaudu'}>kirjaudu</Link>
         <header className="header">
           <h1>Joulukuusikauppa</h1>
           <DaysToChristmas className="days"/>     

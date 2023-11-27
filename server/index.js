@@ -13,6 +13,8 @@ const multer = require('multer')
 const upload = multer({ dest: "upload/" })
 //for token npm i jsonwebtoken
 const jwt = require('jsonwebtoken')
+//for fileserver npm i fs
+const fs = require('fs')
 
 const port = 3001
 
@@ -204,10 +206,32 @@ const storage = multer.diskStorage({
 //new multer for multirest files
 const upload2 = multer({storage: storage})
 
+//add images and create new folders
 //upload.single yhden kuvan lähetykseen, määritellään parametrin(key) nimi eli tässä 'pic'
+//with postman - body - formdata - file
 app.post('/image', upload2.single('pic'), async (req, res) => {
 
-    res.send('Ok')
+    const currentPath = req.file.path
+    const category = req.body.category
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + category + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + category
+
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        res.json({imageUrl: imageUrl})
+    } catch (error) {
+        res.json({error: error.message})
+    }
 } )
 
 //
