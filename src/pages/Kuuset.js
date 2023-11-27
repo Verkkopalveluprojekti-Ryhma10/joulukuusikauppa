@@ -4,6 +4,7 @@ import Mustakuusi from '../assets/images/mustakuusi.jpg';
 import Sinikuusi from '../assets/images/sinikuusi.jpg';
 import Manty from '../assets/images/manty.jpg'
 import Tuija from '../assets/images/tuija.jpg'
+import Serbiankuusi from '../assets/images/serbiankuusi.jpg'
 
 const TreeType = ({ type, image, label, description }) => {
     const [expanded, setExpanded] = useState(false);
@@ -120,6 +121,12 @@ const TreeType = ({ type, image, label, description }) => {
         type="Tuija"
         image={Tuija}
         label="Timanttituija"
+        description=""/>
+
+        <TreeType
+        type="Serbiankuusi"
+        image={Serbiankuusi}
+        label="Serbiankuusi"
         description=""/>
       </div>
     );
