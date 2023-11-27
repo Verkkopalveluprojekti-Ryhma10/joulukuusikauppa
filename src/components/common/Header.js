@@ -6,9 +6,9 @@ import { Link, Outlet } from 'react-router-dom'
 
 
 function Header() {
+
     return (
       <div>
-        
         <header className="header">
           <h1>Joulukuusikauppa</h1>
           <DaysToChristmas className="days"/>     

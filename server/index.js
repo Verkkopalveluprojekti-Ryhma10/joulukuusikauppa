@@ -189,6 +189,27 @@ app.get('/user', async (req,res) => {
 
 })
 
+//for admin part, multirest files destinations
+
+const storage = multer.diskStorage({
+
+    destination: ( req, file, cb ) => {
+        cb(null, '../src/assets/images')
+    },
+    filename: (req, file, cb ) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+//new multer for multirest files
+const upload2 = multer({storage: storage})
+
+//upload.single yhden kuvan lähetykseen, määritellään parametrin(key) nimi eli tässä 'pic'
+app.post('/image', upload2.single('pic'), async (req, res) => {
+
+    res.send('Ok')
+} )
+
 //
 
 app.listen(port,() => {
