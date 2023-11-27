@@ -22,7 +22,7 @@ function Navb() {
           >   
             <Nav.Link href="/Kuuset">Kuuset</Nav.Link>
             <Nav.Link href="/Koristeet">Koristepaketit</Nav.Link>
-            <Nav.Link href="Latvatahded">Latvatähdet</Nav.Link>
+            <Nav.Link href="/Latvatahdet">Latvatähdet</Nav.Link>
 
             <Nav.Link href="/Muut">Muut</Nav.Link>
             <Nav.Link href="/Demosivu">Demosivu</Nav.Link>
