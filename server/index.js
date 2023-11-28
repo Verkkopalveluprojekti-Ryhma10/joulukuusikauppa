@@ -207,7 +207,7 @@ const storage = multer.diskStorage({
 const upload2 = multer({storage: storage})
 
 //add images and create new folders
-//upload.single yhden kuvan lähetykseen, määritellään parametrin(key) nimi eli tässä 'pic'
+////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
 //with postman - body - formdata - file
 app.post('/image', upload2.single('pic'), async (req, res) => {
 
