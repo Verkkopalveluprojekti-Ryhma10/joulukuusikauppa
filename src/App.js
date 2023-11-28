@@ -15,7 +15,6 @@ import {
   Navigate
 } from 'react-router-dom';
 
-
 function App() {
   return (
     <>
@@ -27,10 +26,9 @@ function App() {
             <Route exact path="/Latvatahdet" element={ <Latvatahdet />} />
             <Route exact path="/Muut" element={ <Muut />} />
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
-            <Route exact path="/rekisteri" element={ <RegisterForm />} />
+            <Route exact path="/rekisteroidy" element={ <RegisterForm />} />
             <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        
+          </Routes>        
       <Footer />
     </>
   );
