@@ -4,6 +4,7 @@ import Mustakuusi from '../assets/images/mustakuusi.jpg';
 import Sinikuusi from '../assets/images/sinikuusi.jpg';
 import Manty from '../assets/images/manty.jpg'
 import Tuija from '../assets/images/tuija.jpg'
+import Serbiankuusi from '../assets/images/serbiankuusi.jpg'
 
 const TreeType = ({ type, image, label, description }) => {
     const [expanded, setExpanded] = useState(false);
@@ -55,7 +56,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="2"
             />
-            <label>110 - 150 cm   -   100€</label><br />
+            <label>121 - 160 cm   -   120€</label><br />
 
             <input
               type="radio"
@@ -64,7 +65,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="3"
             />
-            <label>140 - 180 cm   -   140€</label><br />
+            <label>161 - 200 cm   -   160€</label><br />
           </label><br />
 
           <input
@@ -74,16 +75,7 @@ const TreeType = ({ type, image, label, description }) => {
               onChange={(e) => handleSizeChange(e)}
               id="4"
             />
-            <label>170 - 210 cm   -   160€</label><br />
-
-            <input
-              type="radio"
-              value="200-240"
-              checked={selectedSize === '200-240'}
-              onChange={(e) => handleSizeChange(e)}
-              id="5"
-            />
-            <label>200 - 240 cm   -   200€</label><br />
+            <label>201 - 240 cm   -   200€</label><br />
 
           <label>
             Määrä:
@@ -129,6 +121,12 @@ const TreeType = ({ type, image, label, description }) => {
         type="Tuija"
         image={Tuija}
         label="Timanttituija"
+        description=""/>
+
+        <TreeType
+        type="Serbiankuusi"
+        image={Serbiankuusi}
+        label="Serbiankuusi"
         description=""/>
       </div>
     );

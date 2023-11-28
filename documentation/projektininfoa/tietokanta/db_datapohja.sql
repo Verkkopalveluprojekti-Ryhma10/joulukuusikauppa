@@ -18,7 +18,7 @@ INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`
 
 
 -- Lisätään Kuusien pituudet
-INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 80-120', 'Pituus 81-120', '1', '80', 100);
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 80-120', 'Pituus 80-120', '1', '80', 100);
 INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 121-160', 'Pituus 121-160', '1', '120', 150);
 INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 161-200', 'Pituus 161-200', '1', '160', 50);
 INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 201-240', 'Pituus 201-240', '1', '200', 50);

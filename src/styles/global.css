@@ -88,6 +88,39 @@ img {
     padding: 10px;
   }
 
+  .koristeet-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+img {
+    margin-top: 2em;
+    height: 250px;
+    padding: 5px;
+}
+
+.DecorationDiv {
+    border: 1px solid black;
+    height: 350px;
+    text-align: center;
+    background-color: #F0F0F0;
+    border-radius: 10%;
+    flex: 0 0 calc(20% - 20px);
+    margin: 3.5em;
+}
+
+.DecorationDiv:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.DecorationDiv.expanded{
+    height: fit-content;
+    width: 400px;
+    text-align: center;
+    padding: 10px;
+  } 
+
 label {
     padding: 5px;
 }
