@@ -22,7 +22,7 @@ const TreeType = ({ type, image, label, description }) => {
     const handleQuantityChange = (event) => {
       event.preventDefault();
       event.stopPropagation();
-      setQuantity(parseInt(event.target.value, 10));
+      setQuantity(event.target.value);
     };
   
     const handleSizeQuantityClick = (event) => {
