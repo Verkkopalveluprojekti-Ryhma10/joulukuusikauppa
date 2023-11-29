@@ -17,6 +17,7 @@ CREATE TABLE `product_categories` (
 CREATE TABLE `products` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
+  `name2` VARCHAR(100),
   `description` TEXT,
   `category` INT NOT NULL,
   `price` FLOAT NOT NULL,
