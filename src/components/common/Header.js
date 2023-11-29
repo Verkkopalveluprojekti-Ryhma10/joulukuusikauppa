@@ -9,7 +9,7 @@ function Header() {
 
     return (
       <div>
-        <Link to={'/kirjaudu'}>Kirjaudu</Link>
+        <Link to={'/kirjaudu'}>Kirjaudu </Link>
         <Link to={'/rekisteroidy'}>Rekisteröidy</Link>
         <header className="header">
           <h1>Joulukuusikauppa</h1>
