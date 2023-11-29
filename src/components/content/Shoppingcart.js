@@ -9,8 +9,21 @@ function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
 
   //tuotteen lisääminen ostoskoriin
-  const addToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      // Tarkistetaan, onko tuote jo korissa
+      const isProductInCart = prevItems.find(item => item.id === product.id);
+
+      if (isProductInCart) {
+        // Jos on, päivitetään vain määrää
+        return prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        // Jos ei ole, lisätään tuote korin listalle
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
   };
 
   //tuotteen poistaminen ostoskorista id:n perusteella
