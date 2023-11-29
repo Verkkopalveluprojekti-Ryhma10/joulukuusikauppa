@@ -10,14 +10,13 @@ CREATE TABLE `product_categories` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `description` TEXT,
-  `subcategory` INT,
   `image_url` TEXT
 );
 
 -- Luodaan taulu tuotteille
 CREATE TABLE `products` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(30) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
   `description` TEXT,
   `category` INT NOT NULL,
   `price` FLOAT NOT NULL,
@@ -38,7 +37,7 @@ CREATE TABLE `users` (
   `uname` VARCHAR(30) NOT NULL UNIQUE,
   `passwd` VARCHAR(255) NOT NULL,
   `role` VARCHAR(10) NOT NULL,
-  `registeredAt` DATETIME DEFAULT (CURRENT_TIMESTAMP)
+  `registeredAt` DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Luodaan taulu tilauksille
@@ -47,8 +46,8 @@ CREATE TABLE `orders` (
   `customer` INT NOT NULL,
   `payStatus` VARCHAR(5) NOT NULL,
   `orderStatus` VARCHAR(5) NOT NULL,
-  `createdAt` DATE DEFAULT (CURRENT_TIMESTAMP),
-  `modifiedAt` DATE DEFAULT (CURRENT_TIMESTAMP)
+  `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `modifiedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Luodaan taulu tilausriveille

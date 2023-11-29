@@ -1,5 +1,6 @@
 USE joulukuusikauppa;
 
+
 -- Lisätään Tuotekategoriat
 INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Kuuset', 'Joulun kuningas, kodin vihdeä juhlavieras. Hanki kuusi meiltä, se on vastuullisesti itse tuotetuista siemenistä kasvatettu, luonnon metsiä säästäen. Valitse oma suosikkisi ja luo täydellinen joulutunnelma valitsemallasi kuusella!', '/public/images/kuusikuva.jpg');
 INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Koristeet', 'Täältä löydät monenmoista koristepakettia valitsemasi kuusen koristeluun', '/public/images/koristekuva.jpg');
@@ -8,20 +9,32 @@ seuraavanlaisia tähtiä.', '/public/images/latvakuva.jpg');
 INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Muut', 'Valitse laajasta valikoimastamma täydellisiä joulun ajan tarvikkeita kotiisi. Joulunajan ilo ja käytännöllisyys yhdistyvät näissä tuotteissa - Hanki omasi ja loihdi kotiisi joulun taikaa!', '/public/images/muutkuva.jpg');
 
 
--- Lisätään Alikategorioita
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Metsäkuusi', 'Perinteinen suomalainen metsäkuusi, melkein niinkuin naapurin metsästä varastettu. Hommaa heti!',1, '/public/images/metsakuusi.jpg');
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Mustakuusi', 'Joulukuusi mallia amerikasta ja kanadasta. Soveltuu myös skandinaaviseen kotiin.',1, '/public/images/mustakuusi.jpg');
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Sinikuusi', 'Kauniin sinertävä kuusi perinteisen vihreän sijaan.',1, '/public/images/sinikuusi.jpg');
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Mänty', 'Voiko mänty olla joulukuusi? Osta ja kokeile! Tämä on sisäsiistimpi kuin kuusi ja lapissa mänty on kuusta suositumpi vaihtoehto "joulukuuseksi".',1, '/public/images/mantykuusi.jpg');
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Timanttituija', 'Tämä kartion mallinen, erittäin tuuhea lajike, sopii erittäin hyvin myös joulukuuseksi.',1, '/public/images/tuija.jpg');
-INSERT INTO product_categories(`name`, `description`, `subcategory`, `image_url`) VALUES ('Serbiankuusi', 'Tämä kuusi on erittäin uhanalainen luonnossa, mutta me tuotamme kuusen siemenet paikallisella tuotannolla, joten elvytämme kantaa ja tarjoamme teille kauniin kuusen sekä puhtaan omantunnon!.',1, NULL);
-
-
 -- Lisätään Kuusien pituudet
-INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 80-120', 'Pituus 80-120', '1', '80', 100);
-INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 121-160', 'Pituus 121-160', '1', '120', 150);
-INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 161-200', 'Pituus 161-200', '1', '160', 50);
-INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Pituus 201-240', 'Pituus 201-240', '1', '200', 50);
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Metsäkuusi', 'Pituus 80-120', '1', '80', 100,'../assets/images/metsakuusi');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Metsäkuusi', 'Pituus 121-160', '1', '120', 150, '../assets/images/metsakuusi');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Metsäkuusi', 'Pituus 161-200', '1', '160', 50, '../assets/images/metsakuusi');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Metsäkuusi', 'Pituus 201-240', '1', '200', 50, '../assets/images/metsakuusi');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mustakuusi', 'Pituus 80-120', '1', '80', 100, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mustakuusi', 'Pituus 121-160', '1', '120', 150, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mustakuusi', 'Pituus 161-200', '1', '160', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mustakuusi', 'Pituus 201-240', '1', '200', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Sinikuusi', 'Pituus 80-120', '1', '80', 100, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Sinikuusi', 'Pituus 121-160', '1', '120', 150, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Sinikuusi', 'Pituus 161-200', '1', '160', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Sinikuusi', 'Pituus 201-240', '1', '200', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mänty', 'Pituus 80-120', '1', '80', 100, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mänty', 'Pituus 121-160', '1', '120', 150, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mänty', 'Pituus 161-200', '1', '160', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Mänty', 'Pituus 201-240', '1', '200', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Timanttituija', 'Pituus 80-120', '1', '80', 100, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Timanttituija', 'Pituus 121-160', '1', '120', 150, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Timanttituija', 'Pituus 161-200', '1', '160', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Timanttituija', 'Pituus 201-240', '1', '200', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Serbiankuusi', 'Pituus 80-120', '1', '80', 100, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Serbiankuusi', 'Pituus 121-160', '1', '120', 150, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Serbiankuusi', 'Pituus 161-200', '1', '160', 50, '');
+INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `image_url`) VALUES ('Serbiankuusi', 'Pituus 201-240', '1', '200', 50, '');
+
 
 
 -- Lisätään Koristeet
@@ -53,4 +66,4 @@ INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VAL
 INSERT INTO products (`name`, `description`, `category`, `price`, `storage`) VALUES ('Kuusenalusmatto', 'Perinteikkäästä juutista tehty kaunis matto. Kaikki meistä vanhenevat, myös kuusi ja irtohavuilta ei voi välttyä. Vähennä sotkua pienellä vaivalla ja lisää tämä ostoskoriin!', '4', '10', 50);
 
 -- Lisätään Admin    salasana: admin
-INSERT INTO users(`lname`, `fname`, `uname`, `passwd`, `role`) VALUES ('Testaava', 'Keijo', 'admin', '$2a$10$lDKDfLNQA4V5.NaR/bu/4OKnf6f26i8tfcO2l0jvX1wc0mez6gFcK', 'admin');
+INSERT INTO users(`lname`, `fname`, `phone`, `email`, `address`, `post`, `city`, `uname`, `passwd`, `role`) VALUES ('Testaava', 'Keijo', '---', '---', '---', '---', '---', 'admin', '$2a$10$lDKDfLNQA4V5.NaR/bu/4OKnf6f26i8tfcO2l0jvX1wc0mez6gFcK', 'admin');
