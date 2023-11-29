@@ -90,6 +90,25 @@ app.get('/products', async (req, res) => {
 });
 
 //Maalela yrittää tähän codes
+
+//for admin adding products to database
+//this works for now
+app.post('/products', upload.none(), async(req, res) => {
+
+    const { productName, description, category, price } = req.body;
+
+    const sqlAddProducts = 'INSERT INTO products (name, description, category, price) VALUES (?, ?, ?, ?)';
+
+    const reqBodyValues = [ productName, description, category, price ];
+
+    try {
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddProducts, reqBodyValues)
+        res.status(200).json({message: 'Tuotteen lisäys onnistui.'})
+    } catch (error) {
+        res.status(500).json({ error: err.message });
+    }
+})
 //pw hash stuff
 //first register new user
 //upload.none, .none takes in only key-value pairs as text (not files, formdata fields)
@@ -188,7 +207,6 @@ app.get('/user', async (req,res) => {
         //if there is no token
         res.status(403).send('Access forbidden')
     }
-
 })
 
 //for admin part, multirest files destinations
@@ -207,7 +225,7 @@ const storage = multer.diskStorage({
 const upload2 = multer({storage: storage})
 
 //add images and create new folders
-//upload.single yhden kuvan lähetykseen, määritellään parametrin(key) nimi eli tässä 'pic'
+////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
 //with postman - body - formdata - file
 app.post('/image', upload2.single('pic'), async (req, res) => {
 
