@@ -18,19 +18,21 @@ const Latvatahdet = () => {
     }, [])
     
     //mapped data presented
+
+    // img tageissa katsotaan onko image_url määritetty vai onko null, jos määritetty niin käytetään sitä kuvaa ja muutoin täytekuvaa.
     return (
         <div>
             <h1>Tämä on Latvatähdet-sivu</h1>
             {productData.value.map((item, index) =>
             <div key={index}>
                 <li>
-                   tuote: {item.name} , hinta: {item.price} , kuva: <img src='' />
+                    
+                    tuote: {item.name} , hinta: {item.price} , kuva: {item.image_url ? <img src={require('../assets' + item.image_url)} /> : <img src={require('../assets/images/main.jpg')} />}
                 </li>
             </div>
             )}
         </div>
     );
-
 };
 
 export default Latvatahdet;
