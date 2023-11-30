@@ -24,7 +24,7 @@ const Latvatahdet = () => {
             {productData.value.map((item, index) =>
             <div key={index}>
                 <li>
-                   tuote: {item.name} , hinta: {item.price}
+                   tuote: {item.name} , hinta: {item.price} , kuva: <img src='' />
                 </li>
             </div>
             )}

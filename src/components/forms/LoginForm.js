@@ -25,11 +25,11 @@ function Login() {
 
    function login() {
        //send as parameters
-       axios.postForm('http://localhost:3001/login', {uname, pw})
+       axios.postForm('http://localhost:3001/login', {uname, pw})  
        .then( res => token.value = res.data.jwtToken) //this gets tokenvalue
        .catch(error => console.log(error.message))
    };
-
+   
    return(
        <div className="forms-container">
            <input value={uname} onChange={e => setUname(e.target.value)}/>
