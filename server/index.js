@@ -23,6 +23,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+//for images
+app.use(express.static('public'))
 
 const conf = {    
         host: process.env.DB_HOST,
@@ -214,7 +216,7 @@ app.get('/user', async (req,res) => {
 const storage = multer.diskStorage({
 
     destination: ( req, file, cb ) => {
-        cb(null, '../src/assets/images')
+        cb(null, '../src/assets/images')  
     },
     filename: (req, file, cb ) => {
         cb(null, Date.now() + file.originalname)
@@ -237,7 +239,7 @@ app.post('/image', upload2.single('pic'), async (req, res) => {
     const imageUrl = 'images/' + category + '/' + filename
     //create folder
     const targetDir = '../src/assets/images/'  + category
-
+    
     try {
         //if folder does not exist
         if(!fs.existsSync(targetDir)) {
