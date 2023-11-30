@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { token, userInfo } from "../signals/LoginSignal"
+import '../../styles/Forms.css'
 
 //npm i axios
 //npm i @preact/signals-react
@@ -30,7 +31,7 @@ function Login() {
    };
 
    return(
-       <div>
+       <div className="forms-container">
            <input value={uname} onChange={e => setUname(e.target.value)}/>
            <input value={pw} onChange={e => setPw(e.target.value)}/>
            <button onClick={login}>Kirjaudu</button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import '../../styles/Forms.css'
 
 function AdminAddProducts() {
 
@@ -12,7 +13,7 @@ function AdminAddProducts() {
   }
 
   return (
-    <div>
+    <div className='forms-container'>
       <label>Lisää tuotenimi: </label>
       <input type="text" placeholder="Lisää tuotenimi" 
       value={productName} onChange={(e) => setProductName(e.target.value)}/>

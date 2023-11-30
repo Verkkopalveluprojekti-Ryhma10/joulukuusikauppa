@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import '../../styles/Forms.css'
 
 
 export default function RegisterForm() {
@@ -38,7 +39,7 @@ export default function RegisterForm() {
     }
 
     return(
-        <div>
+        <div className="forms-container">
             <label>Sukunimesi: </label>
             <input type="text" placeholder="Sukunimi" 
             value={lname} onChange={(e) => setLname(e.target.value)}/>
