@@ -27,7 +27,7 @@ const Latvatahdet = () => {
             <div key={index}>
                 <li>
                     
-                    tuote: {item.name} , hinta: {item.price} , kuva: {item.image_url ? <img src={require('../assets' + item.image_url)} /> : <img src={require('../assets/images/main.jpg')} />}
+                    tuote: {item.name} , hinta: {item.price} , kuva: {item.image_url ? <img src={require('../assets' + item.image_url)} alt='latvatahti' /> : <img src={require('../assets/images/main.jpg')} alt='taytekuva' />}
                 </li>
             </div>
             )}
