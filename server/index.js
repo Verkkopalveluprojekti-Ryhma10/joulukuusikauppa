@@ -2,8 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
-//const config = require('./db_config')
-
 
 //for pw hash npm i bcrypt
 const bcrypt = require('bcrypt')

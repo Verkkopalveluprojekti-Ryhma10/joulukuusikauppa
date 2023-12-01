@@ -4,6 +4,40 @@ import axios from 'axios'
 
 function AdminAddProducts() {
 
+  //this state is used to track if product is succesfully added
+  const [newDataIsAdded, setNewDataIsAdded] = useState(false)
+
+  //successfully added new product to database
+  function productIsAdded() {
+    setNewDataIsAdded(true)
+  }
+
+  //for adding another product after success message
+  function anotherProduct() {
+    setNewDataIsAdded(false)
+  }
+
+  return(
+    <>
+    {/* check if the product transfer was ok */}
+    {!newDataIsAdded ? (
+      //render the AddProducts component
+      //productAdded prop is in addproducts functions axios .then 
+      <AddProducts productAdded={productIsAdded}/>
+    ) : (
+      //show success message and button that takes you back to addproducts
+      <div className='forms-container'>
+        <p>Tuote lisätty.</p>
+        <button onClick={anotherProduct}>Lisää uusi tuote</button>
+      </div>
+    )}    
+    </>
+  )
+
+}
+
+function AddProducts({productAdded}) {
+
   const [productName, setProductName] = useState('')
   const [productNameTwo, setProductNameTwo] = useState('')
   const [description, setDescription] = useState('')
@@ -39,6 +73,8 @@ function AdminAddProducts() {
       setCategory(res.data.category)
       setPrice(res.data.price)
       setStorage(res.data.storage)
+      // use callback if transfer ok
+      productAdded()
     })
     .catch(error => setErrormessage('tapahtui virhe: ' + error.message))
   }  
@@ -54,8 +90,8 @@ function AdminAddProducts() {
       <label>Lisää tuotekuvaus: </label>
       <input type="text" placeholder="Lisää tuotekuvaus" 
       value={description} onChange={(e) => setDescription(e.target.value)}/>
-      <label>Lisää/valitse kategoria: </label>
-      <input type="text" placeholder="Lisää kategoria" 
+      <label>Valitse kategoria: </label>
+      <input type="text" placeholder="Valitse kategoria" 
       value={category} onChange={(e) => setCategory(e.target.value)}/>        
       <label>Lisää tuotehinta: </label>
       <input type="text" placeholder="Lisää tuotehinta" 
@@ -68,7 +104,7 @@ function AdminAddProducts() {
       value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}/>
       <label>Valitse kuvatiedosto: </label>
       <input type='file' onChange={(e) => setImgFile(e.target.files[0])}/>
-      <button onClick={AddNewProduct}>Lisää uusi tuote tietokantaan</button>
+      <button onClick={AddNewProduct}>Lisää uusi tuote tietokantaan</button>      
     </div>
   )
 }
