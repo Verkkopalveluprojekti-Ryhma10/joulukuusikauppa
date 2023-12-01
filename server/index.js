@@ -23,8 +23,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-//for images
-app.use(express.static('public'))
+//for images, did not get this yet
+//app.use(express.static('src/assets/images'))
 
 const conf = {    
         host: process.env.DB_HOST,
@@ -229,16 +229,17 @@ const upload2 = multer({storage: storage})
 //add images and create new folders
 ////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
 //with postman - body - formdata - file
+//add other product data
 app.post('/image', upload2.single('pic'), async (req, res) => {
-
+    
     const currentPath = req.file.path
-    const category = req.body.category
+    const newFolderName = req.body.newFolderName
     const filename = req.file.filename
 
     //destination path send for users
-    const imageUrl = 'images/' + category + '/' + filename
+    const imageUrl = 'images/' + newFolderName + '/' + filename
     //create folder
-    const targetDir = '../src/assets/images/'  + category
+    const targetDir = '../src/assets/images/'  + newFolderName
     
     try {
         //if folder does not exist
@@ -248,9 +249,24 @@ app.post('/image', upload2.single('pic'), async (req, res) => {
         }
         await fs.promises.rename(currentPath, targetDir + '/' + filename)
 
-        res.json({imageUrl: imageUrl})
+        //add new product info to db with imageurl
+
+        const { productName, productName2, description, category, price, storage } = req.body;
+
+        const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    
+        const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
+    
+        try {
+            const connection = await mysql.createConnection(conf)
+            await connection.execute(sqlAddProducts, reqBodyValues)
+            res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }    
+        
     } catch (error) {
-        res.json({error: error.message})
+        res.status(500).json({error: error.message})
     }
 } )
 
