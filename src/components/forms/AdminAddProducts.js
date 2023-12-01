@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../../styles/Forms.css'
 import axios from 'axios'
 
-function AdminAddProducts() {
+export default function AdminAddProducts() {
 
   //this state is used to track if product is succesfully added
   const [newDataIsAdded, setNewDataIsAdded] = useState(false)
@@ -109,4 +109,3 @@ function AddProducts({productAdded}) {
   )
 }
 
-export default AdminAddProducts

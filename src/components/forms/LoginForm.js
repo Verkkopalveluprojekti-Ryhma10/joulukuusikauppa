@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { token, userInfo } from "../signals/LoginSignal"
+import AdminAddProducts from "./AdminAddProducts"
 import '../../styles/Forms.css'
 
 //npm i axios
@@ -41,10 +42,17 @@ function Login() {
 
 function UserInfo() {
 
-    return(
+    if( userInfo.value.lname === "Testaava") {
+     return (
+     <>  
+     {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+     < AdminAddProducts /> 
+     </>) 
+    } else {
+        return(
         <div>
             {/* if userInfo has value, then show last name and first name*/}
             {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
         </div>
-    )
+    )}
 }
