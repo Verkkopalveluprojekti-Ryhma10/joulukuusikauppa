@@ -1,8 +1,8 @@
 import axios from "axios"
 import { useState } from "react"
 import { token, userInfo } from "../signals/LoginSignal"
-import AdminAddProducts from "./AdminAddProducts"
 import '../../styles/Forms.css'
+import { Navigate } from "react-router-dom"
 
 //npm i axios
 //npm i @preact/signals-react
@@ -42,17 +42,22 @@ function Login() {
 
 function UserInfo() {
 
-    if( userInfo.value.lname === "Testaava") {
-     return (
-     <>  
-     {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
-     < AdminAddProducts /> 
-     </>) 
-    } else {
-        return(
-        <div>
-            {/* if userInfo has value, then show last name and first name*/}
-            {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
-        </div>
-    )}
+    //if userinfo.value is not null..
+    if(userInfo.value != null){
+        //userinfo.value.role is admin navigate to adminaddproducts
+        if( userInfo.value.role === "admin" ) {
+        return (
+        <>  
+        < Navigate to="/yllapito" /> 
+        </>
+        ) 
+        //else welcome user or something..
+        } else {
+            return(
+            <div>
+                {/* if userInfo has value, then show last name and first name*/}
+                {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+            </div>
+        )}
+}
 }

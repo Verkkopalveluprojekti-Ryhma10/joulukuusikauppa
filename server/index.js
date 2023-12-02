@@ -192,7 +192,7 @@ app.get('/user', async (req,res) => {
     //use split (token is Bearer token so [1] is token)
     const token = req.headers.authorization?.split(' ')[1];
 
-    const sql = 'SELECT lname, fname, phone, email, address, post, city FROM users WHERE uname=?'
+    const sql = 'SELECT * FROM users WHERE uname=?'
 
     try {
         //this checks that token matches with user

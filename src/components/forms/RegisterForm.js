@@ -34,7 +34,8 @@ export default function RegisterForm() {
             setPw(response.data.pw)
             setRole(response.data.role)
         }).catch (error => {
-            setErrormessage('tapahtui virhe: ' + error.message);
+            setErrormessage('tapahtui virhe. ');
+            console.log(error.message);
         })
     }
 

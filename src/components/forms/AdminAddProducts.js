@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../../styles/Forms.css'
 import axios from 'axios'
+import { userInfo } from "../signals/LoginSignal"
 
 export default function AdminAddProducts() {
 
@@ -19,6 +20,9 @@ export default function AdminAddProducts() {
 
   return(
     <>
+    <div className="forms-container">
+    {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+    </div>
     {/* check if the product transfer was ok */}
     {!newDataIsAdded ? (
       //render the AddProducts component
@@ -33,7 +37,6 @@ export default function AdminAddProducts() {
     )}    
     </>
   )
-
 }
 
 function AddProducts({productAdded}) {
