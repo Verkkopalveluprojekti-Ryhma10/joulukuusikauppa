@@ -56,7 +56,7 @@ function UserInfo() {
             return(
             <div>
                 {/* if userInfo has value, then show last name and first name*/}
-                {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+                {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
             </div>
         )}
 }
