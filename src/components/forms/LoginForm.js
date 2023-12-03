@@ -34,7 +34,7 @@ function Login() {
    return(
        <div className="forms-container">
            <input value={uname} onChange={e => setUname(e.target.value)}/>
-           <input value={pw} onChange={e => setPw(e.target.value)}/>
+           <input type="password" value={pw} onChange={e => setPw(e.target.value)}/>
            <button onClick={login}>Kirjaudu</button>
        </div>
    )
