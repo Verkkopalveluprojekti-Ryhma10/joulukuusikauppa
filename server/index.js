@@ -20,6 +20,7 @@ const port = 3001
 
 const app = express()
 
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
@@ -257,53 +258,3 @@ app.post('/image', upload2.single('pic'), async (req, res) => {
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)
 })
-
-//reitti tuotteen lisäämiseksi käyttäjän ostoskoriin
-app.post('/cart', (req, res) => {
-    const { userId, productId, quantity } = req.body;
-
-    //luodaan ostoskorin tuote ja lisätään se väliaikaiseen säilöön
-    const cartItem = { userId, productId, quantity };
-    cart.push(cartItem); // Lisää tuote 'cart' -muuttujaan
-
-    res.status(200).json({ message: 'Tuote lisätty ostoskoriin', cartItem });
-});
-
-
-//reitti ostoskorissa olevan tuotteen määrän päivittämiseksi
-app.put('/cart/:itemId', (req, res) => {
-    const itemId = req.params.itemId; //ostoskorissa olevan tuotteen tunniste
-    const { quantity } = req.body; //päivitetään tuotteelle uusi määrä
-
-    //etsi ja päivitä tuotteen määrä 'cart' -muuttujassa
-    const item = cart.find(item => item.id === itemId);
-    if (item) {
-        item.quantity = quantity;
-        res.status(200).json({ message: 'Ostoskorin tuotteen määrä päivitetty', item });
-    } else {
-        res.status(404).send('Tuotetta ei löytynyt ostoskorista');
-    }
-});
-
-//reitti tuotteen poistamiseksi ostoskorista
-app.delete('/cart/:itemId', (req, res) => {
-    const itemId = req.params.itemId; //poistettavan tuotteen tunniste
-
-    //etsi ja poista tuote 'cart' -muuttujasta
-    const index = cart.findIndex(item => item.id === itemId);
-    if (index > -1) {
-        cart.splice(index, 1); // Poistaa tuotteen 'cart' -muuttujasta
-        res.status(200).json({ message: 'Tuote poistettu ostoskorista' });
-    } else {
-        res.status(404).send('Tuotetta ei löytynyt ostoskorista');
-    }
-});
-
-//reitti käyttäjän ostoskorin sisällön hakemiseksi
-app.get('/cart/:userId', (req, res) => {
-    const userId = req.params.userId; //käyttäjän tunniste
-
-    //haetaan käyttäjän kaikki ostoskorin tuotteet 'cart' -muuttujasta
-    const userCart = cart.filter(item => item.userId === userId);
-    res.json(userCart); //palauttaa käyttäjän ostoskorin sisällön
-});
