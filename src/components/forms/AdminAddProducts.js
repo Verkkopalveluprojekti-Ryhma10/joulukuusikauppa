@@ -68,7 +68,7 @@ function AddProducts({productAdded}) {
       storage: storage
     }
 
-    axios.postForm('http://localhost:3001/image', params)
+    axios.postForm('http://localhost:3001/addproduct', params)
     .then(res => {
       setimgUrl(res.data.imageUrl)
       setProductName(res.data.productName)
@@ -79,7 +79,10 @@ function AddProducts({productAdded}) {
       // use callback if transfer ok
       productAdded()
     })
-    .catch(error => setErrormessage('tapahtui virhe: ' + error.message))
+    .catch(error => {
+      setErrormessage('Tapahtui virhe.')
+      console.log(error.message)
+    })
   }  
 
   return (
@@ -110,5 +113,9 @@ function AddProducts({productAdded}) {
       <button onClick={AddNewProduct}>Lisää uusi tuote tietokantaan</button>      
     </div>
   )
+}
+
+function AddNewCategory() {
+  
 }
 

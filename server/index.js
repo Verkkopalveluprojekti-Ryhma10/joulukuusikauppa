@@ -228,7 +228,7 @@ const upload2 = multer({storage: storage})
 ////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
 //with postman - body - formdata - file
 //add other product data
-app.post('/image', upload2.single('pic'), async (req, res) => {
+app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     
     const currentPath = req.file.path
     const newFolderName = req.body.newFolderName
@@ -247,26 +247,107 @@ app.post('/image', upload2.single('pic'), async (req, res) => {
         }
         await fs.promises.rename(currentPath, targetDir + '/' + filename)
 
-        //add new product info to db with imageurl
-
         const { productName, productName2, description, category, price, storage } = req.body;
 
         const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    
+
         const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
-    
-        try {
-            const connection = await mysql.createConnection(conf)
-            await connection.execute(sqlAddProducts, reqBodyValues)
-            res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }    
-        
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddProducts, reqBodyValues)
+
+        res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
+
     } catch (error) {
         res.status(500).json({error: error.message})
-    }
+    }  
 } )
+
+app.post('/addcategories', upload2.single('pic'), async (req, res) => {
+    
+    const currentPath = req.file.path
+    const newFolderName = req.body.newFolderName
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + newFolderName + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + newFolderName
+    
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        const { name, description2 } = req.body;
+
+        const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
+   
+        const reqBodyValues2 = [ name, description2, imageUrl ];
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddCategory, reqBodyValues2)
+        res.status(200).json({message: 'Lisäys onnistui.', imageUrl: imageUrl})
+
+    //    const addProduct = await addProducts(imageUrl, req, res)
+    //    const addCategory = await addCategories(imageUrl, req, res)        
+
+    //    if(addProduct == 0 && addCategory == 0) {
+    //     res.status(200).json({message: 'Lisäys onnistui.', imageUrl: imageUrl})
+    //    } else {
+    //     if(addProduct != 0) {
+    //         res.status(500).json({error: "Virhe tuotteen lisäyksessä."})
+    //     } 
+    //     if(addCategory != 0) {
+    //         res.status(500).json({error: "Virhe kategorian lisäyksessä."})
+    //     }
+    //    }
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }  
+} )
+
+// async function addProducts(imageUrl, req, res) {
+
+//     //add new product info to db with imageurl
+//     try {
+//         const { productName, productName2, description, category, price, storage } = req.body;
+
+//         const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+//         const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
+
+//         const connection = await mysql.createConnection(conf)
+//         await connection.execute(sqlAddProducts, reqBodyValues)
+        
+//         return 0
+//     } catch (error) {
+//         return 1
+//     }
+// }
+
+// async function addCategories(imageUrl, req, res) {
+
+//     //add new category info to db with imageurl
+//     try {
+//         const { name, description2 } = req.body;
+
+//         const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
+   
+//         const reqBodyValues2 = [ name, description2, imageUrl ];
+
+//          const connection2 = await mysql.createConnection(conf)
+//          await connection2.execute(sqlAddCategory, reqBodyValues2)
+//          await connection2.end()
+//          return 0
+        
+//     } catch (error) {
+//         return 1
+//     }
+// }
 
 //
 
