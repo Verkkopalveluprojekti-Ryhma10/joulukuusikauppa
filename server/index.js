@@ -263,6 +263,7 @@ app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     }  
 } )
 
+//for admin to add new category with image
 app.post('/addcategories', upload2.single('pic'), async (req, res) => {
     
     const currentPath = req.file.path
@@ -290,64 +291,12 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
 
         const connection = await mysql.createConnection(conf)
         await connection.execute(sqlAddCategory, reqBodyValues2)
-        res.status(200).json({message: 'Lisäys onnistui.', imageUrl: imageUrl})
+        res.status(200).json({message: 'Kategorian lisäys onnistui.', imageUrl: imageUrl})
 
-    //    const addProduct = await addProducts(imageUrl, req, res)
-    //    const addCategory = await addCategories(imageUrl, req, res)        
-
-    //    if(addProduct == 0 && addCategory == 0) {
-    //     res.status(200).json({message: 'Lisäys onnistui.', imageUrl: imageUrl})
-    //    } else {
-    //     if(addProduct != 0) {
-    //         res.status(500).json({error: "Virhe tuotteen lisäyksessä."})
-    //     } 
-    //     if(addCategory != 0) {
-    //         res.status(500).json({error: "Virhe kategorian lisäyksessä."})
-    //     }
-    //    }
     } catch (error) {
         res.status(500).json({error: error.message})
     }  
 } )
-
-// async function addProducts(imageUrl, req, res) {
-
-//     //add new product info to db with imageurl
-//     try {
-//         const { productName, productName2, description, category, price, storage } = req.body;
-
-//         const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
-
-//         const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
-
-//         const connection = await mysql.createConnection(conf)
-//         await connection.execute(sqlAddProducts, reqBodyValues)
-        
-//         return 0
-//     } catch (error) {
-//         return 1
-//     }
-// }
-
-// async function addCategories(imageUrl, req, res) {
-
-//     //add new category info to db with imageurl
-//     try {
-//         const { name, description2 } = req.body;
-
-//         const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
-   
-//         const reqBodyValues2 = [ name, description2, imageUrl ];
-
-//          const connection2 = await mysql.createConnection(conf)
-//          await connection2.execute(sqlAddCategory, reqBodyValues2)
-//          await connection2.end()
-//          return 0
-        
-//     } catch (error) {
-//         return 1
-//     }
-// }
 
 //
 
