@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
-import '../../styles/';
-import { CartContext } from '../content/CartProvider';
+import { CartContext } from './CartProvider';
 
 
 function ShoppingCart() {
