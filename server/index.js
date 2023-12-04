@@ -2,8 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
-//const config = require('./db_config')
-
 
 //for pw hash npm i bcrypt
 const bcrypt = require('bcrypt')
@@ -24,10 +22,12 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+//for images, did not get this yet
+//app.use(express.static('src/assets/images'))
 
 const conf = {    
         host: process.env.DB_HOST,
-        port: 3306,
+        port: process.env.DB_PORT,
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE    
@@ -193,7 +193,7 @@ app.get('/user', async (req,res) => {
     //use split (token is Bearer token so [1] is token)
     const token = req.headers.authorization?.split(' ')[1];
 
-    const sql = 'SELECT lname, fname, phone, email, address, post, city FROM users WHERE uname=?'
+    const sql = 'SELECT * FROM users WHERE uname=?'
 
     try {
         //this checks that token matches with user
@@ -215,7 +215,7 @@ app.get('/user', async (req,res) => {
 const storage = multer.diskStorage({
 
     destination: ( req, file, cb ) => {
-        cb(null, '../src/assets/images')
+        cb(null, '../src/assets/images')  
     },
     filename: (req, file, cb ) => {
         cb(null, Date.now() + file.originalname)
@@ -228,17 +228,18 @@ const upload2 = multer({storage: storage})
 //add images and create new folders
 ////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
 //with postman - body - formdata - file
-app.post('/image', upload2.single('pic'), async (req, res) => {
-
+//add other product data
+app.post('/addproduct', upload2.single('pic'), async (req, res) => {
+    
     const currentPath = req.file.path
-    const category = req.body.category
+    const newFolderName = req.body.newFolderName
     const filename = req.file.filename
 
     //destination path send for users
-    const imageUrl = 'images/' + category + '/' + filename
+    const imageUrl = 'images/' + newFolderName + '/' + filename
     //create folder
-    const targetDir = '../src/assets/images/'  + category
-
+    const targetDir = '../src/assets/images/'  + newFolderName
+    
     try {
         //if folder does not exist
         if(!fs.existsSync(targetDir)) {
@@ -247,10 +248,55 @@ app.post('/image', upload2.single('pic'), async (req, res) => {
         }
         await fs.promises.rename(currentPath, targetDir + '/' + filename)
 
-        res.json({imageUrl: imageUrl})
+        const { productName, productName2, description, category, price, storage } = req.body;
+
+        const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+        const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddProducts, reqBodyValues)
+
+        res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
+
     } catch (error) {
-        res.json({error: error.message})
-    }
+        res.status(500).json({error: error.message})
+    }  
+} )
+
+//for admin to add new category with image
+app.post('/addcategories', upload2.single('pic'), async (req, res) => {
+    
+    const currentPath = req.file.path
+    const newFolderName = req.body.newFolderName
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + newFolderName + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + newFolderName
+    
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        const { name, description2 } = req.body;
+
+        const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
+   
+        const reqBodyValues2 = [ name, description2, imageUrl ];
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddCategory, reqBodyValues2)
+        res.status(200).json({message: 'Kategorian lisäys onnistui.', imageUrl: imageUrl})
+
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }  
 } )
 
 //
