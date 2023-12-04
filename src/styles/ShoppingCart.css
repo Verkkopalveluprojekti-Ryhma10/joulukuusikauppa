@@ -1,24 +1,19 @@
-.shopping-cart {
-    color: black !important;
-    text-decoration: none !important;
-    margin: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    right: 0%;
-}
+.shopping-cart-dropdown {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .total-price {
+    border-top: 1px solid #ddd;
+    text-align: right;
+  }
+  
+  .dropdown-toggle::after {
+    display: none;
+  }
 
-.shopping-cart span {
-    font-size: 15px;
-}
-
-.shopping-cart span:hover {
-    font-weight: bold;
-}
-
-.fa-shopping-cart {
-    color: white;
-}
-
-.ShopCartText {
-    font-size: 10px;
-}
+  .shopping-cart-dropdown-menu {
+    width: 100%; 
+    max-height: 300px; 
+    overflow-y: auto;
+  }
