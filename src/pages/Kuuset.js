@@ -1,135 +1,99 @@
-import React, { useState } from 'react';
-import Metsakuusi from '../assets/images/metsakuusi.jpg';
-import Mustakuusi from '../assets/images/mustakuusi.jpg';
-import Sinikuusi from '../assets/images/sinikuusi.jpg';
-import Manty from '../assets/images/manty.jpg'
-import Tuija from '../assets/images/tuija.jpg'
-import Serbiankuusi from '../assets/images/serbiankuusi.jpg'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const TreeType = ({ type, image, label, description }) => {
-    const [expanded, setExpanded] = useState(false);
-    const [selectedSize, setSelectedSize] = useState('');
-    const [quantity, setQuantity] = useState(1);
-  
-    const handleExpand = () => {
-      setExpanded(!expanded);
-    };
-  
-    const handleSizeChange = (event) => {
-      setSelectedSize(event.target.value);
-    };
-  
-    const handleQuantityChange = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      setQuantity(event.target.value);
-    };
-  
-    const handleSizeQuantityClick = (event) => {
-      event.stopPropagation();
-    };
-  
-    return (
-      <div className={`TreeDiv ${expanded ? 'expanded' : ''}`} onClick={handleExpand}>
-        <img src={image} alt={type} className={type.toLowerCase()} />
-        <h3>{label}</h3>
-        
-  
-        {expanded && (
-        <div className="options" onClick={handleSizeQuantityClick}>
-        <p>{description}</p>
+const TreeType = ({ products }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
+  const handleExpand = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleVariantChange = (event) => {
+    setSelectedVariant(event.target.value);
+  };
+
+  const handleQuantityChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const handleVariantQuantityClick = (event) => {
+    event.stopPropagation();
+  };
+
+  return (
+    <div className={`TreeDiv ${expanded ? 'expanded' : ''}`} onClick={handleExpand}>
+      <img src={products[0].image_url} alt={products[0].name} className={products[0].name.toLowerCase()} />
+      <h3>{products[0].name}</h3>
+
+      {expanded && (
+        <div className="options" onClick={handleVariantQuantityClick}>
           <label>
             Valitse kuusen korkeus:
             <br />
-            <input
-              type="radio"
-              value="80-120"
-              checked={selectedSize === '80-120'}
-              onChange={(e) => handleSizeChange(e)}
-              id="1"
-            />
-            <label>80 - 120 cm   -   80€</label><br />
-            <input
-              type="radio"
-              value="110-150"
-              checked={selectedSize === '110-150'}
-              onChange={(e) => handleSizeChange(e)}
-              id="2"
-            />
-            <label>121 - 160 cm   -   120€</label><br />
-
-            <input
-              type="radio"
-              value="140-180"
-              checked={selectedSize === '140-180'}
-              onChange={(e) => handleSizeChange(e)}
-              id="3"
-            />
-            <label>161 - 200 cm   -   160€</label><br />
-          </label><br />
-
-          <input
-              type="radio"
-              value="170-210"
-              checked={selectedSize === '170-210'}
-              onChange={(e) => handleSizeChange(e)}
-              id="4"
-            />
-            <label>201 - 240 cm   -   200€</label><br />
-
+            {products.map((variant, index) => (
+              <div key={index}>
+                <input
+                  type="radio"
+                  value={`${variant.name}-${variant.description}`}
+                  checked={selectedVariant === `${variant.name}-${variant.description}`}
+                  onChange={(e) => handleVariantChange(e)}
+                  id={index}
+                />
+                <label>
+                  {variant.description} - {variant.price}€
+                </label>
+                <br />
+              </div>
+            ))}
+          </label>
+          <br />
           <label>
             Määrä:
             <input type="number" value={quantity} onChange={(e) => handleQuantityChange(e)} />
           </label>
-
-          <button>Add to Cart</button>
+          <button>Lisää ostoskoriin</button>
         </div>
       )}
     </div>
   );
 };
 
-  const Kuuset = () => {
-    return (
-      <div className='kuuset-container'>
-        <TreeType
-        type="Metsa"
-        image={Metsakuusi}
-        label="Metsäkuusi" 
-        description=
-        "Suomalainen viljelty metsäkuusi. Tiheäkasvuinen, teräväneulainen, keskivihreä ja perinteinen - varma valinta!"/>
+const Kuuset = () => {
+  const [productList, setProductList] = useState([]);
 
-        <TreeType
-        type="Musta"
-        image={Mustakuusi}
-        label="Mustakuusi"
-        description=""/>
-        
-        <TreeType
-        type="Sini"
-        image={Sinikuusi}
-        label="Sinikuusi"
-        description=""/>
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/products')
+      .then((res) => setProductList(res.data))
+      .catch((error) => console.error('Error fetching products: ' + error.message));
+  }, []);
 
-        <TreeType
-        type="Manty"
-        image={Manty}
-        label="Mänty"
-        description="" />
+  // Group and filter products by name and category
+  const groupedProducts = Object.values(
+    productList.reduce((acc, product) => {
+      if (product.category === 1) {
+        if (!acc[product.name]) {
+          acc[product.name] = [];
+        }
+        acc[product.name].push(product);
+      }
+      return acc;
+    }, {})
+  );
 
-        <TreeType
-        type="Tuija"
-        image={Tuija}
-        label="Timanttituija"
-        description=""/>
-
-        <TreeType
-        type="Serbiankuusi"
-        image={Serbiankuusi}
-        label="Serbiankuusi"
-        description=""/>
+  return (
+    <div>
+      <div className="kuuset-container">
+        {groupedProducts.map((products, index) => (
+          <TreeType key={index} products={products} />
+        ))}
       </div>
-    );
-  };
-  
-  export default Kuuset;
+    </div>
+  );
+};
+
+export default Kuuset;
+
+
