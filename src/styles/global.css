@@ -67,6 +67,12 @@ img {
     padding: 5px;
 }
 
+.TreeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .TreeDiv {
     border: 1px solid black;
     height: 350px;
