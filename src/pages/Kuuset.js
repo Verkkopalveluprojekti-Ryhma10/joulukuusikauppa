@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+// components for different tree variations
 const TreeType = ({ products }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState('');
   const [quantity, setQuantity] = useState(1);
 
+//handle expand feature
   const handleExpand = () => {
     setExpanded(!expanded);
   };
 
+//handle selected variant
   const handleVariantChange = (event) => {
     setSelectedVariant(event.target.value);
   };
 
+//handle selected amount
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
 
+//expand doesn't close when selecting variant
   const handleVariantQuantityClick = (event) => {
     event.stopPropagation();
   };
+
 
   return (
     <div className={`TreeDiv ${expanded ? 'expanded' : ''}`} onClick={handleExpand}>
@@ -63,6 +69,7 @@ const TreeType = ({ products }) => {
 const Kuuset = () => {
   const [productList, setProductList] = useState([]);
 
+// Fetch product list from the server
   useEffect(() => {
     axios
       .get('http://localhost:3001/products')
@@ -72,14 +79,20 @@ const Kuuset = () => {
 
   // Group and filter products by name and category
   const groupedProducts = Object.values(
-    productList.reduce((acc, product) => {
-      if (product.category === 1) {
-        if (!acc[product.name]) {
-          acc[product.name] = [];
+    productList.reduce((productGroups, product) => {
+      const isCategoryOne = product.category === 1;
+  
+      if (isCategoryOne) {
+        const productName = product.name;
+  
+        if (!productGroups[productName]) {
+          productGroups[productName] = [];
         }
-        acc[product.name].push(product);
+        
+        productGroups[productName].push(product);
       }
-      return acc;
+  
+      return productGroups;
     }, {})
   );
 
