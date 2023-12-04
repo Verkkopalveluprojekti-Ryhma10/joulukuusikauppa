@@ -10,7 +10,6 @@ function Product({ product }) {
     <div>
       {/* Näyttää tuotteen nimen */}
       <h3>{product.name}</h3>
-      {/* Tähän voi lisätä muita tuotteen tietoja, kuten hinnan tai kuvauksen */}
       {/* Nappi, joka lisää tuotteen ostoskoriin käyttäen CartContextin addToCart-funktiota */}
       <button onClick={() => addToCart(product)}>Lisää ostoskoriin</button>
     </div>

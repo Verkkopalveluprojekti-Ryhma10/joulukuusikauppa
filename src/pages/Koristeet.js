@@ -1,3 +1,4 @@
+// Kova koodit testailuun tuotteille yms 
 import React from 'react';
 import DecorationType from '../components/content/DecorationType'; // Oletetaan, että tämä on erillinen komponentti
 import '../styles/global.css';
@@ -89,3 +90,34 @@ const Koristeet = () => {
 };
 
 export default Koristeet;
+
+
+/* Tätä en vielä saanut pelittään, antaa erroria, ei vissiin mee SQL kyselyt jossain oikein aivot loppu mitetin myöhemmin lisää
+
+import React, { useState, useEffect } from 'react';
+import DecorationType from '../components/content/DecorationType';
+import '../styles/global.css';
+
+const Koristeet = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/products');
+        if (!response.ok) {
+          throw new Error('Verkkopyynnössä tapahtui virhe');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Virhe tuotteiden haussa:', error);
+      }
+    };
+  
+    fetchProducts();
+  }, [])};
+
+export default Koristeet;
+*/
+

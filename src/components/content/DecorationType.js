@@ -15,7 +15,7 @@ function DecorationType(props) {
 
   // Käsittelee tuotteen lisäämisen ostoskoriin
   const handleAddToCart = () => { 
-    addToCart({ id: props.id, price: props.price, quantity: parseInt(quantity) });
+    addToCart({ id: props.type, name: props.label, price: props.price, quantity: parseInt(quantity) });
   };
 
   return (
