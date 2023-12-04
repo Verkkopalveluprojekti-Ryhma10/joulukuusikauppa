@@ -100,7 +100,7 @@ img {
     padding: 5px;
 }
 
-.DecorationDiv {
+.decoration-type {
     border: 1px solid black;
     height: 350px;
     text-align: center;
@@ -110,11 +110,11 @@ img {
     margin: 3.5em;
 }
 
-.DecorationDiv:hover{
+.decoration-type:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.DecorationDiv.expanded{
+.decoration-type.expanded{
     height: fit-content;
     width: 400px;
     text-align: center;

@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useState } from "react"
 import { token, userInfo } from "../signals/LoginSignal"
+import '../../styles/Forms.css'
+import { Navigate } from "react-router-dom"
 
 //npm i axios
 //npm i @preact/signals-react
@@ -30,9 +32,9 @@ function Login() {
    };
    
    return(
-       <div>
+       <div className="forms-container">
            <input value={uname} onChange={e => setUname(e.target.value)}/>
-           <input value={pw} onChange={e => setPw(e.target.value)}/>
+           <input type="password" value={pw} onChange={e => setPw(e.target.value)}/>
            <button onClick={login}>Kirjaudu</button>
        </div>
    )
@@ -40,10 +42,22 @@ function Login() {
 
 function UserInfo() {
 
-    return(
-        <div>
-            {/* if userInfo has value, then show last name and first name*/}
-            {userInfo.value && <h2>Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
-        </div>
-    )
+    //if userinfo.value is not null..
+    if(userInfo.value != null){
+        //userinfo.value.role is admin navigate to adminaddproducts
+        if( userInfo.value.role === "admin" ) {
+        return (
+        <>  
+        < Navigate to="/yllapito" /> 
+        </>
+        ) 
+        //else welcome user or something..
+        } else {
+            return(
+            <div>
+                {/* if userInfo has value, then show last name and first name*/}
+                {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+            </div>
+        )}
+}
 }

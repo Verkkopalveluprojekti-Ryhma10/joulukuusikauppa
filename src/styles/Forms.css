@@ -1,0 +1,32 @@
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem;
+  }
+  
+  .forms-container label {
+    margin-bottom: 4px;
+  }
+  
+  .forms-container input {
+    margin-bottom: 16px;
+    padding: 8px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .forms-container button {
+    padding: 8px 16px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #cdc199;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .forms-container button:hover {
+    background-color: #cdc199;
+  }
