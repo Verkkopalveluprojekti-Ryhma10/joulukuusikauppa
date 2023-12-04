@@ -1,19 +1,12 @@
-.shopping-cart-dropdown {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .total-price {
-    border-top: 1px solid #ddd;
-    text-align: right;
-  }
-  
-  .dropdown-toggle::after {
-    display: none;
-  }
 
-  .shopping-cart-dropdown-menu {
-    width: 100%; 
-    max-height: 300px; 
-    overflow-y: auto;
+
+  .custom-shopping-cart .dropdown-menu {
+    width: 100% !important; /* Haluamasi leveys */
+    max-height: 1000px; /* Haluamasi korkeus */
+    overflow-y: auto; /* Vierityspalkki tarvittaessa */
+    /* Muut haluamasi tyylit */
+  }
+  
+  .bg-body-tertiary .custom-shopping-cart .dropdown-menu {
+    width: 100% !important;
   }

@@ -15,21 +15,20 @@ export function CartProvider({ children }) {
   }, [cartItems]);
 
   const addToCart = (product) => {
-      setCartItems((prevItems) => {
-        // Tarkistetaan, löytyykö tuote jo ostoskorista
-        const isProductInCart = prevItems.find(item => item.id === product.id);
+    setCartItems((prevItems) => {
+      const isProductInCart = prevItems.find(item => item.id === product.id);
   
-        if (isProductInCart) {
-          // Jos tuote on jo korissa, päivitetään sen määrää
-          return prevItems.map(item =>
-            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-          );
-        } else {
-          // Jos tuote ei ole korissa, lisätään se ostoskoriin
-          return [...prevItems, { ...product, quantity: 1 }];
-        }
-      });
-    };
+      if (isProductInCart) {
+        // Jos tuote on jo korissa, päivitetään sen määrää quantity-arvolla
+        return prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + product.quantity } : item
+        );
+      } else {
+        // Jos tuote ei ole korissa, lisätään se ostoskoriin
+        return [...prevItems, product];
+      }
+    });
+  };
 
     const removeFromCart = (itemId) => {
       //päivitetään ostoskorin tila poistamalla tuote, jonka id vastaa annettua itemId:tä

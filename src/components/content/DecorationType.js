@@ -10,7 +10,7 @@ function DecorationType(props) {
   };
 
   const handleAddToCart = () => { 
-    addToCart({ id: props.id, price: props.price, quantity: parseInt(quantity) });
+    addToCart({ id: props.type, name: props.label, price: props.price, quantity: parseInt(quantity, 10) });
   };
 
   return (
