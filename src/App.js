@@ -1,6 +1,7 @@
 import Header from './components/common/Header';
 import Home from './pages/Home';
 import Footer from './components/common/Footer';
+import { CartProvider } from './components/content/CartProvider'; 
 
 import Kuuset from './pages/Kuuset';
 import Koristeet from './pages/Koristeet';
@@ -18,6 +19,7 @@ import {
 
 function App() {
   return (
+    <CartProvider> {/*käytetään CartProvider komponenttia koko sovelluksen ympärillä */}
     <>
       <Header />        
           <Routes>
@@ -33,6 +35,7 @@ function App() {
           </Routes>        
       <Footer />
     </>
+    </CartProvider>
   );
 }
 
