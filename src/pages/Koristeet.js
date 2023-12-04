@@ -93,6 +93,10 @@ export default Koristeet;
 
 
 /* Tätä en vielä saanut pelittään, antaa erroria, ei vissiin mee SQL kyselyt jossain oikein aivot loppu mitetin myöhemmin lisää
+Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+Koristeet.js:18 Virhe tuotteiden haussa: Error: Verkkopyynnössä tapahtui virhe
+    at fetchProducts (Koristeet.js:13:1)
+fetchProducts @ Koristeet.js:18
 
 import React, { useState, useEffect } from 'react';
 import DecorationType from '../components/content/DecorationType';
