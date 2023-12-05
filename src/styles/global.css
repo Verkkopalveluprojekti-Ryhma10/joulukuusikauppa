@@ -100,6 +100,12 @@ img {
     padding: 10px;
   }
 
+  .TreeDiv button:hover,
+  .MuutDiv button:hover,
+  .LatvatahdetDiv button:hover  {
+    background-color: green;
+  }
+
   .koristeet-container {
     display: flex;
     flex-wrap: wrap;
