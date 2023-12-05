@@ -138,7 +138,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountMetsaKuusi}
@@ -146,7 +146,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>
@@ -177,7 +177,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountMustaKuusi}
@@ -185,7 +185,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>
@@ -216,7 +216,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountSiniKuusi}
@@ -224,7 +224,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>
@@ -255,7 +255,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountManty}
@@ -263,7 +263,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>
@@ -294,7 +294,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountTimantti}
@@ -302,7 +302,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>
@@ -333,7 +333,7 @@ const Kuuset = () => {
                   </div>
                 ))}
                 <label>
-                  Amount:
+                  Määrä:
                   <input
                     type="number"
                     value={amountSerbian}
@@ -341,7 +341,7 @@ const Kuuset = () => {
                     min="1"
                   />
                 </label>
-                <button>Add to Cart</button>
+                <button>Lisää ostoskoriin</button>
               </div>
             )}
           </div>

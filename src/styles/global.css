@@ -67,13 +67,15 @@ img {
     padding: 5px;
 }
 
-.TreeContainer {
+.TreeContainer,
+.MuutContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.TreeDiv {
+.TreeDiv,
+.MuutDiv {
     border: 1px solid black;
     height: 350px;
     text-align: center;
@@ -83,7 +85,8 @@ img {
     margin: 3.5em;
 }
 
-.TreeDiv:hover{
+.TreeDiv:hover,
+.MuutDiv:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
