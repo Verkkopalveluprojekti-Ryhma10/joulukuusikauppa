@@ -119,9 +119,9 @@ const Kuuset = () => {
         {MetsaKuusi && (
           <div>
             <h3 onClick={toggleExpandMetsaKuusi}>{MetsaKuusi.name}</h3>
+            {MetsaKuusi.image_url ? <img src={require('../assets' + MetsaKuusi.image_url)} alt='metsakuusi' /> : <img src={require('../assets/images/metsakuusi.jpg')} alt='mustakuusi' />}
             {expandedMetsaKuusi && (
               <div>
-                <img src={MetsaKuusi.image_url} alt={MetsaKuusi.name} />
                 <p>{MetsaKuusi.description}</p>
                 {KuusetData.slice(1, 5).map((product, index) => (
                   <div key={index}>
@@ -158,9 +158,9 @@ const Kuuset = () => {
         {MustaKuusi && (
           <div>
             <h3 onClick={toggleExpandMustaKuusi}>{MustaKuusi.name}</h3>
+            {MustaKuusi.image_url ? <img src={require('../assets' + MustaKuusi.image_url)} alt='mustakuusi' /> : <img src={require('../assets/images/mustakuusi.jpg')} alt='mustakuusi' />}
             {expandedMustaKuusi && (
               <div>
-                <img src={MustaKuusi.image_url} alt={MustaKuusi.name} />
                 <p>{MustaKuusi.description}</p>
                 {KuusetData.slice(4, 8).map((product, index) => (
                   <div key={index}>
@@ -196,9 +196,9 @@ const Kuuset = () => {
         {SiniKuusi && (
           <div>
             <h3 onClick={toggleExpandSiniKuusi}>{SiniKuusi.name}</h3>
+            {SiniKuusi.image_url ? <img src={require('../assets' + SiniKuusi.image_url)} alt='timantti' /> : <img src={require('../assets/images/sinikuusi.jpg')} alt='sinikuusi' />}
             {expandedSiniKuusi && (
               <div>
-                <img src={SiniKuusi.image_url} alt={SiniKuusi.name} />
                 <p>{SiniKuusi.description}</p>
                 {KuusetData.slice(8, 12).map((product, index) => (
                   <div key={index}>
@@ -234,9 +234,9 @@ const Kuuset = () => {
         {Manty && (
           <div>
             <h3 onClick={toggleExpandManty}>{Manty.name}</h3>
+            {Manty.image_url ? <img src={require('../assets' + Manty.image_url)} alt='manty' /> : <img src={require('../assets/images/manty.jpg')} alt='manty' />}
             {expandedManty && (
               <div>
-                <img src={Manty.image_url} alt={Manty.name} />
                 <p>{Manty.description}</p>
                 {KuusetData.slice(12, 16).map((product, index) => (
                   <div key={index}>
@@ -272,9 +272,9 @@ const Kuuset = () => {
         {Timantti && (
           <div>
             <h3 onClick={toggleExpandTimantti}>{Timantti.name}</h3>
+            {Timantti.image_url ? <img src={require('../assets' + Timantti.image_url)} alt='timanttituija' /> : <img src={require('../assets/images/tuija.jpg')} alt='timanttituija' />}
             {expandedTimantti && (
               <div>
-                <img src={Timantti.image_url} alt={Timantti.name} />
                 <p>{Timantti.description}</p>
                 {KuusetData.slice(16, 20).map((product, index) => (
                   <div key={index}>
@@ -310,9 +310,9 @@ const Kuuset = () => {
         {Serbian && (
           <div>
             <h3 onClick={toggleExpandSerbian}>{Serbian.name}</h3>
+            {Serbian.image_url ? <img src={require('../assets' + Serbian.image_url)} alt='serbiankuusi' /> : <img src={require('../assets/images/serbiankuusi.jpg')} alt='serbiankuusi' />}
             {expandedSerbian && (
               <div>
-                <img src={Serbian.image_url} alt={Serbian.name} />
                 <p>{Serbian.description}</p>
                 {KuusetData.slice(8, 12).map((product, index) => (
                   <div key={index}>
