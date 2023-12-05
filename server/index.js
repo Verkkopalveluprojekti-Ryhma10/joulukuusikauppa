@@ -22,8 +22,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
-//for images, did not get this yet
-//app.use(express.static('src/assets/images'))
 
 const conf = {    
         host: process.env.DB_HOST,
@@ -92,24 +90,6 @@ app.get('/products', async (req, res) => {
 
 //Maalela yrittää tähän codes
 
-//for admin adding products to database
-//this works for now
-app.post('/products', upload.none(), async(req, res) => {
-
-    const { productName, description, category, price } = req.body;
-
-    const sqlAddProducts = 'INSERT INTO products (name, description, category, price) VALUES (?, ?, ?, ?)';
-
-    const reqBodyValues = [ productName, description, category, price ];
-
-    try {
-        const connection = await mysql.createConnection(conf)
-        await connection.execute(sqlAddProducts, reqBodyValues)
-        res.status(200).json({message: 'Tuotteen lisäys onnistui.'})
-    } catch (error) {
-        res.status(500).json({ error: err.message });
-    }
-})
 //pw hash stuff
 //first register new user
 //upload.none, .none takes in only key-value pairs as text (not files, formdata fields)

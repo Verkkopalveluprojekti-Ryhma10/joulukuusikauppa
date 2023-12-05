@@ -1,12 +1,28 @@
 .footer {
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     left: 0;
     bottom: 0;
     width: 100%;
     color: black;
-    text-align: center;
+    text-align: left;
     padding: 20px 0; 
     font-size: 1em;
     border-top: 2px solid white;
+}
+
+.footer-content {
+    margin-left: 1rem;
+}
+
+.icons {
+    margin-right: 1em;
+    color: black;   
+}
+
+.icons:hover {
+    color:white;
 }

@@ -17,8 +17,20 @@ export default function RegisterForm() {
     const [role, setRole] = useState('customer')
     const [errormessage, setErrormessage] = useState('')
     const [IsRegistered, setIsRegistered] = useState(false)
+    const [inputError, setInputError] = useState('')
 
-    function registerButton() {        
+    function registerButton() {  
+        
+        //checks that input values are not empty, so server won´t crash..
+    if(lname.trim() ==='' || fname.trim() ==='' || phone.trim()==='' || 
+       email.trim() ==='' || address.trim() ==='' || post.trim() ==='' ||
+       city.trim() ==='' || uname.trim() ==='' || pw.trim() ==='') {
+        console.log('Kenttä ei voi olla tyhjä');
+        setInputError('Syötä kaikkiin kenttiin tiedot ensin.')
+        return
+      }
+      //empty error message if inputs are not empty
+      setInputError('')
 
         //lets post some new info to users table
         //this is only for customer registration so role is always customer, for now
@@ -74,6 +86,7 @@ export default function RegisterForm() {
                 <label>Salasana: </label>
                 <input type="password" placeholder="Salasana" 
                 value={pw} onChange={(e) => setPw(e.target.value)}/>
+                <p>{inputError}</p>
                 <button onClick={registerButton}>Rekisteröidy</button>
                 </>
             )}            
