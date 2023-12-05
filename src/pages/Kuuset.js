@@ -115,10 +115,10 @@ const Kuuset = () => {
   return (
     <div className="TreeContainer">
       {/* MetsaKuusi */}
-      <div className={`TreeDiv ${expandedMetsaKuusi ? 'expanded' : ''}`}>
+      <div className={`TreeDiv ${expandedMetsaKuusi ? 'expanded' : ''}`} onClick={toggleExpandMetsaKuusi}>
         {MetsaKuusi && (
           <div>
-            <h3 onClick={toggleExpandMetsaKuusi}>{MetsaKuusi.name}</h3>
+            <h3>{MetsaKuusi.name}</h3>
             {MetsaKuusi.image_url ? <img src={require('../assets' + MetsaKuusi.image_url)} alt='metsakuusi' /> : <img src={require('../assets/images/metsakuusi.jpg')} alt='mustakuusi' />}
             {expandedMetsaKuusi && (
               <div>
@@ -154,10 +154,10 @@ const Kuuset = () => {
       </div>
 
       {/* MustaKuusi */}
-      <div className={`TreeDiv ${expandedMustaKuusi ? 'expanded' : ''}`}>
+      <div className={`TreeDiv ${expandedMustaKuusi ? 'expanded' : ''}`} onClick={toggleExpandMustaKuusi}>
         {MustaKuusi && (
           <div>
-            <h3 onClick={toggleExpandMustaKuusi}>{MustaKuusi.name}</h3>
+            <h3>{MustaKuusi.name}</h3>
             {MustaKuusi.image_url ? <img src={require('../assets' + MustaKuusi.image_url)} alt='mustakuusi' /> : <img src={require('../assets/images/mustakuusi.jpg')} alt='mustakuusi' />}
             {expandedMustaKuusi && (
               <div>
@@ -192,10 +192,10 @@ const Kuuset = () => {
       </div>
 
       {/* SiniKuusi */}
-      <div className={`TreeDiv ${expandedSiniKuusi ? 'expanded' : ''}`}>
+      <div className={`TreeDiv ${expandedSiniKuusi ? 'expanded' : ''}`} onClick={toggleExpandSiniKuusi}>
         {SiniKuusi && (
           <div>
-            <h3 onClick={toggleExpandSiniKuusi}>{SiniKuusi.name}</h3>
+            <h3>{SiniKuusi.name}</h3>
             {SiniKuusi.image_url ? <img src={require('../assets' + SiniKuusi.image_url)} alt='timantti' /> : <img src={require('../assets/images/sinikuusi.jpg')} alt='sinikuusi' />}
             {expandedSiniKuusi && (
               <div>
@@ -230,10 +230,10 @@ const Kuuset = () => {
       </div>
 
             {/* Mänty */}
-            <div className={`TreeDiv ${expandedManty ? 'expanded' : ''}`}>
+            <div className={`TreeDiv ${expandedManty ? 'expanded' : ''}`} onClick={toggleExpandManty}>
         {Manty && (
           <div>
-            <h3 onClick={toggleExpandManty}>{Manty.name}</h3>
+            <h3>{Manty.name}</h3>
             {Manty.image_url ? <img src={require('../assets' + Manty.image_url)} alt='manty' /> : <img src={require('../assets/images/manty.jpg')} alt='manty' />}
             {expandedManty && (
               <div>
@@ -268,10 +268,10 @@ const Kuuset = () => {
       </div>
 
             {/* Timanttituija */}
-            <div className={`TreeDiv ${expandedTimantti ? 'expanded' : ''}`}>
+            <div className={`TreeDiv ${expandedTimantti ? 'expanded' : ''}`} onClick={toggleExpandTimantti}>
         {Timantti && (
           <div>
-            <h3 onClick={toggleExpandTimantti}>{Timantti.name}</h3>
+            <h3>{Timantti.name}</h3>
             {Timantti.image_url ? <img src={require('../assets' + Timantti.image_url)} alt='timanttituija' /> : <img src={require('../assets/images/tuija.jpg')} alt='timanttituija' />}
             {expandedTimantti && (
               <div>
@@ -306,10 +306,10 @@ const Kuuset = () => {
       </div>
 
             {/* Serbiankuusi */}
-            <div className={`TreeDiv ${expandedSerbian ? 'expanded' : ''}`}>
+            <div className={`TreeDiv ${expandedSerbian ? 'expanded' : ''}`} onClick={toggleExpandSerbian}>
         {Serbian && (
           <div>
-            <h3 onClick={toggleExpandSerbian}>{Serbian.name}</h3>
+            <h3>{Serbian.name}</h3>
             {Serbian.image_url ? <img src={require('../assets' + Serbian.image_url)} alt='serbiankuusi' /> : <img src={require('../assets/images/serbiankuusi.jpg')} alt='serbiankuusi' />}
             {expandedSerbian && (
               <div>
