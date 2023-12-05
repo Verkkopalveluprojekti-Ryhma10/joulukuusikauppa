@@ -68,14 +68,16 @@ img {
 }
 
 .TreeContainer,
-.MuutContainer {
+.MuutContainer,
+.LatvatahdetContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
 .TreeDiv,
-.MuutDiv {
+.MuutDiv,
+.LatvatahdetDiv {
     border: 1px solid black;
     height: 350px;
     text-align: center;
@@ -86,7 +88,8 @@ img {
 }
 
 .TreeDiv:hover,
-.MuutDiv:hover {
+.MuutDiv:hover,
+.LatvatahdetDiv:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
