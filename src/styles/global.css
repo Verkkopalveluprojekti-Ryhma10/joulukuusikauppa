@@ -67,17 +67,29 @@ img {
     padding: 5px;
 }
 
-.TreeDiv {
+.TreeContainer,
+.MuutContainer,
+.LatvatahdetContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.TreeDiv,
+.MuutDiv,
+.LatvatahdetDiv {
     border: 1px solid black;
     height: 350px;
     text-align: center;
     background-color: #F0F0F0;
     border-radius: 10%;
-    flex: 0 0 calc(20% - 20px);
+    flex: 0 0 calc(25% - 20px);
     margin: 3.5em;
 }
 
-.TreeDiv:hover{
+.TreeDiv:hover,
+.MuutDiv:hover,
+.LatvatahdetDiv:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -86,6 +98,12 @@ img {
     width: 400px;
     text-align: center;
     padding: 10px;
+  }
+
+  .TreeDiv button:hover,
+  .MuutDiv button:hover,
+  .LatvatahdetDiv button:hover  {
+    background-color: green;
   }
 
   .koristeet-container {

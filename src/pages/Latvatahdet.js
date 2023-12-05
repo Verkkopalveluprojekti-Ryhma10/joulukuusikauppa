@@ -1,36 +1,49 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { productData } from '../components/signals/ProductDataSignal';
-//import needed signal
+import axios from 'axios';
 
 const Latvatahdet = () => {
+    const [LatvatahdetData, setLatvatahdetData] = useState([]);
+    const [amountLatvatahdet, setAmountLatvatahdet] = useState(1);
 
-    //choose which category you need
-    const [subCategory, setSubCategory] = useState(3)
-    const [errormessage, setErrormessage] = useState('')
-
-    //add subcategory using params to get endpoint
-    //productData gets value from database
     useEffect(() => {
-        axios.get('http://localhost:3001/products', {params: {category: subCategory}})
-        .then(res => productData.value = res.data)
-        .catch(error => setErrormessage('tapahtui virhe: ' + error.message))      
-    }, [])
-    
-    //mapped data presented
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3001/products?category=3');
+                setLatvatahdetData(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-    // img tageissa katsotaan onko image_url määritetty vai onko null, jos määritetty niin käytetään sitä kuvaa ja muutoin täytekuvaa.
+        fetchData();
+    }, []);
+
+    const handleAmountChangeLatvatahdet = (e) => {
+        setAmountLatvatahdet(parseInt(e.target.value, 10) || 1);
+    };
+
     return (
-        <div>
-            <h1>Tämä on Latvatähdet-sivu</h1>
-            {productData.value.map((item, index) =>
-            <div key={index}>
-                <li>
-                    
-                    tuote: {item.name} , hinta: {item.price} , kuva: {item.image_url ? <img src={require('../assets' + item.image_url)} alt='latvatahti' /> : <img src={require('../assets/images/main.jpg')} alt='taytekuva' />}
-                </li>
-            </div>
-            )}
+        <div className='LatvatahdetContainer'>
+            {LatvatahdetData.map((product) => (
+                <div key={product.id} className='LatvatahdetDiv'>
+                    <p>{product.image_url}</p>
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <p>{product.price} €</p>
+
+                    <label>
+                        Määrä:
+                        <input
+                            type="number"
+                            value={amountLatvatahdet}
+                            onChange={handleAmountChangeLatvatahdet}
+                            min="1"
+                        />
+                    </label>
+                    <button>Lisää ostoskoriin</button>
+                </div>
+            ))
+            }
         </div>
     );
 };
