@@ -128,7 +128,7 @@ const Kuuset = () => {
             {expandedMetsaKuusi && (
               <div onClick={handleVariantQuantityClick}>
                 <p>{MetsaKuusi.description}</p>
-                {KuusetData.slice(1, 5).map((product, index) => (
+                {KuusetData.slice(0, 4).map((product, index) => (
                   <div key={index}>
                     <label>
                       <input
