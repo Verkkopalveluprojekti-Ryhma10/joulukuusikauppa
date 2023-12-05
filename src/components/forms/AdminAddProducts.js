@@ -63,6 +63,7 @@ function AddProducts({productAdded}) {
   //for imgUrl
   const [imgUrl, setimgUrl] = useState("")
   const [errormessage, setErrormessage] = useState('')
+  const [inputError, setInputError] = useState('')
 
   function AddNewProduct() {
     const params = {
@@ -76,6 +77,17 @@ function AddProducts({productAdded}) {
       price: price,
       storage: storage
     }
+
+    //checks that input values are not empty, so server won´t crash..
+    if(productName.trim() ==='' || productNameTwo.trim() ==='' || 
+      description.trim() ==='' || category.trim() ==='' || 
+      price.trim() ==='' || storage.trim() ==='' || newFolderName.trim()==='') {
+      console.log('Kenttä ei voi olla tyhjä');
+      setInputError('Syötä kaikkiin kenttiin tiedot ensin.')
+      return
+    }
+    //empty error message if inputs are not empty
+    setInputError('')
 
     axios.postForm('http://localhost:3001/addproduct', params)
     .then(res => {
@@ -98,7 +110,7 @@ function AddProducts({productAdded}) {
     <div className='forms-container'>
       <label>Lisää tuotenimi: </label>
       <input type="text" placeholder="Lisää tuotenimi" 
-      value={productName} onChange={(e) => setProductName(e.target.value)}/>
+      value={productName} onChange={(e) => setProductName(e.target.value)} required/>
       <label>Lisää tuotenimi2: </label>
       <input type="text" placeholder="Lisää tuotenimi2" 
       value={productNameTwo} onChange={(e) => setProductNameTwo(e.target.value)}/>
@@ -106,7 +118,7 @@ function AddProducts({productAdded}) {
       <input type="text" placeholder="Lisää tuotekuvaus" 
       value={description} onChange={(e) => setDescription(e.target.value)}/>
       <label>Valitse kategoria: </label>
-      <input type="text" placeholder="Valitse kategoria" 
+      <input type="number" placeholder="Valitse kategoria numerolla" 
       value={category} onChange={(e) => setCategory(e.target.value)}/>        
       <label>Lisää tuotehinta: </label>
       <input type="text" placeholder="Lisää tuotehinta" 
@@ -119,6 +131,7 @@ function AddProducts({productAdded}) {
       value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}/>
       <label>Valitse kuvatiedosto: </label>
       <input type='file' onChange={(e) => setImgFile(e.target.files[0])}/>
+      <p>{inputError}</p>
       <button onClick={AddNewProduct}>Lisää uusi tuote tietokantaan</button>      
     </div>
   )
@@ -134,8 +147,10 @@ function AddCategory({categoryAdded}) {
   //for imgUrl
   const [imgUrl, setimgUrl] = useState("")
   const [errormessage, setErrormessage] = useState('')
-
+  const [inputError, setInputError] = useState('')
+  
   function AddNewCategory() {
+
     const params = {
       pic: imgFile,
       newFolderName: newFolderName,
@@ -143,6 +158,14 @@ function AddCategory({categoryAdded}) {
       name: name,
       description2: description,
     }
+    //checks that input values are not empty, so server won´t crash..
+    if(name.trim() ==='' || description.trim() ==='' || newFolderName.trim()==='') {
+      console.log('Kenttä ei voi olla tyhjä');
+      setInputError('Syötä kaikkiin kenttiin tiedot ensin.')
+      return
+    }
+    //empty error message if inputs are not empty
+    setInputError('')
 
     axios.postForm('http://localhost:3001/addcategories', params)
     .then(res => {
@@ -170,6 +193,7 @@ function AddCategory({categoryAdded}) {
       value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}/>
       <label>Valitse kuvatiedosto: </label>
       <input type='file' onChange={(e) => setImgFile(e.target.files[0])}/>
+      <p>{inputError}</p>
       <button onClick={AddNewCategory}>Lisää uusi kategoria tietokantaan</button>      
     </div>
   )
