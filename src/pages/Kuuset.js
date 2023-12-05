@@ -112,6 +112,11 @@ const Kuuset = () => {
     setAmountSerbian(parseInt(e.target.value, 10) || 1);
   };
 
+  //Handle quantity and option change
+  const handleVariantQuantityClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <div className="TreeContainer">
       {/* MetsaKuusi */}
@@ -121,7 +126,7 @@ const Kuuset = () => {
             <h3>{MetsaKuusi.name}</h3>
             {MetsaKuusi.image_url ? <img src={require('../assets' + MetsaKuusi.image_url)} alt='metsakuusi' /> : <img src={require('../assets/images/metsakuusi.jpg')} alt='mustakuusi' />}
             {expandedMetsaKuusi && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{MetsaKuusi.description}</p>
                 {KuusetData.slice(1, 5).map((product, index) => (
                   <div key={index}>
@@ -160,7 +165,7 @@ const Kuuset = () => {
             <h3>{MustaKuusi.name}</h3>
             {MustaKuusi.image_url ? <img src={require('../assets' + MustaKuusi.image_url)} alt='mustakuusi' /> : <img src={require('../assets/images/mustakuusi.jpg')} alt='mustakuusi' />}
             {expandedMustaKuusi && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{MustaKuusi.description}</p>
                 {KuusetData.slice(4, 8).map((product, index) => (
                   <div key={index}>
@@ -198,7 +203,7 @@ const Kuuset = () => {
             <h3>{SiniKuusi.name}</h3>
             {SiniKuusi.image_url ? <img src={require('../assets' + SiniKuusi.image_url)} alt='timantti' /> : <img src={require('../assets/images/sinikuusi.jpg')} alt='sinikuusi' />}
             {expandedSiniKuusi && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{SiniKuusi.description}</p>
                 {KuusetData.slice(8, 12).map((product, index) => (
                   <div key={index}>
@@ -236,7 +241,7 @@ const Kuuset = () => {
             <h3>{Manty.name}</h3>
             {Manty.image_url ? <img src={require('../assets' + Manty.image_url)} alt='manty' /> : <img src={require('../assets/images/manty.jpg')} alt='manty' />}
             {expandedManty && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{Manty.description}</p>
                 {KuusetData.slice(12, 16).map((product, index) => (
                   <div key={index}>
@@ -274,7 +279,7 @@ const Kuuset = () => {
             <h3>{Timantti.name}</h3>
             {Timantti.image_url ? <img src={require('../assets' + Timantti.image_url)} alt='timanttituija' /> : <img src={require('../assets/images/tuija.jpg')} alt='timanttituija' />}
             {expandedTimantti && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{Timantti.description}</p>
                 {KuusetData.slice(16, 20).map((product, index) => (
                   <div key={index}>
@@ -312,7 +317,7 @@ const Kuuset = () => {
             <h3>{Serbian.name}</h3>
             {Serbian.image_url ? <img src={require('../assets' + Serbian.image_url)} alt='serbiankuusi' /> : <img src={require('../assets/images/serbiankuusi.jpg')} alt='serbiankuusi' />}
             {expandedSerbian && (
-              <div>
+              <div onClick={handleVariantQuantityClick}>
                 <p>{Serbian.description}</p>
                 {KuusetData.slice(8, 12).map((product, index) => (
                   <div key={index}>
