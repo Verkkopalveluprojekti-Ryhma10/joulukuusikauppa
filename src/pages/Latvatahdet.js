@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
+import DecorationType from '../components/content/DecorationType';
 
 const Latvatahdet = () => {
     const [LatvatahdetData, setLatvatahdetData] = useState([]);
-    const [amountLatvatahdet, setAmountLatvatahdet] = useState(1);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,30 +18,19 @@ const Latvatahdet = () => {
         fetchData();
     }, []);
 
-    const handleAmountChangeLatvatahdet = (e) => {
-        setAmountLatvatahdet(parseInt(e.target.value, 10) || 1);
-    };
 
     return (
         <div className='LatvatahdetContainer'>
             {LatvatahdetData.map((product) => (
-                <div key={product.id} className='LatvatahdetDiv'>
-                    <p>{product.image_url}</p>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-                    <p>{product.price} €</p>
 
-                    <label>
-                        Määrä:
-                        <input
-                            type="number"
-                            value={amountLatvatahdet}
-                            onChange={handleAmountChangeLatvatahdet}
-                            min="1"
-                        />
-                    </label>
-                    <button>Lisää ostoskoriin</button>
-                </div>
+                    <DecorationType
+                    type={product.name}
+                    image={product.image_url}
+                    label={product.name}
+                    description={product.description}
+                    price={product.price}/>
+
+
             ))
             }
         </div>

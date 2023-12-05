@@ -319,7 +319,7 @@ const Kuuset = () => {
             {expandedSerbian && (
               <div onClick={handleVariantQuantityClick}>
                 <p>{Serbian.description}</p>
-                {KuusetData.slice(8, 12).map((product, index) => (
+                {KuusetData.slice(20, 24).map((product, index) => (
                   <div key={index}>
                     <label>
                       <input
