@@ -132,9 +132,9 @@ const Kuuset = () => {
                         checked={selectedOptionMetsaKuusi === product.name2}
                         onChange={() => handleOptionChangeMetsaKuusi(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
+                    
                   </div>
                 ))}
                 <label>
@@ -171,9 +171,8 @@ const Kuuset = () => {
                         checked={selectedOptionMustaKuusi === product.name2}
                         onChange={() => handleOptionChangeMustaKuusi(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
                   </div>
                 ))}
                 <label>
@@ -210,9 +209,8 @@ const Kuuset = () => {
                         checked={selectedOptionSiniKuusi === product.name2}
                         onChange={() => handleOptionChangeSiniKuusi(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
                   </div>
                 ))}
                 <label>
@@ -249,9 +247,8 @@ const Kuuset = () => {
                         checked={selectedOptionManty === product.name2}
                         onChange={() => handleOptionChangeManty(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
                   </div>
                 ))}
                 <label>
@@ -288,9 +285,8 @@ const Kuuset = () => {
                         checked={selectedOptionTimantti === product.name2}
                         onChange={() => handleOptionChangeTimantti(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
                   </div>
                 ))}
                 <label>
@@ -327,9 +323,8 @@ const Kuuset = () => {
                         checked={selectedOptionSerbian === product.name2}
                         onChange={() => handleOptionChangeSerbian(product.name2)}
                       />
-                      {product.name2}
+                      {product.name2} - {product.price}€
                     </label>
-                    <p>{product.price}€</p>
                   </div>
                 ))}
                 <label>
