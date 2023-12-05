@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
+//npm install @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
+
 function Footer() {
     return (
         <footer className="footer">
