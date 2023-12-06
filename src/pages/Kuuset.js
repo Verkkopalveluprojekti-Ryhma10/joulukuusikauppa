@@ -66,7 +66,7 @@ const Kuuset = () => {
                     })
                   }
                 />
-                {`${option.price} € - ${option.name2} cm`}
+                {option.price}€ - {option.name2}cm
               </label>
             ))}
           </div>
@@ -95,7 +95,7 @@ const Kuuset = () => {
                     })
                   }
                 />
-                {`${option.price} € - ${option.name2} cm`}
+                {option.price}€ - {option.name2}cm
               </label>
             ))}
           </div>
@@ -124,7 +124,7 @@ const Kuuset = () => {
                     })
                   }
                 />
-                {`${option.price} € - ${option.name2} cm`}
+                {option.price}€ - {option.name2}cm
               </label>
             ))}
           </div>
@@ -153,7 +153,7 @@ const Kuuset = () => {
                     })
                   }
                 />
-                {`${option.price} € - ${option.name2} cm`}
+                {option.price}€ - {option.name2}cm
               </label>
             ))}
           </div>
@@ -213,7 +213,7 @@ const Kuuset = () => {
                     })
                   }
                 />
-                {`${option.price} - ${option.name2}`}
+                {option.price}€ - {option.name2}cm
               </label>
             ))}
           </div>
