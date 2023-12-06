@@ -133,7 +133,7 @@ const Kuuset = () => {
         description={product4?.description}
         price={
           <div>
-            {options2.map((option, index) => (
+            {options4.map((option, index) => (
               <label key={index}>
                 <input
                   type="radio"
@@ -162,7 +162,7 @@ const Kuuset = () => {
         description={product5?.description}
         price={
           <div>
-            {options2.map((option, index) => (
+            {options5.map((option, index) => (
               <label key={index}>
                 <input
                   type="radio"
@@ -193,7 +193,7 @@ const Kuuset = () => {
         description={product6?.description}
         price={
           <div>
-            {options2.map((option, index) => (
+            {options6.map((option, index) => (
               <label key={index}>
                 <input
                   type="radio"
