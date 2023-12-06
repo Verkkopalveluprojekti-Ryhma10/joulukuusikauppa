@@ -23,16 +23,22 @@ const Kuuset = () => {
     fetchData();
   }, []);
 
+  //Metsäkuusi
   const product = KuusetData[0];
   const options = KuusetData.slice(0, 4);
+  //Mustakuusi
   const product2 = KuusetData[4];
   const options2 = KuusetData.slice(4, 8);
+  //Sinikuusi
   const product3 = KuusetData[8];
   const options3 = KuusetData.slice(8, 12);
+  //Mänty
   const product4 = KuusetData[12];
   const options4 = KuusetData.slice(12, 16);
+  //Timanttituija
   const product5 = KuusetData[16];
   const options5 = KuusetData.slice(16, 20);
+  //Serbiankuusi
   const product6 = KuusetData[20];
   const options6 = KuusetData.slice(20, 24);
 
