@@ -24,11 +24,12 @@ function DecorationType(props) {
     <div className="decoration-type">
       {/* Näyttää koristetyypin nimen ja kuvauksen */}
       <h3>{props.label}</h3>
+      <img src={props.image ? require('../../assets'+props.image) : require('../../assets/images/eioo.jpg')} />
       <p>{props.description}</p>
       {/* Näyttää tuotteen hinnan */}
-      <p>Hinta: {props.price} €</p>
+      <p>{props.price} €</p>
       {/* Näyttää tuotteen kuvan */}
-      <img src={props.image ? require('../../assets'+props.image) : require('../../assets/images/eioo.jpg')} />
+      
       {/* Määrän valintaelementti */}
       <label htmlFor="quantity">Määrä:</label>
       <input
