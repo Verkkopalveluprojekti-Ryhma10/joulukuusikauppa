@@ -30,10 +30,10 @@ function Main() {
         Latvatähdet
       </button></Link>
 
-      <Link to="/Muuta">
+      <Link to="/Muut">
       <button className='decorBtn'>
         <img src={muutaKuva} alt="koriste" className='decorPic' /><br />
-        Muuta
+        Muut
       </button></Link>
     </div>
 
