@@ -18,8 +18,6 @@ const Muut = () => {
         fetchData();
     }, []);
 
-
-
     return (
         <div className='MuutContainer'>
             {MuutData.map((product) => (
