@@ -18,17 +18,21 @@ const Muut = () => {
         fetchData();
     }, []);
 
+
     return (
         <div className='MuutContainer'>
-            {MuutData.map((product) => (
-
-                <DecorationType
-                type={product.name}
-                image={product.image_url}
-                label={product.name}
-                description={product.description}
-                price={product.price}/>
-            ))
+            {MuutData.map((product, i) => {
+                return (
+                    <div key={i}> 
+                        <DecorationType
+                            type={product.id}
+                            image={product.image_url}
+                            label={product.name}
+                            description={product.description}
+                            price={product.price}
+                        />
+                    </div>
+                )})
             }
         </div>
     );

@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
+import axios from 'axios';
 import { CartContext } from '../content/CartProvider';
 
 // DecorationType-komponentti, joka ottaa vastaan propsit koristetyypille
 function DecorationType(props) {
+  console.log(props.id)
   // Käyttää CartContextia hankkiakseen addToCart-funktion
   const { addToCart } = useContext(CartContext);
   // Käyttää useState-hookia hallitakseen tuotteen määrää
@@ -25,6 +27,8 @@ function DecorationType(props) {
       <p>{props.description}</p>
       {/* Näyttää tuotteen hinnan */}
       <p>Hinta: {props.price} €</p>
+      {/* Näyttää tuotteen kuvan */}
+      <img src={props.image ? require('../../assets'+props.image) : require('../../assets/images/eioo.jpg')} />
       {/* Määrän valintaelementti */}
       <label htmlFor="quantity">Määrä:</label>
       <input

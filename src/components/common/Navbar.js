@@ -24,7 +24,6 @@ function Navb() {
             <Nav.Link href="/Latvatahdet">Latvatähdet</Nav.Link>
 
             <Nav.Link href="/Muut">Muut</Nav.Link>
-            <Nav.Link href="/Demosivu">Demosivu</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

@@ -21,17 +21,18 @@ const Latvatahdet = () => {
 
     return (
         <div className='LatvatahdetContainer'>
-            {LatvatahdetData.map((product) => (
-
-                    <DecorationType
-                    type={product.name}
-                    image={product.image_url}
-                    label={product.name}
-                    description={product.description}
-                    price={product.price}/>
-
-
-            ))
+            {LatvatahdetData.map((product, i) => {
+                return (
+                    <div key={i}> 
+                        <DecorationType
+                            type={product.id}
+                            image={product.image_url}
+                            label={product.name}
+                            description={product.description}
+                            price={product.price}
+                        />
+                    </div>
+                )})
             }
         </div>
     );
