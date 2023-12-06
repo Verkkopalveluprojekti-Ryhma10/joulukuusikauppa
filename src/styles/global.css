@@ -39,7 +39,7 @@ a:hover {
 .pineBtn, .decorBtn {
     margin: 20px;
     margin-left: 5em;
-    border-radius: 10%;
+    border-radius: 3%;
     height: 200px;
     width: 200px;
     border: 1px solid rgb(255, 255, 255);
