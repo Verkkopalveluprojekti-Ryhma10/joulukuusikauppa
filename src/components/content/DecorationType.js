@@ -4,7 +4,6 @@ import { CartContext } from '../content/CartProvider';
 
 // DecorationType-komponentti, joka ottaa vastaan propsit koristetyypille
 function DecorationType(props) {
-  console.log(props.id)
   // Käyttää CartContextia hankkiakseen addToCart-funktion
   const { addToCart } = useContext(CartContext);
   // Käyttää useState-hookia hallitakseen tuotteen määrää

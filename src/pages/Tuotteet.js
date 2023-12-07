@@ -1,15 +1,17 @@
 import React, { useEffect, useState} from 'react';
-import axios from 'axios';
 import DecorationType from '../components/content/DecorationType';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const Latvatahdet = () => {
-    const [LatvatahdetData, setLatvatahdetData] = useState([]);
+const Tuotteet = () => {
+    const [TuotteetData, setTuotteetData] = useState([]);
+    const {category} = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/products?category=3');
-                setLatvatahdetData(response.data);
+                const response = await axios.get('http://localhost:3001/products?category='+category);
+                setTuotteetData(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -18,10 +20,9 @@ const Latvatahdet = () => {
         fetchData();
     }, []);
 
-
     return (
         <div className='LatvatahdetContainer'>
-            {LatvatahdetData.map((product, i) => {
+            {TuotteetData.map((product, i) => {
                 return (
                     <div key={i}> 
                         <DecorationType
@@ -38,4 +39,4 @@ const Latvatahdet = () => {
     );
 };
 
-export default Latvatahdet;
+export default Tuotteet;

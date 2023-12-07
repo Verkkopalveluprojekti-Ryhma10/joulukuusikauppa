@@ -1,11 +1,11 @@
 USE joulukuusikauppa;
 
 -- Lisätään Tuotekategoriat
-INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Kuuset', 'Joulun kuningas, kodin vihdeä juhlavieras. Hanki kuusi meiltä, se on vastuullisesti itse tuotetuista siemenistä kasvatettu, luonnon metsiä säästäen. Valitse oma suosikkisi ja luo täydellinen joulutunnelma valitsemallasi kuusella!', '/images/Categories/Trees.jpg');
-INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Koristeet', 'Täältä löydät monenmoista koristepakettia valitsemasi kuusen koristeluun', '/images/Categories/Decorations.jpg');
+INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Kuuset', 'Joulun kuningas, kodin vihdeä juhlavieras. Hanki kuusi meiltä, se on vastuullisesti itse tuotetuista siemenistä kasvatettu, luonnon metsiä säästäen. Valitse oma suosikkisi ja luo täydellinen joulutunnelma valitsemallasi kuusella!', '/images/categories/Trees.jpg');
+INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Koristeet', 'Täältä löydät monenmoista koristepakettia valitsemasi kuusen koristeluun', '/images/categories/Decorations.jpg');
 INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Latvatähdet', 'Latvatähti, tämä joulukuusen kruunu! Viimeistele kuusen koristelu tarpeeksi hienolla tähdellä, meiltä löytyy
-seuraavanlaisia tähtiä.', '/images/Categories/Stars.jpg');
-INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Muut', 'Valitse laajasta valikoimastamma täydellisiä joulun ajan tarvikkeita kotiisi. Joulunajan ilo ja käytännöllisyys yhdistyvät näissä tuotteissa - Hanki omasi ja loihdi kotiisi joulun taikaa!', '/images/Categories/Others.jpg');
+seuraavanlaisia tähtiä.', '/images/categories/Stars.jpg');
+INSERT INTO product_categories (`name`, `description`, `image_url`) VALUES ('Muut', 'Valitse laajasta valikoimastamma täydellisiä joulun ajan tarvikkeita kotiisi. Joulunajan ilo ja käytännöllisyys yhdistyvät näissä tuotteissa - Hanki omasi ja loihdi kotiisi joulun taikaa!', '/images/categories/Others.jpg');
 
 -- Lisätään Kuusien pituudet
 

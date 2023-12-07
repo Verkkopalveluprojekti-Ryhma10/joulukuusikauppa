@@ -5,9 +5,26 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import ShoppingCart from '../content/ShoppingCart';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 
 function Navb() {
+
+  const [CategoryData, setCategoryData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/categories');
+            setCategoryData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    fetchData();
+    }, []);
+
     return (
       <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
@@ -18,12 +35,18 @@ function Navb() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
-          >   
-            <Nav.Link href="/Kuuset">Kuuset</Nav.Link>
-            <Nav.Link href="/Koristeet">Koristepaketit</Nav.Link>
-            <Nav.Link href="/Latvatahdet">Latvatähdet</Nav.Link>
+            >   
+            
+            {CategoryData.map((category, i) => {
+              return (
+                <div key={i}>
+                  <Nav.Link href={`/Tuotteet/`+category.id}>{category.name}</Nav.Link>
+                </div>               
+              )})
+            }
+              
+            <Nav.Link href="/Kuuset">Ainon Kuuset</Nav.Link>
 
-            <Nav.Link href="/Muut">Muut</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

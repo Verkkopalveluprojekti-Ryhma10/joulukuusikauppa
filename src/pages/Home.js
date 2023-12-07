@@ -1,41 +1,42 @@
 import '../styles/global.css'
 import React from 'react';
-import kuusiKuva from '../assets/images/categories/Trees.jpg';
-import koristeKuva from '../assets/images/categories/Decorations.jpg';
-import latvaKuva from '../assets/images/categories/Stars.jpg';
-import muutaKuva from '../assets/images/categories/Others.jpg';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Main() {
+  const [CategoryData, setCategoryData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/categories');
+            setCategoryData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    fetchData();
+}, []);
 
   return (
     <main className="main">
-      <div className='productObject'>
-        
-      <Link to="/Kuuset">
-      <button className='pineBtn'>
-        <img src={kuusiKuva} alt="kuusi" className='pinePic' /><br />
-        Kuuset
-      </button></Link>
-
-      <Link to="/Koristeet">
-      <button className='decorBtn'>
-        <img src={koristeKuva} alt="koriste" className='decorPic' /><br />
-        Koristeet
-      </button></Link>
-
-      <Link to="/Latvatahdet">
-      <button className='decorBtn'>
-        <img src={latvaKuva} alt="latva" className='decorPic' /><br />
-        Latvatähdet
-      </button></Link>
-
-      <Link to="/Muut">
-      <button className='decorBtn'>
-        <img src={muutaKuva} alt="koriste" className='decorPic' /><br />
-        Muut
-      </button></Link>
-    </div>
+      <div className='LatvatahdetContainer'>  
+        {CategoryData.map((category, i) => {
+          return (
+            <div key={i} className='productObject'>
+              <Link to={`/Tuotteet/${category.id}`}>
+                <button className='pineBtn'>
+                  <img src={require('../assets'+category.image_url)} alt={category.name} className='pinePic' />
+                {category.name}
+                </button>
+                
+              </Link>
+            </div>
+              
+          )})
+        }
+      </div>
 
       <aside className="aside">
         <p>Tervetuloa Suomen ympäristöystävällisimpään kuusikauppaan!<br />

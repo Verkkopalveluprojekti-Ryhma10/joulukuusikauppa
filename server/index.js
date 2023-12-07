@@ -45,14 +45,14 @@ app.get('/categories', async (req, res) => {
     try {
         const connection = await mysql.createConnection(conf);
         const category = req.query.category;
-        const subcategory = req.query.subcategory;
+        const name = req.query.name;
 
         let result;        
         
         if(category) {
             result = await connection.execute("SELECT * FROM product_categories WHERE id=?", [category]);
-        }else if(subcategory){
-            result = await connection.execute("SELECT * FROM product_categories WHERE subcategory=?", [subcategory]);
+        }else if(name){
+            result = await connection.execute("SELECT * FROM product_categories WHERE name=?", [name]);
         }else{
             result = await connection.execute("SELECT * FROM product_categories");
         }
@@ -71,15 +71,15 @@ app.get('/products', async (req, res) => {
         const connection = await mysql.createConnection(conf);
         // Luetaan jos annettu parametreja
         const category = req.query.category;
-        const subcategory = req.query.subcategory;
+        const name = req.query.name;
 
         let result;     
         if(category){
             // Haetaan tuotteet jos kategoria määritetty
             result = await connection.execute("SELECT * FROM products WHERE category=?", [category]);
-        }else if(subcategory){
+        } else if(name){
             // Haetaan tuotteen jos alikategoria määritetty
-            result = await connection.execute("SELECT * FROM products WHERE subcategory=?", [subcategory]);
+            result = await connection.execute("SELECT * FROM products p join product_categories pc on pc.id=p.category WHERE pc.name=?", [name]);
         } else {
             // Haetaan kaikki tuotteet
             result = await connection.execute("SELECT * FROM products");
