@@ -9,7 +9,8 @@
     display: inline-block;
     justify-content: space-between;
     align-items: center;    
-    padding-left: 40px; 
+    padding-left: 40px;
+    padding-right: 5px; 
     height: 10em;
     width: 100%;
     border-bottom: 2px solid white;
@@ -40,10 +41,35 @@ h1 {
     padding: 4px;
     width: 150px;
     border-radius: 6px;
-    background-color: rgb(186, 186, 186);
+    background-color: rgba(191, 189, 186, 0.924);
     margin-right: 10px;
     margin-top: 10px;
 }
 .button:hover {
     box-shadow:0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #ddddddec;
+}
+@media screen and (max-width: 900px) {
+    h1, .header.days {
+        width: max-content;
+        font-size: 4em !important;
+    }
+}
+@media screen and (max-width: 780px) {
+    h1, .header.days {
+        width: max-content;
+        font-size: 3.7em !important;
+    }
+}
+@media screen and (max-width: 640px) {
+    h1, .header.days {
+        width: max-content;
+        font-size: 3.4em !important;
+    }
+}
+@media  screen and (max-width: 560px) {
+    h1, .header.days  {
+        width: max-content;
+        font-size: 2.8em !important;
+  }
 }
