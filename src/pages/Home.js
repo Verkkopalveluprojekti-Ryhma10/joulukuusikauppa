@@ -25,14 +25,14 @@ function Main() {
       </button></Link>
 
       <Link to="/Latvatahdet">
-      <button className='decorBtn'>
-        <img src={latvaKuva} alt="latva" className='decorPic' /><br />
+      <button className='latvaBtn'>
+        <img src={latvaKuva} alt="latva" className='latvaPic' /><br />
         Latvatähdet
       </button></Link>
 
       <Link to="/Muut">
-      <button className='decorBtn'>
-        <img src={muutaKuva} alt="koriste" className='decorPic' /><br />
+      <button className='muutBtn'>
+        <img src={muutaKuva} alt="koriste" className='muutPic' /><br />
         Muut
       </button></Link>
     </div>

@@ -37,10 +37,12 @@ a:hover {
 
 .productObject img {
     height: 150px;
+    width: 150px;
     border-radius: 50%;
     margin: 5px;
 }
-.pineBtn, .decorBtn {
+
+.pineBtn, .decorBtn, .latvaBtn, .muutBtn {
     margin: 20px;
     margin-left: 5em;
     border-radius: 3%;
