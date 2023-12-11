@@ -162,7 +162,48 @@ app.post('/login', upload.none(), async (req, res) => {
 })
 
 //
+// Gets customer orders
+app.get('/orders', async (req,res) => {
 
+    //Get token from autrization header
+    const token = req.headers.authorization?.split(' ')[1];
+
+    //verify token. Token has a username
+    try{
+        const username = jwt.verify(token, process.env.JWT_KEY).username;
+        const orders = await getOrders(username);
+        res.status(200).json(orders);
+    }catch(err){
+        console.log(err.message);
+        res.status(403).send('Access forbidden');
+    }
+});
+//Samulin säätösirkus
+async function getOrders(users) {
+    try {
+        const connection = await mysql.createConnection(conf);
+        const [rows] = await connection.execute('SELECT orders_customer.orders_createdAt AS date, users_uname.id AS orderId FROM order_customer INNER JOIN customer ON customer.id = customer_order.customer_id WHERE customer.username=?', [users]);
+
+        let result = [];
+
+        for (const row of rows) {
+            const [products] = await connection.execute("SELECT id,product_name productName,price,img_url imageUrl, category, quantity FROM product INNER JOIN order_line ON order_line.product_id = product.id WHERE order_line.order_id=?", [row.orderId]);
+
+            let order = {
+                orderDate: row.date,
+                orderId: row.orderId,
+                products: products
+            }
+
+            result.push(order);
+        }
+
+        return result;
+    }catch (error) {
+        console.log(error.message);
+        res.status(500).json({ error: err.message });
+    }
+}
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)
 })
