@@ -55,7 +55,9 @@ a:hover {
 }
 
 .pineBtn:hover,
-.decorBtn:hover {
+.decorBtn:hover,
+.latvaBtn:hover,
+.muutBtn:hover {
   background-color: #ddd;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -95,7 +97,8 @@ a:hover {
 
 .TreeDiv:hover,
 .MuutDiv:hover,
-.LatvatahdetDiv:hover {
+.LatvatahdetDiv:hover,
+.MuutDiv:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
