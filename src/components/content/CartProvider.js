@@ -10,8 +10,13 @@ export function CartProvider({ children }) {
   });
 
    // Tallenna ostoskorin muutokset localStorageen aina kun cartItems muuttuu
-   useEffect(() => {
+  /* useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);*/
+
+  useEffect(() => {
+    const ShoppingCart = cartItems.map(item => ({ id: item.id, quantity: item.quantity }));
+    localStorage.setItem('cart', JSON.stringify(ShoppingCart));
   }, [cartItems]);
 
   const addToCart = (product) => {
