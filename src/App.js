@@ -10,12 +10,14 @@ import Muut from './pages/Muut';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 import AdminAddProducts from './components/forms/AdminAddProducts';
+import OrderDelivery from './components/forms/Orderdelivery';
 
 import {
   Routes,
   Route,
   Navigate
 } from 'react-router-dom';
+//import OrderDelivery from './components/forms/Orderdelivery';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route exact path="/rekisteroidy" element={ <RegisterForm />} />
             <Route exact path='/yllapito' element= { <AdminAddProducts />} />
+            <Route exact path='/Orderdelivery' element= { <OrderDelivery />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>        
       <Footer />
