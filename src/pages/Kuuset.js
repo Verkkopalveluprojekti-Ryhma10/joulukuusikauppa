@@ -1,137 +1,78 @@
-import React, { useState } from 'react';
-import Metsakuusi from '../assets/images/metsakuusi.jpg';
-import Mustakuusi from '../assets/images/mustakuusi.jpg';
-import Sinikuusi from '../assets/images/sinikuusi.jpg';
-import Manty from '../assets/images/manty.jpg'
-import Tuija from '../assets/images/tuija.jpg'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import DecorationType from "../components/content/DecorationType";
 
-const TreeType = ({ type, image, label, description }) => {
-    const [expanded, setExpanded] = useState(false);
-    const [selectedSize, setSelectedSize] = useState('');
-    const [quantity, setQuantity] = useState(1);
-  
-    const handleExpand = () => {
-      setExpanded(!expanded);
+const Kuuset = () => {
+  const [KuusetData, setKuusetData] = useState([]);
+  const [selectedOptionKuuset, setSelectedOptionKuuset] = useState({
+    size: null,
+    price: 0
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/products?category=1');
+        setKuusetData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
-  
-    const handleSizeChange = (event) => {
-      setSelectedSize(event.target.value);
-    };
-  
-    const handleQuantityChange = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      setQuantity(parseInt(event.target.value, 10));
-    };
-  
-    const handleSizeQuantityClick = (event) => {
-      event.stopPropagation();
-    };
-  
+
+    fetchData();
+  }, []);
+
+  const renderPriceOptions = (options) => {
+
     return (
-      <div className={`TreeDiv ${expanded ? 'expanded' : ''}`} onClick={handleExpand}>
-        <img src={image} alt={type} className={type.toLowerCase()} />
-        <h3>{label}</h3>
-        
-  
-        {expanded && (
-        <div className="options" onClick={handleSizeQuantityClick}>
-        <p>{description}</p>
-          <label>
-            Valitse kuusen korkeus:
-            <br />
+      <div>
+        {options.map((option, index) => (
+          <label key={index}>
             <input
               type="radio"
-              value="80-120"
-              checked={selectedSize === '80-120'}
-              onChange={(e) => handleSizeChange(e)}
-              id="1"
+              name="kuusetOptions"
+              value={index}
+              checked={selectedOptionKuuset.price === option.price}
+              onChange={() =>
+                setSelectedOptionKuuset({
+                  size: option.size,
+                  price: parseFloat(option.price),
+                })
+              }
             />
-            <label>80 - 120 cm   -   80€</label><br />
-            <input
-              type="radio"
-              value="110-150"
-              checked={selectedSize === '110-150'}
-              onChange={(e) => handleSizeChange(e)}
-              id="2"
-            />
-            <label>110 - 150 cm   -   100€</label><br />
-
-            <input
-              type="radio"
-              value="140-180"
-              checked={selectedSize === '140-180'}
-              onChange={(e) => handleSizeChange(e)}
-              id="3"
-            />
-            <label>140 - 180 cm   -   140€</label><br />
-          </label><br />
-
-          <input
-              type="radio"
-              value="170-210"
-              checked={selectedSize === '170-210'}
-              onChange={(e) => handleSizeChange(e)}
-              id="4"
-            />
-            <label>170 - 210 cm   -   160€</label><br />
-
-            <input
-              type="radio"
-              value="200-240"
-              checked={selectedSize === '200-240'}
-              onChange={(e) => handleSizeChange(e)}
-              id="5"
-            />
-            <label>200 - 240 cm   -   200€</label><br />
-
-          <label>
-            Määrä:
-            <input type="number" value={quantity} onChange={(e) => handleQuantityChange(e)} />
+            {option.price}€ - {option.name2}cm
           </label>
+        ))}
+      </div>
+    );
+  };
 
-          <button>Add to Cart</button>
-        </div>
-      )}
+  const renderDecorationType = (product, options) => {
+    return (
+      <DecorationType
+        id={product?.id}
+        type={product?.id}
+        label={product?.name}
+        image={product?.image_url}
+        description={product?.description}
+        price={renderPriceOptions(options)}
+      />
+    );
+  };
+
+  return (
+    <div className="TreeContainer">
+      {renderDecorationType(KuusetData[0], KuusetData.slice(0, 4))}
+      {renderDecorationType(KuusetData[4], KuusetData.slice(4, 8))}
+      {renderDecorationType(KuusetData[8], KuusetData.slice(8, 12))}
+      {renderDecorationType(KuusetData[12], KuusetData.slice(12, 16))}
+      {renderDecorationType(KuusetData[16], KuusetData.slice(16, 20))}
+      {renderDecorationType(KuusetData[20], KuusetData.slice(20, 24))}
     </div>
   );
 };
 
-  const Kuuset = () => {
-    return (
-      <div className='kuuset-container'>
-        <TreeType
-        type="Metsa"
-        image={Metsakuusi}
-        label="Metsäkuusi" 
-        description=
-        "Suomalainen viljelty metsäkuusi. Tiheäkasvuinen, teräväneulainen, keskivihreä ja perinteinen - varma valinta!"/>
+export default Kuuset;
 
-        <TreeType
-        type="Musta"
-        image={Mustakuusi}
-        label="Mustakuusi"
-        description=""/>
-        
-        <TreeType
-        type="Sini"
-        image={Sinikuusi}
-        label="Sinikuusi"
-        description=""/>
 
-        <TreeType
-        type="Manty"
-        image={Manty}
-        label="Mänty"
-        description="" />
-
-        <TreeType
-        type="Tuija"
-        image={Tuija}
-        label="Timanttituija"
-        description=""/>
-      </div>
-    );
-  };
-  
-  export default Kuuset;

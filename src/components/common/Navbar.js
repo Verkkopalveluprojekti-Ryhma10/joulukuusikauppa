@@ -4,8 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
-import ShoppingCart from '../content/Shoppingcart';
+import ShoppingCart from '../content/ShoppingCart';
 
 
 function Navb() {
@@ -19,13 +18,12 @@ function Navb() {
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
-          > <Nav.Link href="/Kuuset">Kuuset</Nav.Link>
+          >   
+            <Nav.Link href="/Kuuset">Kuuset</Nav.Link>
             <Nav.Link href="/Koristeet">Koristepaketit</Nav.Link>
             <Nav.Link href="/Latvatahdet">Latvatähdet</Nav.Link>
 
-            <Nav.Link href="/Muuta">
-              Muuta
-            </Nav.Link>
+            <Nav.Link href="/Muut">Muut</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

@@ -1,9 +1,9 @@
 import '../styles/global.css'
 import React from 'react';
-import kuusiKuva from '../assets/images/kuusikuva.jpg';
-import koristeKuva from '../assets/images/koristekuva.jpg';
-import latvaKuva from '../assets/images/latvakuva.jpg';
-import muutaKuva from '../assets/images/muutkuva.jpg';
+import kuusiKuva from '../assets/images/categories/Trees.jpg';
+import koristeKuva from '../assets/images/categories/Decorations.jpg';
+import latvaKuva from '../assets/images/categories/Stars.jpg';
+import muutaKuva from '../assets/images/categories/Others.jpg';
 import { Link } from 'react-router-dom';
 
 function Main() {
@@ -25,15 +25,15 @@ function Main() {
       </button></Link>
 
       <Link to="/Latvatahdet">
-      <button className='decorBtn'>
-        <img src={latvaKuva} alt="latva" className='decorPic' /><br />
+      <button className='latvaBtn'>
+        <img src={latvaKuva} alt="latva" className='latvaPic' /><br />
         Latvatähdet
       </button></Link>
 
-      <Link to="/Muuta">
-      <button className='decorBtn'>
-        <img src={muutaKuva} alt="koriste" className='decorPic' /><br />
-        Muuta
+      <Link to="/Muut">
+      <button className='muutBtn'>
+        <img src={muutaKuva} alt="koriste" className='muutPic' /><br />
+        Muut
       </button></Link>
     </div>
 

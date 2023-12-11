@@ -2,8 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql2/promise')
-//const config = require('./db_config')
-
 
 //for pw hash npm i bcrypt
 const bcrypt = require('bcrypt')
@@ -13,10 +11,13 @@ const multer = require('multer')
 const upload = multer({ dest: "upload/" })
 //for token npm i jsonwebtoken
 const jwt = require('jsonwebtoken')
+//for fileserver npm i fs
+const fs = require('fs')
 
 const port = 3001
 
 const app = express()
+
 
 app.use(cors())
 app.use(express.json())
@@ -24,7 +25,7 @@ app.use(express.urlencoded({extended: false}))
 
 const conf = {    
         host: process.env.DB_HOST,
-        port: 3306,
+        port: process.env.DB_PORT,
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE    
@@ -43,10 +44,14 @@ app.get('/', async (req,res) => {
 app.get('/categories', async (req, res) => {
     try {
         const connection = await mysql.createConnection(conf);
+        const category = req.query.category;
         const subcategory = req.query.subcategory;
 
         let result;        
-        if(subcategory){
+        
+        if(category) {
+            result = await connection.execute("SELECT * FROM product_categories WHERE id=?", [category]);
+        }else if(subcategory){
             result = await connection.execute("SELECT * FROM product_categories WHERE subcategory=?", [subcategory]);
         }else{
             result = await connection.execute("SELECT * FROM product_categories");
@@ -88,6 +93,7 @@ app.get('/products', async (req, res) => {
 });
 
 //Maalela yrittää tähän codes
+
 //pw hash stuff
 //first register new user
 //upload.none, .none takes in only key-value pairs as text (not files, formdata fields)
@@ -150,7 +156,9 @@ app.post('/login', upload.none(), async (req, res) => {
 
             //if valid true, then ok, else unauthorized
             if(valid) {
-                res.status(200).send("Login successful");
+                //create token for user, save username and more if needed
+                const token = jwt.sign({username: uname }, process.env.JWT_KEY)
+                res.status(200).json({jwtToken: token});
             } else {
                 //401 unauthorized
                 res.status(401).send("Invalid username or password");
@@ -160,6 +168,120 @@ app.post('/login', upload.none(), async (req, res) => {
         res.status(500).send(error.message);
     }
 })
+
+//Only authenticated user can fetch data with username 
+app.get('/user', async (req,res) => {
+
+    //check token from headers
+    //questionmark if there is no authorization, returns null
+    //use split (token is Bearer token so [1] is token)
+    const token = req.headers.authorization?.split(' ')[1];
+
+    const sql = 'SELECT * FROM users WHERE uname=?'
+
+    try {
+        //this checks that token matches with user
+        const username = jwt.verify(token, process.env.JWT_KEY).username;        
+        const connection = await mysql.createConnection(conf)
+        //now we can use username for checking data
+        //execute sql with token verified username parameter
+        const [rows] = await connection.execute(sql, [username])
+
+        res.json(rows[0]);
+    } catch (error) {
+        //if there is no token
+        res.status(403).send('Access forbidden')
+    }
+})
+
+//for admin part, multirest files destinations
+
+const storage = multer.diskStorage({
+
+    destination: ( req, file, cb ) => {
+        cb(null, '../src/assets/images')  
+    },
+    filename: (req, file, cb ) => {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+//new multer for multirest files
+const upload2 = multer({storage: storage})
+
+//add images and create new folders
+////upload.single sending one image at a time, defining parameter(key) name, here 'pic'
+//with postman - body - formdata - file
+//add other product data
+app.post('/addproduct', upload2.single('pic'), async (req, res) => {
+    
+    const currentPath = req.file.path
+    const newFolderName = req.body.newFolderName
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + newFolderName + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + newFolderName
+    
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        const { productName, productName2, description, category, price, storage } = req.body;
+
+        const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
+        const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddProducts, reqBodyValues)
+
+        res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
+
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }  
+} )
+
+//for admin to add new category with image
+app.post('/addcategories', upload2.single('pic'), async (req, res) => {
+    
+    const currentPath = req.file.path
+    const newFolderName = req.body.newFolderName
+    const filename = req.file.filename
+
+    //destination path send for users
+    const imageUrl = 'images/' + newFolderName + '/' + filename
+    //create folder
+    const targetDir = '../src/assets/images/'  + newFolderName
+    
+    try {
+        //if folder does not exist
+        if(!fs.existsSync(targetDir)) {
+            //create folder
+            await fs.promises.mkdir(targetDir)
+        }
+        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+
+        const { name, description2 } = req.body;
+
+        const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
+   
+        const reqBodyValues2 = [ name, description2, imageUrl ];
+
+        const connection = await mysql.createConnection(conf)
+        await connection.execute(sqlAddCategory, reqBodyValues2)
+        res.status(200).json({message: 'Kategorian lisäys onnistui.', imageUrl: imageUrl})
+
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }  
+} )
 
 //
 // Gets customer orders
