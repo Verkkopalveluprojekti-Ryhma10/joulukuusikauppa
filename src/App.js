@@ -3,8 +3,6 @@ import Home from './pages/Home';
 import Footer from './components/common/Footer';
 import { CartProvider } from './components/content/CartProvider';
 
-import Kuuset from './pages/Kuuset';
-
 import Tuotteet from './pages/Tuotteet';
 
 import LoginForm from './components/forms/LoginForm';
@@ -25,7 +23,6 @@ function App() {
       <Header />        
           <Routes>
             <Route exact path="/" element={ <Home />} />
-            <Route exact path="/Kuuset" element={ <Kuuset />} />
 
             <Route exact path="/Tuotteet/:category" element={ <Tuotteet />} />
 
