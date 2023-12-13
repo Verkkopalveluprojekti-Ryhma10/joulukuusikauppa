@@ -29,17 +29,13 @@ a:hover {
 }
 
 .productObject img {
-    height: 10em;
-    width: 10em;
-    border-radius: 50%;
+    max-height: 150px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;  
 }
 
 .categoryBtn {
-    margin: 20px;
-    margin-left: 5em;
-    border-radius: 3%;
-    height: 200px;
-    width: 200px;
+    border-radius: 3%;  
     border: 1px solid rgb(255, 255, 255);
     background-color: transparent;
     backdrop-filter: blur(2px);
@@ -55,8 +51,7 @@ a:hover {
 .productContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;  
 }
 
 .productContainer img {
@@ -68,7 +63,7 @@ a:hover {
 .categoryContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;    
 }
 
 .categoryContainer img {
