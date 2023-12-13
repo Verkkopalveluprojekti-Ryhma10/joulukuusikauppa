@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/Forms.css'
 import axios from 'axios'
 import { userInfo } from "../signals/LoginSignal"
@@ -8,6 +8,7 @@ export default function AdminAddProducts() {
   //this state is used to track if product is succesfully added
   const [productAdded, setProductAdded] = useState(false);
   const [categoryAdded, setCategoryAdded] = useState(false);
+  
 
   //successfully added new product to database
   function productIsAdded() {
@@ -53,7 +54,7 @@ function AddProducts({productAdded}) {
   const [productName, setProductName] = useState('')
   const [productNameTwo, setProductNameTwo] = useState('')
   const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [price, setPrice] = useState('')
   const [storage, setStorage] = useState('')
   //subfolder name
@@ -65,6 +66,21 @@ function AddProducts({productAdded}) {
   const [errormessage, setErrormessage] = useState('')
   const [inputError, setInputError] = useState('')
 
+  const [categoryData, setCategoryData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/categories');
+            setCategoryData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    fetchData();
+  }, []);
+ 
   function AddNewProduct() {
     const params = {
       pic: imgFile,
@@ -73,15 +89,16 @@ function AddProducts({productAdded}) {
       productName: productName,
       productName2: productNameTwo,
       description: description,
-      category: category,
+      category: selectedCategory,
       price: price,
       storage: storage
     }
 
+    console.log('Valittu kategoria: ' +selectedCategory)
     //checks that input values are not empty, so server won´t crash..
     if(productName.trim() ==='' || productNameTwo.trim() ==='' || 
-      description.trim() ==='' || category.trim() ==='' || 
-      price.trim() ==='' || storage.trim() ==='' || newFolderName.trim()==='') {
+      description.trim() ==='' || selectedCategory.trim() ==='' || 
+      price.trim() ==='' || storage.trim() ==='') {
       console.log('Kenttä ei voi olla tyhjä');
       setInputError('Syötä kaikkiin kenttiin tiedot ensin.')
       return
@@ -94,7 +111,7 @@ function AddProducts({productAdded}) {
       setimgUrl(res.data.imageUrl)
       setProductName(res.data.productName)
       setProductNameTwo(res.data.productName2)
-      setCategory(res.data.category)
+      setSelectedCategory(res.data.selectedCategory)
       setPrice(res.data.price)
       setStorage(res.data.storage)
       // use callback if transfer ok
@@ -118,17 +135,24 @@ function AddProducts({productAdded}) {
       <input type="text" placeholder="Lisää tuotekuvaus" 
       value={description} onChange={(e) => setDescription(e.target.value)}/>
       <label>Valitse kategoria: </label>
-      <input type="number" placeholder="Valitse kategoria numerolla" 
-      value={category} onChange={(e) => setCategory(e.target.value)}/>        
+      
+      <select onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Valitse kategoria">
+        
+        {categoryData.map((category, i) => {
+           {console.log(category.id)}
+            return (     
+              <option key={i} value={category.id} >{category.name + ' - ID: ' + category.id}</option>
+          )})
+        }
+        
+      </select>
+      
       <label>Lisää tuotehinta: </label>
       <input type="text" placeholder="Lisää tuotehinta" 
       value={price} onChange={(e) => setPrice(e.target.value)}/>
       <label>Lisää varastomäärä: </label>
       <input type="text" placeholder="Lisää varastomäärä" 
       value={storage} onChange={(e) => setStorage(e.target.value)}/>  
-      <label>Lisää uusi alikansio kuville: </label>
-      <input type="text" placeholder="Lisää alikansio" 
-      value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}/>
       <label>Valitse kuvatiedosto: </label>
       <input type='file' onChange={(e) => setImgFile(e.target.files[0])}/>
       <p>{inputError}</p>
@@ -140,8 +164,7 @@ function AddProducts({productAdded}) {
 function AddCategory({categoryAdded}) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')  
-  //subfolder name
-  const [newFolderName, setNewFolderName] = useState('')
+  
   //for imagefile
   const [imgFile, setImgFile] = useState('')
   //for imgUrl
@@ -153,13 +176,13 @@ function AddCategory({categoryAdded}) {
 
     const params = {
       pic: imgFile,
-      newFolderName: newFolderName,
+      newFolderName: name,
       imageUrl: imgUrl,
       name: name,
       description2: description,
     }
     //checks that input values are not empty, so server won´t crash..
-    if(name.trim() ==='' || description.trim() ==='' || newFolderName.trim()==='') {
+    if(name.trim() ==='' || description.trim() ==='') {
       console.log('Kenttä ei voi olla tyhjä');
       setInputError('Syötä kaikkiin kenttiin tiedot ensin.')
       return
@@ -188,9 +211,6 @@ function AddCategory({categoryAdded}) {
       <label>Lisää tuotekuvaus: </label>
       <input type="text" placeholder="Lisää tuotekuvaus" 
       value={description} onChange={(e) => setDescription(e.target.value)}/>         
-      <label>Lisää uusi alikansio kuville: </label>
-      <input type="text" placeholder="Lisää alikansio" 
-      value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}/>
       <label>Valitse kuvatiedosto: </label>
       <input type='file' onChange={(e) => setImgFile(e.target.files[0])}/>
       <p>{inputError}</p>

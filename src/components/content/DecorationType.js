@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { CartContext } from '../content/CartProvider';
 
 // DecorationType-komponentti, joka ottaa vastaan propsit koristetyypille
@@ -16,18 +15,20 @@ function DecorationType(props) {
 
   // Käsittelee tuotteen lisäämisen ostoskoriin
   const handleAddToCart = () => { 
-    addToCart({ id: props.type, name: props.label, price: props.price, quantity: parseInt(quantity) });
+    addToCart({ id: props.type, name: props.label+' '+props.label2, price: props.price, quantity: parseInt(quantity) });
   };
 
   return (
     <div className="decoration-type">
       {/* Näyttää koristetyypin nimen ja kuvauksen */}
-      <h3>{props.label}</h3>
+      <h4>{props.label}</h4>
+      <p>{props.label2}</p>
+      {/* Näyttää tuotteen kuvan */}
       <img src={props.image ? require('../../assets'+props.image) : require('../../assets/images/eioo.jpg')} />
+      {/* Näyttää tuotteen kuvaukset */}
       <p>{props.description}</p>
       {/* Näyttää tuotteen hinnan */}
       <p>{props.price} €</p>
-      {/* Näyttää tuotteen kuvan */}
       
       {/* Määrän valintaelementti */}
       <label htmlFor="quantity">Määrä:</label>

@@ -10,7 +10,7 @@ const Tuotteet = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/products?category='+category);
+                const response = await axios.get('http://localhost:3001/products?name='+category);
                 setTuotteetData(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -29,6 +29,7 @@ const Tuotteet = () => {
                             type={product.id}
                             image={product.image_url}
                             label={product.name}
+                            label2={product.name2}
                             description={product.description}
                             price={product.price}
                         />

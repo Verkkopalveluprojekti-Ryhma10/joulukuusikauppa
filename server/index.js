@@ -79,7 +79,7 @@ app.get('/products', async (req, res) => {
             result = await connection.execute("SELECT * FROM products WHERE category=?", [category]);
         } else if(name){
             // Haetaan tuotteen jos alikategoria määritetty
-            result = await connection.execute("SELECT * FROM products p join product_categories pc on pc.id=p.category WHERE pc.name=?", [name]);
+            result = await connection.execute("SELECT p.id, p.name, p.name2, p.description, p.category, p.price, p.storage, p.image_url FROM products p join product_categories pc on pc.id=p.category WHERE pc.name =?", [name]);
         } else {
             // Haetaan kaikki tuotteet
             result = await connection.execute("SELECT * FROM products");
@@ -220,7 +220,7 @@ app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     const filename = req.file.filename
 
     //destination path send for users
-    const imageUrl = 'images/' + newFolderName + '/' + filename
+    const imageUrl = '/images/' + newFolderName + '/' + filename
     //create folder
     const targetDir = '../src/assets/images/'  + newFolderName
     
@@ -254,9 +254,9 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
     const currentPath = req.file.path
     const newFolderName = req.body.newFolderName
     const filename = req.file.filename
-
+    
     //destination path send for users
-    const imageUrl = 'images/' + newFolderName + '/' + filename
+    const imageUrl = '/images/categories/' + filename
     //create folder
     const targetDir = '../src/assets/images/'  + newFolderName
     
@@ -266,14 +266,17 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
             //create folder
             await fs.promises.mkdir(targetDir)
         }
-        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+        await fs.promises.rename(currentPath, '../src/assets/images/categories/'+ filename)
+        console.log('currentPath: ' + currentPath)
+        console.log('targetDir: ' + targetDir)
+        console.log('filename: ' +filename)
 
         const { name, description2 } = req.body;
 
         const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
    
         const reqBodyValues2 = [ name, description2, imageUrl ];
-
+        
         const connection = await mysql.createConnection(conf)
         await connection.execute(sqlAddCategory, reqBodyValues2)
         res.status(200).json({message: 'Kategorian lisäys onnistui.', imageUrl: imageUrl})

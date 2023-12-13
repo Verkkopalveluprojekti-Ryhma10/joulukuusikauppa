@@ -40,13 +40,11 @@ function Navb() {
             {CategoryData.map((category, i) => {
               return (
                 <div key={i}>
-                  <Nav.Link href={`/Tuotteet/`+category.id}>{category.name}</Nav.Link>
+                  <Nav.Link href={`/Tuotteet/`+category.name}>{category.name}</Nav.Link>
                 </div>               
               )})
             }
               
-            <Nav.Link href="/Kuuset">Ainon Kuuset</Nav.Link>
-
           </Nav>
           <Form className="d-flex">
             <Form.Control
