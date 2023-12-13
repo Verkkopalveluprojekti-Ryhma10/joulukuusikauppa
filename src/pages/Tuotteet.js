@@ -21,7 +21,7 @@ const Tuotteet = () => {
     }, []);
 
     return (
-        <div className='LatvatahdetContainer'>
+        <div className='productContainer'>
             {TuotteetData.map((product, i) => {
                 return (
                     <div key={i}> 

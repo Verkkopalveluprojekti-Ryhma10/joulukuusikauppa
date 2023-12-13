@@ -37,13 +37,12 @@ a:hover {
 }
 
 .productObject img {
-    height: 150px;
-    width: 150px;
+    height: 10em;
+    width: 10em;
     border-radius: 50%;
-    margin: 5px;
 }
 
-.pineBtn, .decorBtn, .latvaBtn, .muutBtn {
+.categoryBtn {
     margin: 20px;
     margin-left: 5em;
     border-radius: 3%;
@@ -55,67 +54,44 @@ a:hover {
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-.pineBtn:hover,
-.decorBtn:hover,
-.latvaBtn:hover,
-.muutBtn:hover {
+.categoryBtn:hover {
   background-color: #ddd;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.koristeet-container img,
-.MuutContainer img {
+.productContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+}
+
+.productContainer img {
     margin: 2em;
     max-height: 150px;
     margin: 10px;
 }
 
-.TreeContainer img,
-.LatvatahdetContainer img {
-    margin: 2em;
-    height: 250px;
-    padding: 5px;
-}
-
-.TreeContainer,
-.MuutContainer,
-.LatvatahdetContainer,
-.koristeet-container {
+.categoryContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.TreeDiv {
-    border: 1px solid black;
-    height: 350px;
-    text-align: center;
-    background-color: #F0F0F0;
-    flex: 0 0 calc(30% - 20px);
-    margin: 3.5em;
+.categoryContainer img {
+    margin: 2em;
+    height: 250px;
+    padding: 5px;
 }
 
-.TreeDiv:hover,
-.MuutDiv:hover,
-.LatvatahdetDiv:hover,
-.MuutDiv:hover {
+.categoryBtn:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.TreeDiv.expanded{
-    height: fit-content;
-    width: 400px;
-    text-align: center;
-    padding: 10px;
-  }
-
-  .TreeDiv button:hover,
-  .MuutDiv button:hover,
-  .LatvatahdetDiv button:hover,
-  .decoration-type button:hover  {
-    background-color: green;
-  }
+.decoration-type button:hover {
+background-color: green;
+}
 
 .decoration-type {
     border: 1px solid black;
@@ -146,6 +122,5 @@ label {
     padding-right: 3em;
     border: 1px solid white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(3px);
-    
+    backdrop-filter: blur(3px); 
 }

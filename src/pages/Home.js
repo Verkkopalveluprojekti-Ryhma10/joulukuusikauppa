@@ -21,13 +21,13 @@ function Main() {
 
   return (
     <main className="main">
-      <div className='LatvatahdetContainer'>  
+      <div className='categoryContainer'>  
         {CategoryData.map((category, i) => {
           return (
             <div key={i} className='productObject'>
-              <Link to={`/Tuotteet/${category.id}`}>
-                <button className='pineBtn'>
-                  <img src={require('../assets'+category.image_url)} alt={category.name} className='pinePic' />
+              <Link to={`/Tuotteet/${category.name}`}>
+                <button className='categoryBtn'>
+                  <img src={require('../assets'+category.image_url)} alt={category.name} className='categoryPic' />
                 {category.name}
                 </button>
                 
