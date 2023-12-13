@@ -1,11 +1,4 @@
-/* @font-face {
-    font-family: 'TextFont';
-    src: url('./fonts/Simple\ Kind\ Of\ Girl.ttf') format('TrueType');
-    font-weight: normal;
-    font-style: normal;
-  } */
-
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&family=Pontano+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&family=Pontano+Sans:wght@300&display=swap');
 
 body {
     background-image: url('../assets/images/main.jpg');
@@ -14,7 +7,6 @@ body {
 }
 
 .main {
-    /* font-family: 'TextFont', sans-serif; */
     font-family: 'Pontano Sans', sans-serif;
     min-height: 40em;
     width: 100%;
