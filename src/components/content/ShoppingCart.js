@@ -19,9 +19,12 @@ function ShoppingCart() {
       <Dropdown.Menu className="shopping-cart-dropdown-menu">
         <ListGroup className="shopping-cart-dropdown">
           {cartItems.length > 0 ? (
+            
             // Listaa kaikki ostoskorissa olevat tuotteet
             cartItems.map((item, index) => (
+              
               <ListGroupItem key={index}>
+              {console.log(cartItems)}
                 {/* Näyttää tuotteen nimen, määrän ja yhteishinnan */}
                 {item.name} - Määrä: {item.quantity} - Yhteensä: {item.quantity * item.price} €
                 {/* Poista-nappi poistaa tuotteen ostoskorista */}

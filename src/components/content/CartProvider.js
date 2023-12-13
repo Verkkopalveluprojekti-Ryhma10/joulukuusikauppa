@@ -15,7 +15,7 @@ export function CartProvider({ children }) {
   }, [cartItems]);*/
 
   useEffect(() => {
-    const ShoppingCart = cartItems.map(item => ({ id: item.id, quantity: item.quantity }));
+    const ShoppingCart = cartItems.map(item => ({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }));
     localStorage.setItem('cart', JSON.stringify(ShoppingCart));
   }, [cartItems]);
 

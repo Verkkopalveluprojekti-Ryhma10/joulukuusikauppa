@@ -21,14 +21,14 @@ function Main() {
 
   return (
     <main className="main">
-      <div className='categoryContainer'>  
+        <div class="categoryContainer">
         {CategoryData.map((category, i) => {
           return (
             <div key={i} className='productObject'>
               <Link to={`/Tuotteet/${category.name}`}>
                 <button className='categoryBtn'>
                   <img src={require('../assets'+category.image_url)} alt={category.name} className='categoryPic' />
-                {category.name}
+                <p>{category.name}</p>
                 </button>
                 
               </Link>
@@ -36,7 +36,8 @@ function Main() {
               
           )})
         }
-      </div>
+        </div>
+      
 
       <aside className="aside">
         <p>Tervetuloa Suomen ympäristöystävällisimpään kuusikauppaan!<br />

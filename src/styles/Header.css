@@ -1,11 +1,4 @@
-/* @font-face {
-    font-family: 'NewFont';
-    src: url('./fonts/Abbasy\ Calligraphy\ Typeface.ttf') format('TrueType');
-    font-weight: normal;
-    font-style: normal;
-  } */
-
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&display=swap');
 
 .header {
     display: inline-block;
@@ -29,7 +22,6 @@ h1 {
     font-size: 5em !important;
     color:rgb(79, 93, 104);
     text-shadow: 2px 2px 4px rgb(230, 230, 235);
-    /* font-family: 'NewFont', sans-serif;         */
     font-family: 'Great Vibes', cursive;
 }
 
@@ -37,7 +29,6 @@ h1 {
     font-size: 2em !important;
     color:rgb(79, 93, 104);
     text-shadow: 2px 2px 4px rgb(230, 230, 235);
-    /* font-family: 'NewFont', sans-serif;     */
     font-family: 'Great Vibes', cursive;
 }
 .button {

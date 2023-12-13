@@ -1,11 +1,4 @@
-/* @font-face {
-    font-family: 'TextFont';
-    src: url('./fonts/Simple\ Kind\ Of\ Girl.ttf') format('TrueType');
-    font-weight: normal;
-    font-style: normal;
-  } */
-
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&family=Pontano+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta&family=Pontano+Sans:wght@300&display=swap');
 
 body {
     background-image: url('../assets/images/main.jpg');
@@ -15,7 +8,6 @@ body {
 }
 
 .main {
-    /* font-family: 'TextFont', sans-serif; */
     font-family: 'Pontano Sans', sans-serif;
     min-height: 40em;
     width: 100%;
@@ -37,17 +29,13 @@ a:hover {
 }
 
 .productObject img {
-    height: 10em;
-    width: 10em;
-    border-radius: 50%;
+    max-height: 150px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;  
 }
 
 .categoryBtn {
-    margin: 20px;
-    margin-left: 5em;
-    border-radius: 3%;
-    height: 200px;
-    width: 200px;
+    border-radius: 3%;  
     border: 1px solid rgb(255, 255, 255);
     background-color: transparent;
     backdrop-filter: blur(2px);
@@ -63,8 +51,7 @@ a:hover {
 .productContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;  
 }
 
 .productContainer img {
@@ -76,7 +63,7 @@ a:hover {
 .categoryContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;    
 }
 
 .categoryContainer img {
