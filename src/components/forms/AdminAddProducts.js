@@ -137,7 +137,7 @@ function AddProducts({productAdded}) {
       <label>Valitse kategoria: </label>
       
       <select onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Valitse kategoria">
-        
+        <option>Valitse Kategoria:</option>
         {categoryData.map((category, i) => {
            {console.log(category.id)}
             return (     
