@@ -1,13 +1,31 @@
 import React, { useContext } from "react";
+import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { CartContext } from './CartProvider';
 
+
 function ShoppingCart() {
-  // Käyttää CartContextia hankkiakseen ostoskorin tiedot ja toiminnot
+  const navigate = useNavigate();
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
 
   // Laskee ostoskorin tuotteiden kokonaishinnan
   const totalPrice = () => cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+
+  const submitOrder = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
+      if (response.status === 200) {
+        clearCart();
+        alert('Order placed successfully!');
+        navigate('/order-form'); // Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('Failed to place the order');
+    }
+  };
 
   return (
     <Dropdown>
@@ -40,6 +58,7 @@ function ShoppingCart() {
             <strong>Kokonaissumma: {totalPrice()} €</strong>
           </div>
           {/* Nappi ostoskorin tyhjentämiseksi */}
+          <Button variant="primary" onClick={submitOrder} className="m-2">Tilaa</Button>
           <Button variant="warning" onClick={clearCart} className="m-2">Tyhjennä ostoskori</Button>
         </ListGroup>
       </Dropdown.Menu>
