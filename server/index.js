@@ -13,16 +13,21 @@ const upload = multer({ dest: "upload/" })
 const jwt = require('jsonwebtoken')
 //for fileserver npm i fs
 const fs = require('fs')
+const { Axios, default: axios } = require('axios')
 
 const port = 3001
 
 const app = express()
 
-
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
+const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+// Haetaan dbconffit envistä
 const conf = {    
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
@@ -31,6 +36,7 @@ const conf = {
         database: process.env.DB_DATABASE    
 }
 
+//Kunhan annetaan status että serveri rullaa
 app.get('/', async (req,res) => {
     try {
         const connection = await mysql.createConnection(conf)
@@ -43,17 +49,33 @@ app.get('/', async (req,res) => {
 // Haetaan tuotekategoriat
 app.get('/categories', async (req, res) => {
     try {
+        // Koitetaan muodostaa tietokantayhteys
         const connection = await mysql.createConnection(conf);
+        //luetaan annettuja parametreja
         const category = req.query.category;
         const name = req.query.name;
+        const categorynamebyid = req.query.categorynamebyid;
+        const id = req.query.id;
 
         let result;        
         
+        //Jos category määritetty
         if(category) {
             result = await connection.execute("SELECT * FROM product_categories WHERE id=?", [category]);
-        }else if(name){
+        }
+        //Jos name määritetty
+        else if(name){
             result = await connection.execute("SELECT * FROM product_categories WHERE name=?", [name]);
-        }else{
+        }
+        //Jos categorynamebyid määritetty
+        else if(categorynamebyid){
+            result = await connection.execute("SELECT name FROM product_categories WHERE id=?", [categorynamebyid]);
+        }
+        else if(id){
+            result = await connection.execute("SELECT * FROM product_categories WHERE id=?", [id]);
+        }
+        //Muuten
+        else{
             result = await connection.execute("SELECT * FROM product_categories");
         }
         
@@ -202,7 +224,7 @@ const storage = multer.diskStorage({
         cb(null, '../src/assets/images')  
     },
     filename: (req, file, cb ) => {
-        cb(null, Date.now() + file.originalname)
+        cb(null, Date.now() +'-' + file.originalname)
     }
 })
 
@@ -216,50 +238,59 @@ const upload2 = multer({storage: storage})
 app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     
     const currentPath = req.file.path
-    const newFolderName = req.body.newFolderName
     const filename = req.file.filename
-
-    //destination path send for users
-    const imageUrl = '/images/' + newFolderName + '/' + filename
-    //create folder
-    const targetDir = '../src/assets/images/'  + newFolderName
+    let categoryName
+    
     
     try {
-        //if folder does not exist
+        const connection = await mysql.createConnection(conf)
+        let { productName, productName2, description, category, price, storage } = req.body;
+        
+        productName = capitalizeFirstLetter(productName)
+        productName2 = capitalizeFirstLetter(productName2)
+        description = capitalizeFirstLetter(description)
+
+        //Haetaan kategorian nimi IDn perusteella
+        const response = await axios.get('http://localhost:3001/categories?categorynamebyid='+category);
+        categoryName = response.data[0].name
+
+        const targetDir = '../src/assets/images/'  + categoryName
+            
+        //Varmistetaan onko tuommonen kansio jo olemassa
         if(!fs.existsSync(targetDir)) {
             //create folder
             await fs.promises.mkdir(targetDir)
         }
-        await fs.promises.rename(currentPath, targetDir + '/' + filename)
+        //Siirrellään lisätty kuva oikeaan kansioon
+        await fs.promises.rename(currentPath, '../src/assets/images/'+categoryName+'/'+ filename) 
 
-        const { productName, productName2, description, category, price, storage } = req.body;
+        //destination path send for users
+        const imageUrl = '/images/' + categoryName + '/' + filename
 
+        //Lauseke tuotteiden lisäämistä varten
         const sqlAddProducts = 'INSERT INTO products (name, name2, description, category, price, storage, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)';
-
-        const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];
-
-        const connection = await mysql.createConnection(conf)
+        //Muuttujat tuotteiden lisäämistä varten
+        const reqBodyValues = [ productName, productName2, description, category, price, storage, imageUrl ];     
+        //Lisätään tuotteet kantaan
         await connection.execute(sqlAddProducts, reqBodyValues)
-
         res.status(200).json({message: 'Tuotteen lisäys onnistui.', imageUrl: imageUrl})
-
     } catch (error) {
         res.status(500).json({error: error.message})
-    }  
+    }
 } )
 
 //for admin to add new category with image
 app.post('/addcategories', upload2.single('pic'), async (req, res) => {
     
     const currentPath = req.file.path
-    const newFolderName = req.body.newFolderName
+    let newFolderName = capitalizeFirstLetter(req.body.newFolderName)
     const filename = req.file.filename
     
     //destination path send for users
     const imageUrl = '/images/categories/' + filename
     //create folder
     const targetDir = '../src/assets/images/'  + newFolderName
-    
+      
     try {
         //if folder does not exist
         if(!fs.existsSync(targetDir)) {
@@ -267,14 +298,13 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
             await fs.promises.mkdir(targetDir)
         }
         await fs.promises.rename(currentPath, '../src/assets/images/categories/'+ filename)
-        console.log('currentPath: ' + currentPath)
-        console.log('targetDir: ' + targetDir)
-        console.log('filename: ' +filename)
 
-        const { name, description2 } = req.body;
+        let { name, description2 } = req.body;
 
-        const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';
-   
+        name = capitalizeFirstLetter(name)
+        description2 = capitalizeFirstLetter(description2)
+
+        const sqlAddCategory = 'INSERT INTO product_categories (name, description, image_url) VALUES (?, ?, ?)';   
         const reqBodyValues2 = [ name, description2, imageUrl ];
         
         const connection = await mysql.createConnection(conf)
@@ -285,8 +315,6 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
         res.status(500).json({error: error.message})
     }  
 } )
-
-//
 
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)
