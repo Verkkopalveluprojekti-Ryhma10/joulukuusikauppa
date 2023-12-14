@@ -32,6 +32,7 @@ const Tuotteet = () => {
                             label2={product.name2}
                             description={product.description}
                             price={product.price}
+                            storage={product.storage}
                         />
                     </div>
                 )})

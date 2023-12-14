@@ -29,7 +29,7 @@ function DecorationType(props) {
       <p>{props.description}</p>
       {/* Näyttää tuotteen hinnan */}
       <p>{props.price} €</p>
-      
+      <p>Varastossa: {props.storage}</p>
       {/* Määrän valintaelementti */}
       <label htmlFor="quantity">Määrä:</label>
       <input
