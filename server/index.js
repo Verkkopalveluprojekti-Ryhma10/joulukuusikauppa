@@ -327,10 +327,17 @@ app.post('/order-details', async (req, res) => {
     }
 });
 
-app.post('/orders', async (req, res) => {
+app.post('/orders', upload.none(), async (req, res) => {
+
+    const { customer, payStatus, items } = req.body;
+
+    const sqlAddOrders = 'INSERT INTO orders (customer, payStatus) VALUES (?, ?)';  
+    
+    const reqBodyValues = [customer, payStatus]
+
     try {
-        const { items } = req.body;
-        //tähän logiikka tilausten tallentamiseksi tietokantaan
+        const connection = await mysql.createConnection(conf);
+        await connection.execute(sqlAddOrders, reqBodyValues)
 
         res.status(200).json({ message: 'Tilaus vastaanotettu onnistuneesti' });
     } catch (error) {

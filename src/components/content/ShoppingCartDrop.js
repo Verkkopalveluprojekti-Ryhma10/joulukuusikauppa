@@ -13,18 +13,18 @@ function ShoppingCartDrop() {
   const totalPrice = () => cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
 
   const submitOrder = async () => {
-    try {
-      const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
-      if (response.status === 200) {
+    // try {
+    //   const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
+    //   if (response.status === 200) {
       //  clearCart();
         navigate('/ostoskori'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
       //  navigate('/order-form'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
       }
-    } catch (error) {
-      console.error('Error placing order:', error);
-      alert('Tilauksen lähettäminen epäonnistui');
-    }
-  };
+    // } catch (error) {
+    //   console.error('Error placing order:', error);
+    //   alert('Tilauksen lähettäminen epäonnistui');
+    // }
+  //};
 
   return (
     <Dropdown>
