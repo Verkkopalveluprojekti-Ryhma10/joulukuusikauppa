@@ -5,7 +5,7 @@ import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { CartContext } from './CartProvider';
 
 
-function ShoppingCart() {
+function ShoppingCartDrop() {
   const navigate = useNavigate();
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
 
@@ -16,9 +16,9 @@ function ShoppingCart() {
     try {
       const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
       if (response.status === 200) {
-        clearCart();
-        alert('Jatketaan tilauslomakkeelle!');
-        navigate('/order-form'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
+      //  clearCart();
+        navigate('/ostoskori'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
+      //  navigate('/order-form'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
       }
     } catch (error) {
       console.error('Error placing order:', error);
@@ -65,4 +65,4 @@ function ShoppingCart() {
   );
 }
 
-export default ShoppingCart;
+export default ShoppingCartDrop;

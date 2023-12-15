@@ -1,0 +1,79 @@
+import React, { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { CartContext } from '../components/content/CartProvider';
+import { token, userInfo } from "../components/signals/LoginSignal"
+import { Link } from 'react-router-dom';
+import { paymentMethod } from '../components/signals/OrderSignal';
+
+
+
+function ShoppingCart() {
+  const navigate = useNavigate();
+  const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
+
+  // Laskee ostoskorin tuotteiden kokonaishinnan
+  const totalPrice = () => cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+
+  return (
+          
+    <div className="shoppingPreview">       
+        {cartItems.length > 0 ? (
+        
+        <table className="shoppingTable">
+            <tr><th>Tuote:</th><th>Hinta/kpl:</th><th>Määrä:</th><th>Yhteensä:</th><th>&nbsp;</th></tr>
+            {/* Listaa kaikki ostoskorissa olevat tuotteet*/}
+            {cartItems.map((item, index) => (              
+                <tr key={index}>
+                    {console.log(cartItems)}
+                    {/* Näyttää tuotteen nimen, määrän ja yhteishinnan */}
+                    <td>{item.name}</td><td>{item.price} €</td><td>{item.quantity}</td><td>{item.quantity * item.price} €</td>
+                    {/* Poista-nappi poistaa tuotteen ostoskorista */}
+                    <td><Button variant="danger" size="sm" onClick={() => removeFromCart(item.id)}>Poista</Button></td>
+                </tr>
+            ))}
+        </table>
+        ) : (
+        // Ilmoittaa, jos ostoskori on tyhjä
+        <p className="m-2">Ostoskori on tyhjä</p>
+        )}
+        <div className="total-price p-2">
+            {/* Näyttää ostoskorin kokonaishinnan */}
+            <strong>Kokonaissumma: {totalPrice()} €</strong>
+        </div>
+        {/* Nappi ostoskorin tyhjentämiseksi */}
+        <Button variant="warning" onClick={clearCart} className="m-2">Tyhjennä ostoskori</Button>
+        <hr />
+
+        {!token.value ?
+            <div className="shoppingCartUserInfo">
+                <p>Tilaaminen vaatii rekisteröitymisen. Jos olet jo kanta-asiakas, kirjaudu tunnuksillasi, kiitos.</p>
+                <button class= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
+                <button class= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
+            </div> : <></>
+            /*  Tämä aiheuttaa virheen!!
+            <div className="shoppingCartUserInfo">
+                <p>Etunimi: {userInfo.value.fname}</p>
+                <p>Sukunimi: {userInfo.value.lname}</p>
+                <p>Postitusosoite: {userInfo.value.address} {userInfo.value.post} </p>
+                <select value={paymentMethod.value} onChange={(e) => paymentMethod.value = e.target.value} className="order-form__select">
+                    <option value="">Valitse maksutapa</option>
+                    <option value="bank">Pankki</option>
+                    <option value="card">Korttimaksu</option>
+                    <option value="mobilepay">MobilePay</option>
+                    <option value="invoice">Lasku</option>
+                </select>             
+                {cartItems.length > 0 ? 
+                <Button variant="warning" className="m-2">Vahvista tilaus</Button> : ''
+                }
+            </div>
+            */
+            
+        }
+        
+    </div>
+        
+  );
+}
+
+export default ShoppingCart;

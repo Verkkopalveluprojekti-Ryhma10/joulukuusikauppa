@@ -111,3 +111,44 @@ label {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(3px); 
 }
+
+.shoppingPreview {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+}
+
+.shoppingTable {
+    border: 1px solid grey;
+    margin: 10px;
+    background-color: #DDD;
+}
+
+.shoppingTable th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+.shoppingTable tr {
+    border-bottom: 1px solid white;
+}
+
+.shoppingTable tr:last-child {
+    border-bottom: none;
+}
+
+.shoppingPreview button {
+    width: 10em;
+}
+
+.shoppingCartUserInfo {
+    text-align:center;
+    margin-top:2em;
+    margin-bottom: 10px;
+}
+
+.shoppingCartUserInfo button {
+    float: none;
+}

@@ -15,6 +15,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
+import ShoppingCart from './pages/Shoppingcart';
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
             <Route exact path="/" element={ <Home />} />
 
             <Route exact path="/Tuotteet/:category" element={ <Tuotteet />} />
+            <Route exact path="/ostoskori" element={ <ShoppingCart />} />
+            
+            
 
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route exact path="/rekisteroidy" element={ <RegisterForm />} />

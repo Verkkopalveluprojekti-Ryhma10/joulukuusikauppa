@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import ShoppingCart from '../content/ShoppingCart';
+import ShoppingCartDrop from '../content/ShoppingCartDrop';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
@@ -44,7 +44,7 @@ function Navb() {
                 </div>               
               )})
             }
-              
+              <Nav.Link href={'/ostoskori/'}>Ostoskori</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
@@ -55,7 +55,7 @@ function Navb() {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
-          <ShoppingCart />
+          <ShoppingCartDrop />
         </Navbar.Collapse>     
       </Container>
     </Navbar>
