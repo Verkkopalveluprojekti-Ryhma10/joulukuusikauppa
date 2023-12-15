@@ -8,6 +8,7 @@ import Tuotteet from './pages/Tuotteet';
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 import AdminAddProducts from './components/forms/AdminAddProducts';
+import OrderForm from './components/forms/OrderForm';
 
 import {
   Routes,
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route exact path="/rekisteroidy" element={ <RegisterForm />} />
             <Route exact path='/yllapito' element= { <AdminAddProducts />} />
+            <Route path="/order-form" element={<OrderForm />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>        
       <Footer />
