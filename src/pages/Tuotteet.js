@@ -7,16 +7,16 @@ const Tuotteet = () => {
     const [TuotteetData, setTuotteetData] = useState([]);
     const {category} = useParams();
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/products?name='+category);
-                setTuotteetData(response.data);
+                setTuotteetData(response.data);             
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, []);
 

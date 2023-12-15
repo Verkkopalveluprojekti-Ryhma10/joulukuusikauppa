@@ -1,4 +1,4 @@
-import React, { usestate, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const OrderDelivery = () => {
     // order details

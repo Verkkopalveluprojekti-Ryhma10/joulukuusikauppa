@@ -57,8 +57,6 @@ function AddProducts({productAdded}) {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [price, setPrice] = useState('')
   const [storage, setStorage] = useState('')
-  //subfolder name
-  const [newFolderName, setNewFolderName] = useState('')
   //for imagefile
   const [imgFile, setImgFile] = useState('')
   //for imgUrl
@@ -84,7 +82,6 @@ function AddProducts({productAdded}) {
   function AddNewProduct() {
     const params = {
       pic: imgFile,
-      newFolderName: newFolderName,
       imageUrl: imgUrl,
       productName: productName,
       productName2: productNameTwo,
@@ -94,7 +91,6 @@ function AddProducts({productAdded}) {
       storage: storage
     }
 
-    console.log('Valittu kategoria: ' +selectedCategory)
     //checks that input values are not empty, so server won´t crash..
     if(productName.trim() ==='' || productNameTwo.trim() ==='' || 
       description.trim() ==='' || selectedCategory.trim() ==='' || 
@@ -136,12 +132,11 @@ function AddProducts({productAdded}) {
       value={description} onChange={(e) => setDescription(e.target.value)}/>
       <label>Valitse kategoria: </label>
       
-      <select onChange={(e) => setSelectedCategory(e.target.value)} placeholder="Valitse kategoria">
+      <select onChange={(e) => {setSelectedCategory(e.target.value)}} placeholder="Valitse kategoria">
         <option>Valitse Kategoria:</option>
         {categoryData.map((category, i) => {
-           {console.log(category.id)}
             return (     
-              <option key={i} value={category.id} >{category.name + ' - ID: ' + category.id}</option>
+              <option key={i} value={category.id}>{category.name}</option>
           )})
         }
         
@@ -206,7 +201,7 @@ function AddCategory({categoryAdded}) {
   return (
     <div className='forms-container'>
       <label>Lisää kategorian nimi: </label>
-      <input type="text" placeholder="Lisää tuotenimi" 
+      <input type="text" autoCapitalize='words' placeholder="Lisää tuotenimi" 
       value={name} onChange={(e) => setName(e.target.value)}/>
       <label>Lisää tuotekuvaus: </label>
       <input type="text" placeholder="Lisää tuotekuvaus" 
