@@ -288,8 +288,8 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
 
 app.post('/order-details', async (req, res) => {
     try {
-        const orderDetails = req.body; // Tässä olisivat tilauslomakkeen tiedot
-        // Käsittele ja tallenna nämä tiedot tietokantaasi
+        const orderDetails = req.body;
+        //tähän logiikkaa tilaustietojen tallentamiseksi tietokantaan tarvisi
 
         res.status(200).json({ message: 'Tilauslomakkeen tiedot vastaanotettu' });
     } catch (error) {
@@ -299,19 +299,16 @@ app.post('/order-details', async (req, res) => {
 
 app.post('/orders', async (req, res) => {
     try {
-        const { items } = req.body; // Oletetaan, että lähetät 'items' nimisenä
-
-        // logiikka tilausten tallentamiseksi tietokantaan.
-        // Esimerkki pseudokoodina:
-        // const result = await database.saveOrder(items);
-
+        const { items } = req.body; 
+        //tähän logiikkaa tilausten tallentamiseksi tietokantaan.
+        
         res.status(200).json({ message: 'Tilaus vastaanotettu onnistuneesti' });
     } catch (error) {
         console.error('Virhe tilausta tallennettaessa:', error);
         res.status(500).json({ error: error.message });
     }
 });
-//
+
 
 app.listen(port,() => {
     console.log(`Server is running on port ${port}`)

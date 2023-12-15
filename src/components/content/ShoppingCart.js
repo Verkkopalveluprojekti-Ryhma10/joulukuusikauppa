@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useHistory } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
@@ -18,12 +17,12 @@ function ShoppingCart() {
       const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
       if (response.status === 200) {
         clearCart();
-        alert('Order placed successfully!');
-        navigate('/order-form'); // Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
+        alert('Jatketaan tilauslomakkeelle!');
+        navigate('/order-form'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
       }
     } catch (error) {
       console.error('Error placing order:', error);
-      alert('Failed to place the order');
+      alert('Tilauksen lähettäminen epäonnistui');
     }
   };
 
