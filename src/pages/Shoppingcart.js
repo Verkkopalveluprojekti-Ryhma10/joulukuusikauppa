@@ -25,7 +25,12 @@ function ShoppingCart() {
 
     const order = {
         customer: userInfo.value.id,
-        payStatus: paymentMethod.value
+        payStatus: paymentMethod.value,
+        items: cartItems.map((item) => ({
+            product: item.name,
+            amount: item.quantity,
+            price: item.price,
+          })),
     }
 
     axios.post('http://localhost:3001/orders', order)
