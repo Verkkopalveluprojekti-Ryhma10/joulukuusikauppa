@@ -45,6 +45,7 @@ CREATE TABLE `users` (
 CREATE TABLE `orders` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `customer` INT NOT NULL,
+  `payMethod` VARCHAR(20) NOT NULL,
   `payStatus` VARCHAR(5) NOT NULL,
   `orderStatus` VARCHAR(5) NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
