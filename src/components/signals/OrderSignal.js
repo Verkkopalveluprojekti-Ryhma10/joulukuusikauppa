@@ -6,4 +6,4 @@ export const streetAddress = signal("");
 export const postalCode = signal("");
 export const city = signal("");
 export const country = signal("");
-export const paymentMethod = signal("");
+export const paymentMethod = signal(['bank', 'card', 'mobilepay', 'invoice']);

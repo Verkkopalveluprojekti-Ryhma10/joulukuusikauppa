@@ -5,12 +5,39 @@ import { CartContext } from '../components/content/CartProvider';
 import { token, userInfo } from "../components/signals/LoginSignal"
 import { Link } from 'react-router-dom';
 import { paymentMethod } from '../components/signals/OrderSignal';
-
+import axios from "axios";
 
 
 function ShoppingCart() {
   const navigate = useNavigate();
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
+
+  
+  const handlePaymentMethodChange = (event) => {
+    paymentMethod.value = event.target.value;
+  };
+
+  function sendOrder() {
+
+    const order = {
+        customer: userInfo.value.id,
+        payMethod: paymentMethod.value,
+        items: cartItems.map((item) => ({
+            product: item.name,
+            amount: item.quantity,
+            price: item.price,
+          })),
+    }
+
+    axios.post('http://localhost:3001/orders', order)
+        .then((res) => {
+            console.log('Tilaus onnistui:' , res.data);
+        })
+        .catch((error) => {
+            console.log('Virhe tuli:', error);
+        })
+  }
+  
 
   // Laskee ostoskorin tuotteiden kokonaishinnan
   const totalPrice = () => cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
@@ -50,24 +77,24 @@ function ShoppingCart() {
                 <p>Tilaaminen vaatii rekisteröitymisen. Jos olet jo kanta-asiakas, kirjaudu tunnuksillasi, kiitos.</p>
                 <button class= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
                 <button class= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
-            </div> : <></>
-            /*  Tämä aiheuttaa virheen!!
+            </div> :
+              
             <div className="shoppingCartUserInfo">
                 <p>Etunimi: {userInfo.value.fname}</p>
                 <p>Sukunimi: {userInfo.value.lname}</p>
                 <p>Postitusosoite: {userInfo.value.address} {userInfo.value.post} </p>
-                <select value={paymentMethod.value} onChange={(e) => paymentMethod.value = e.target.value} className="order-form__select">
+                <select value={paymentMethod.value} onChange={handlePaymentMethodChange} className="order-form__select">
                     <option value="">Valitse maksutapa</option>
-                    <option value="bank">Pankki</option>
-                    <option value="card">Korttimaksu</option>
-                    <option value="mobilepay">MobilePay</option>
-                    <option value="invoice">Lasku</option>
+                    <option value={paymentMethod.value.bank}>Pankki</option>
+                    <option value={paymentMethod.value.card}>Korttimaksu</option>
+                    <option value={paymentMethod.value.mobilepay}>MobilePay</option>
+                    <option value={paymentMethod.value.invoice}>Lasku</option>
                 </select>             
                 {cartItems.length > 0 ? 
-                <Button variant="warning" className="m-2">Vahvista tilaus</Button> : ''
+                <Button variant="warning" className="m-2" onClick={sendOrder}>Vahvista tilaus</Button> : ''
                 }
             </div>
-            */
+            
             
         }
         

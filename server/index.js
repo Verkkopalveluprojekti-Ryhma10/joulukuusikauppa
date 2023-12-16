@@ -327,10 +327,29 @@ app.post('/order-details', async (req, res) => {
     }
 });
 
-app.post('/orders', async (req, res) => {
+//order_items table insert is not working yet!!
+app.post('/orders', upload.none(), async (req, res) => {
+
+    const { customer, payMethod, payStatus, items } = req.body;
+
+    const sqlAddOrders = 'INSERT INTO orders (customer, payMethod) VALUES (?, ?)'; 
+    
+    const sqlAddItems = 'INSERT INTO order_items ( order, product, amount, price) VALUES (?, ?, ?, ?)' 
+    
+    const reqBodyValues = [customer, payMethod]
+
     try {
-        const { items } = req.body;
-        //tähän logiikka tilausten tallentamiseksi tietokantaan
+        const connection = await mysql.createConnection(conf);
+        await connection.execute(sqlAddOrders, reqBodyValues)
+
+        //this takes last executed tables id... probably...
+        const [order] = await connection.execute('SELECT LAST_INSERT_ID()');
+        const orderId = order[0]['LAST_INSERT_ID()'];
+
+    for (const item of items) {
+        const itemValues = [ item.product, item.amount, item.price];
+        await connection.execute(sqlAddItems, [orderId, item.product, item.amount, item.price]);
+      }
 
         res.status(200).json({ message: 'Tilaus vastaanotettu onnistuneesti' });
     } catch (error) {
