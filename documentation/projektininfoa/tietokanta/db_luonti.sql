@@ -45,9 +45,7 @@ CREATE TABLE `users` (
 CREATE TABLE `orders` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `customer` INT NOT NULL,
-  `payMethod` VARCHAR(20) NOT NULL,
-  `payStatus` VARCHAR(5) NOT NULL,
-  `orderStatus` VARCHAR(5) NOT NULL,
+  `payMethod` VARCHAR(30) NOT NULL,
   `createdAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `modifiedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -55,8 +53,8 @@ CREATE TABLE `orders` (
 -- Luodaan taulu tilausriveille
 CREATE TABLE `order_items` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `order` INT NOT NULL,
-  `product` INT NOT NULL,
+  `orderid` INT NOT NULL,
+  `productid` INT NOT NULL,
   `amount` INT NOT NULL,
   `price` FLOAT NOT NULL
 );
@@ -68,7 +66,7 @@ ALTER TABLE `products` ADD CONSTRAINT `productCategoryID` FOREIGN KEY (`category
 ALTER TABLE `orders` ADD CONSTRAINT `customerID` FOREIGN KEY (`customer`) REFERENCES `users` (`id`);
 
 -- Luodaan tilauksien ja tilausrivien relaatio
-ALTER TABLE `order_items` ADD CONSTRAINT `orderID` FOREIGN KEY (`order`) REFERENCES `orders` (`id`);
+ALTER TABLE `order_items` ADD CONSTRAINT `orderID` FOREIGN KEY (`orderid`) REFERENCES `orders` (`id`);
 
 -- Luodaan tilausrivien ja tuotteiden relaatio
-ALTER TABLE `order_items` ADD CONSTRAINT `productID` FOREIGN KEY (`product`) REFERENCES `products` (`id`);
+ALTER TABLE `order_items` ADD CONSTRAINT `productID` FOREIGN KEY (`productid`) REFERENCES `products` (`id`);

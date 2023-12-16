@@ -44,7 +44,6 @@ function Navb() {
                 </div>               
               )})
             }
-              <Nav.Link href={'/ostoskori/'}>Ostoskori</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

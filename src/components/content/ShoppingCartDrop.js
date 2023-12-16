@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { CartContext } from './CartProvider';
 
@@ -13,18 +12,10 @@ function ShoppingCartDrop() {
   const totalPrice = () => cartItems.reduce((total, item) => total + (item.quantity * item.price), 0);
 
   const submitOrder = async () => {
-    // try {
-    //   const response = await axios.post('http://localhost:3001/orders', { items: cartItems });
-    //   if (response.status === 200) {
-      //  clearCart();
-        navigate('/ostoskori'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
-      //  navigate('/order-form'); //Käytä 'navigate' ohjataksesi käyttäjän OrderForm-komponenttiin
+    //Käytä 'navigate' ohjataksesi käyttäjä tilaamaan
+    await navigate('/ostoskori'); 
+      
       }
-    // } catch (error) {
-    //   console.error('Error placing order:', error);
-    //   alert('Tilauksen lähettäminen epäonnistui');
-    // }
-  //};
 
   return (
     <Dropdown>
@@ -41,7 +32,6 @@ function ShoppingCartDrop() {
             cartItems.map((item, index) => (
               
               <ListGroupItem key={index}>
-              {console.log(cartItems)}
                 {/* Näyttää tuotteen nimen, määrän ja yhteishinnan */}
                 {item.name} - Määrä: {item.quantity} - Yhteensä: {item.quantity * item.price} €
                 {/* Poista-nappi poistaa tuotteen ostoskorista */}

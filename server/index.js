@@ -240,8 +240,7 @@ app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     const currentPath = req.file.path
     const filename = req.file.filename
     let categoryName
-    
-    
+     
     try {
         const connection = await mysql.createConnection(conf)
         let { productName, productName2, description, category, price, storage } = req.body;
@@ -330,11 +329,12 @@ app.post('/order-details', async (req, res) => {
 //order_items table insert is not working yet!!
 app.post('/orders', upload.none(), async (req, res) => {
 
-    const { customer, payMethod, payStatus, items } = req.body;
+    const { customer, payMethod, payStatus } = req.body;
+    const items = req.body.items;
 
     const sqlAddOrders = 'INSERT INTO orders (customer, payMethod) VALUES (?, ?)'; 
     
-    const sqlAddItems = 'INSERT INTO order_items ( order, product, amount, price) VALUES (?, ?, ?, ?)' 
+    const sqlAddItems = 'INSERT INTO order_items ( orderid, productid, amount, price) VALUES (?, ?, ?, ?)' 
     
     const reqBodyValues = [customer, payMethod]
 
@@ -346,10 +346,10 @@ app.post('/orders', upload.none(), async (req, res) => {
         const [order] = await connection.execute('SELECT LAST_INSERT_ID()');
         const orderId = order[0]['LAST_INSERT_ID()'];
 
-    for (const item of items) {
-        const itemValues = [ item.product, item.amount, item.price];
-        await connection.execute(sqlAddItems, [orderId, item.product, item.amount, item.price]);
-      }
+        for (const item of items) {
+            const itemValues = [ item.product, item.amount, item.price];
+            await connection.execute(sqlAddItems, [orderId, item.product, item.amount, item.price]);
+        }
 
         res.status(200).json({ message: 'Tilaus vastaanotettu onnistuneesti' });
     } catch (error) {
