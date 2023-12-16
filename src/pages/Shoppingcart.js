@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { CartContext } from '../components/content/CartProvider';
@@ -17,15 +17,11 @@ function ShoppingCart() {
     paymentMethod.value = event.target.value;
   };
 
-  useEffect(() => {
-    console.log(paymentMethod.value);
-  }, []);
-
   function sendOrder() {
 
     const order = {
         customer: userInfo.value.id,
-        payStatus: paymentMethod.value,
+        payMethod: paymentMethod.value,
         items: cartItems.map((item) => ({
             product: item.name,
             amount: item.quantity,

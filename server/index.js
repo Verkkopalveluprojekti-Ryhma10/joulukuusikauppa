@@ -327,21 +327,22 @@ app.post('/order-details', async (req, res) => {
     }
 });
 
+//order_items table insert is not working yet!!
 app.post('/orders', upload.none(), async (req, res) => {
 
-    const { customer, payStatus, items } = req.body;
+    const { customer, payMethod, payStatus, items } = req.body;
 
-    const sqlAddOrders = 'INSERT INTO orders (customer, payStatus) VALUES (?, ?)'; 
+    const sqlAddOrders = 'INSERT INTO orders (customer, payMethod) VALUES (?, ?)'; 
     
-    const sqlAddItems = 'INSERT INTO order_items ( order_id, product, amount, price) VALUES (?, ?, ?, ?)' 
+    const sqlAddItems = 'INSERT INTO order_items ( order, product, amount, price) VALUES (?, ?, ?, ?)' 
     
-    const reqBodyValues = [customer, payStatus]
+    const reqBodyValues = [customer, payMethod]
 
     try {
         const connection = await mysql.createConnection(conf);
         await connection.execute(sqlAddOrders, reqBodyValues)
 
-        //this takes last executed tables id... probably... 
+        //this takes last executed tables id... probably...
         const [order] = await connection.execute('SELECT LAST_INSERT_ID()');
         const orderId = order[0]['LAST_INSERT_ID()'];
 

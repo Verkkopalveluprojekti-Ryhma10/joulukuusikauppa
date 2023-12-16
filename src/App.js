@@ -29,8 +29,6 @@ function App() {
             <Route exact path="/Tuotteet/:category" element={ <Tuotteet />} />
             <Route exact path="/ostoskori" element={ <ShoppingCart />} />
             
-            
-
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route exact path="/rekisteroidy" element={ <RegisterForm />} />
             <Route exact path='/yllapito' element= { <AdminAddProducts />} />
