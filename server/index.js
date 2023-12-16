@@ -240,7 +240,8 @@ app.post('/addproduct', upload2.single('pic'), async (req, res) => {
     const currentPath = req.file.path
     const filename = req.file.filename
     let categoryName
-     
+    
+    
     try {
         const connection = await mysql.createConnection(conf)
         let { productName, productName2, description, category, price, storage } = req.body;

@@ -2,7 +2,6 @@ import axios from "axios"
 import { useState } from "react"
 import { token, userInfo } from "../signals/LoginSignal"
 import '../../styles/Forms.css'
-import { Navigate } from "react-router-dom"
 
 //npm i axios
 //npm i @preact/signals-react
@@ -24,10 +23,10 @@ function Login() {
    const [uname, setUname] = useState('')
    const [pw, setPw] = useState('')
 
-   function login() {
+   async function login() {
        //send as parameters
-       axios.postForm('http://localhost:3001/login', {uname, pw})  
-       .then( res => token.value = res.data.jwtToken) //this gets tokenvalue
+       await axios.postForm('http://localhost:3001/login', {uname, pw})  
+       .then((res) => token.value = res.data.jwtToken) //this gets tokenvalue
        .catch(error => console.log(error.message))
    };
    
@@ -45,19 +44,12 @@ function UserInfo() {
     //if userinfo.value is not null..
     if(userInfo.value != null){
         //userinfo.value.role is admin navigate to adminaddproducts
-        if( userInfo.value.role === "admin" ) {
-        return (
-        <>  
-        < Navigate to="/yllapito" /> 
-        </>
-        ) 
-        //else welcome user or something..
-        } else {
-            return(
-            <div>
-                {/* if userInfo has value, then show last name and first name*/}
-                {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
-            </div>
-        )}
+        
+        return(
+        <div>
+            {/* if userInfo has value, then show last name and first name*/}
+            {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+        </div>
+        )
 }
 }
