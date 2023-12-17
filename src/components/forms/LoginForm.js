@@ -26,7 +26,7 @@ function Login() {
    async function login() {
        //send as parameters
        await axios.postForm('http://localhost:3001/login', {uname, pw})  
-       .then((res) => token.value = res.data.jwtToken) //this gets tokenvalue
+       .then(res => token.value = res.data.jwtToken) //this gets tokenvalue
        .catch(error => console.log(error.message))
    };
    
@@ -48,7 +48,7 @@ function UserInfo() {
         return(
         <div>
             {/* if userInfo has value, then show last name and first name*/}
-            {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname}, oot linjoilla!</h2>}
+            {userInfo.value && <h2 className="forms-container">Heippa, {userInfo.value.lname + ' ' + userInfo.value.fname + ', ' + userInfo.value.role}, oot linjoilla!</h2>}
         </div>
         )
 }

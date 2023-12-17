@@ -65,3 +65,4 @@ INSERT INTO products (`name`, `description`, `category`, `price`, `storage`, `im
 
 -- Lisätään Admin    salasana: admin
 INSERT INTO users(`lname`, `fname`, `phone`, `email`, `address`, `post`, `city`, `uname`, `passwd`, `role`) VALUES ('Testaava', 'Keijo', '---', '---', '---', '---', '---', 'admin', '$2a$10$lDKDfLNQA4V5.NaR/bu/4OKnf6f26i8tfcO2l0jvX1wc0mez6gFcK', 'admin');
+INSERT INTO users(`lname`, `fname`, `phone`, `email`, `address`, `post`, `city`, `uname`, `passwd`, `role`) VALUES ('Jokunen', 'Jaska', '0700', 'a@b.com', 'Jaskanpolku 10', '90666', 'Jaskala', 'Jaska', '$2b$10$J5Ts5DBIZrDdINx/.NpW1e0x9K3B8GYUQC/vuFa4pRMVQP6K3Cwam', 'customer');

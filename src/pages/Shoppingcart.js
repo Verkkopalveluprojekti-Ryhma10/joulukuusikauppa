@@ -91,8 +91,8 @@ function ShoppingCart() {
         {!token.value ? (
             <div className="shoppingCartUserInfo">
                 <p>Tilaaminen vaatii rekisteröitymisen. Jos olet jo kanta-asiakas, kirjaudu tunnuksillasi, kiitos.</p>
-                <button class= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
-                <button class= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
+                <button className= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
+                <button className= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
             </div>
             ) : (       
                 !orderNotification ? (

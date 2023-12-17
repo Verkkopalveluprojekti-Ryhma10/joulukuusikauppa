@@ -21,7 +21,7 @@ function Main() {
 
   return (
     <main className="main">
-        <div class="categoryContainer">
+        <div className="categoryContainer">
         {CategoryData.map((category, i) => {
           return (
             <div key={i} className='productObject'>

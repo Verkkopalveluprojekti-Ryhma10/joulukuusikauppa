@@ -5,20 +5,21 @@ import DaysToChristmas from '../content/DaysToChristmas'
 import { Link } from 'react-router-dom'
 import { token, userInfo } from "../signals/LoginSignal"
 
-function Header() {
 
+function Header() {
     return (
+      
       <div>
         { !token.value ? (
           <>
-            <button class= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
-            <button class= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
+            <button className= "button"><Link to={'/kirjaudu'}>Kirjaudu </Link></button>
+            <button className= "button"><Link to={'/rekisteroidy'}>Rekisteröidy</Link></button>
           </>
         ) : (
           <>
-            <button class="button" onClick={()=> token.value = ''}><Link to={'/'}>Kirjaudu ulos</Link></button>            
-            
-            {/*userInfo.value.role === 'admin' ? (<button class="button"><Link to={'/yllapito'}>Ylläpitoon</Link></button>) : ('')*/}
+            <button className="button" onClick={()=> token.value = ''}><Link to={'/'}>Kirjaudu ulos</Link></button>            
+            {console.log('Headerissa: '+userInfo)}
+            {/*userInfo.value.role = 'admin' ? (<button className="button"><Link to={'/yllapito'}>Ylläpitoon</Link></button>):('')*/}            
           </>
         )  
         }
