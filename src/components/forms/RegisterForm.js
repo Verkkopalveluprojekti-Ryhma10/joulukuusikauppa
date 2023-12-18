@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import '../../styles/Forms.css'
 
-
 export default function RegisterForm() {
 
     const [lname, setLname] = useState('')

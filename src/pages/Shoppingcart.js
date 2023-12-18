@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { CartContext } from '../components/content/CartProvider';
 import { token, userInfo } from "../components/signals/LoginSignal"
@@ -20,13 +19,13 @@ function ShoppingCart() {
     }
     return () => clearTimeout(timer);
     },[orderNotification])
-
+    //chosen paymethod value
   const handlePaymentMethodChange = (event) => {
     paymentMethod.value = event.target.value;
   };
 
   function sendOrder() {
-
+    //order parameters posted to orders + orders_items tables 
     const order = {
         customer: userInfo.value.id,
         payMethod: paymentMethod.value,
@@ -87,7 +86,8 @@ function ShoppingCart() {
                     <h3>Kiitos!</h3>                 
                 </>
             ))      
-        )}      
+        )} 
+        {/* check if token has value and user has logged in, then show userdetails      */}
         {!token.value ? (
             <div className="shoppingCartUserInfo">
                 <p>Tilaaminen vaatii rekisteröitymisen. Jos olet jo kanta-asiakas, kirjaudu tunnuksillasi, kiitos.</p>
@@ -101,7 +101,7 @@ function ShoppingCart() {
                     <p>Etunimi: {userInfo.value.fname}</p>
                     <p>Sukunimi: {userInfo.value.lname}</p>
                     <p>Postitusosoite: {userInfo.value.address} {userInfo.value.post} </p>
-                                 
+                     {/* Choose paymethod             */}
                     {cartItems.length > 0 ? (
                         <>
                         <select value={paymentMethod.value} onChange={handlePaymentMethodChange} className="order-form__select">

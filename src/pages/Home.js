@@ -29,8 +29,7 @@ function Main() {
                 <button className='categoryBtn'>
                   <img src={require('../assets'+category.image_url)} alt={category.name} className='categoryPic' />
                 <p>{category.name}</p>
-                </button>
-                
+                </button>                
               </Link>
             </div>
               

@@ -4,17 +4,16 @@ import Footer from './components/common/Footer';
 import { CartProvider } from './components/content/CartProvider';
 
 import Tuotteet from './pages/Tuotteet';
-
 import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/forms/RegisterForm';
 import AdminAddProducts from './components/forms/AdminAddProducts';
+import ShoppingCart from './pages/Shoppingcart';
 
 import {
   Routes,
   Route,
   Navigate
 } from 'react-router-dom';
-import ShoppingCart from './pages/Shoppingcart';
 
 function App() {
 
@@ -24,10 +23,8 @@ function App() {
       <Header />        
           <Routes>
             <Route exact path="/" element={ <Home />} />
-
             <Route exact path="/Tuotteet/:category" element={ <Tuotteet />} />
-            <Route exact path="/ostoskori" element={ <ShoppingCart />} />
-            
+            <Route exact path="/ostoskori" element={ <ShoppingCart />} />            
             <Route exact path="/kirjaudu" element={ <LoginForm />} />
             <Route exact path="/rekisteroidy" element={ <RegisterForm />} />
             <Route exact path='/yllapito' element= { <AdminAddProducts />} />

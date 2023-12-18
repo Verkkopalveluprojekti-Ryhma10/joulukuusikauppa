@@ -1,5 +1,5 @@
 
-HacknPlan linkki: 
+HacknPlan linkki: https://app.hacknplan.com/p/194243/kanban?categoryId=0&boardId=533444
 
 Figma linkki: https://www.figma.com/files/team/1304495138055055127
 

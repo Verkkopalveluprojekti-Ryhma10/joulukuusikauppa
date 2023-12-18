@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Dropdown, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { CartContext } from './CartProvider';
 
-
 function ShoppingCartDrop() {
   const navigate = useNavigate();
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
@@ -13,8 +12,7 @@ function ShoppingCartDrop() {
 
   const submitOrder = async () => {
     //Käytä 'navigate' ohjataksesi käyttäjä tilaamaan
-    await navigate('/ostoskori'); 
-      
+    await navigate('/ostoskori');       
       }
 
   return (

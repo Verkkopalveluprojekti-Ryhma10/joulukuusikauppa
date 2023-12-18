@@ -1,7 +1,6 @@
 import { effect, signal } from "@preact/signals-react";
 import axios from "axios"
 
-
  export const token = signal(getTokenFromStorage());
  export const userInfo = signal(null);
 

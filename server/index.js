@@ -114,8 +114,6 @@ app.get('/products', async (req, res) => {
     }
 });
 
-//Maalela yrittää tähän codes
-
 //pw hash stuff
 //first register new user
 //upload.none, .none takes in only key-value pairs as text (not files, formdata fields)
@@ -315,21 +313,10 @@ app.post('/addcategories', upload2.single('pic'), async (req, res) => {
     }  
 } )
 
-app.post('/order-details', async (req, res) => {
-    try {
-        const { firstName, lastName, address, postalCode, city, country, paymentMethod } = req.body;
-        //tähän logiikka tilaustietojen tallentamiseksi tietokantaan
-
-        res.status(200).json({ message: 'Tilauslomakkeen tiedot vastaanotettu' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-//order_items table insert is not working yet!!
+//post for order and order_items tables
 app.post('/orders', upload.none(), async (req, res) => {
 
-    const { customer, payMethod, payStatus } = req.body;
+    const { customer, payMethod } = req.body;
     const items = req.body.items;
 
     const sqlAddOrders = 'INSERT INTO orders (customer, payMethod) VALUES (?, ?)'; 
@@ -340,12 +327,13 @@ app.post('/orders', upload.none(), async (req, res) => {
 
     try {
         const connection = await mysql.createConnection(conf);
+        //for oders table
         await connection.execute(sqlAddOrders, reqBodyValues)
 
-        //this takes last executed tables id... probably...
+        //this takes last executed tables id
         const [order] = await connection.execute('SELECT LAST_INSERT_ID()');
         const orderId = order[0]['LAST_INSERT_ID()'];
-
+        //for order_items table
         for (const item of items) {
             const itemValues = [ item.product, item.amount, item.price];
             await connection.execute(sqlAddItems, [orderId, item.product, item.amount, item.price]);
